@@ -1,0 +1,34 @@
+<div ng-controller="PhoneListCtrl" class="container-fluid" ng-init="montaHome()">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
+
+      Buscar: <input ng-model="query">
+      Listar em ordem:
+      <select ng-model="orderProp">
+        <option value="name">Alfabética</option>
+        <option value="age">Novidade</option>
+      </select>
+
+    </div>
+	
+	
+	
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="livros">
+        <li ng-repeat="livro in livros | filter:query | orderBy:orderProp" class="thumbnail phone-listing">
+          <a href="{{livro.titulo}}" class="thumb"></a>
+          <a href="{{livro.id}}">{{livro.titulo}}</a>
+          <p>{{livro.autor}}</p>
+        </li>
+      </ul>
+		
+    </div>
+	<div id="lowerLogButs">
+		<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()" >Logout</button>	
+	</div>
+  </div>
+</div>
+

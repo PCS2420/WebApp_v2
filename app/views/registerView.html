@@ -1,0 +1,42 @@
+
+<div ng-controller="registerCtrl" class="container">
+
+    <form name="myForm" role="form" action="/" id="myForm">
+        <h2 class="form-sigin-heading">Registro</h2>
+
+        <div ng-show="sucesso" class="alert alert-success">Conta criada!</div>
+        <div ng-show="falha" class="alert alert-danger">Erro na criação da conta!<br> {{causa}}</div>
+
+        <div class="form-group" ng-class="{ 'has-error': myForm.name.$dirty && myForm.name.$error.required }">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" class="form-control" ng-model="user.nome" required />
+            <span ng-show="myForm.name.$dirty && myForm.name.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.nusp.$dirty && myForm.nusp.$error.required }">
+            <label for="nusp">Nusp</label>
+            <input type="number" name="nusp" id="nusp" class="form-control" ng-model="user.cpf" required />
+            <span ng-show="myForm.nusp.$dirty && myForm.nusp.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.course.$dirty && myForm.course.$error.required }">
+            <label for="course">Curso</label>
+            <input type="text" name="course" id="course" class="form-control" ng-model="user.curso" required />
+            <span ng-show="myForm.course.$dirty && myForm.course.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.username.$dirty && myForm.username.$error.required }">
+            <label for="username">Nome de usuário</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="user.login" required />
+            <span ng-show="myForm.username.$dirty && myForm.username.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.password.$dirty && myForm.password.$error.required }">
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="user.senha" required />
+            <span ng-show="myForm.password.$dirty && myForm.password.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="myForm.$invalid || dataLoading " class="btn btn-primary" ng-click="register()">Enviar</button>
+            <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a href="#/login" class="btn btn-link">Cancelar</a>
+        </div>
+    </form>
+
+</div>
