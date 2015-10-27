@@ -9,11 +9,11 @@
  */
 var app=angular.module('webAppV2App',[
 	'ngRoute',
-	'ngResource',  
+	'ngResource',
 	'ui.bootstrap',
 	'homeControllers'
 ]);
-	
+
 app.config(function($routeProvider) {
 	$routeProvider
 	.when('/', {
@@ -21,7 +21,7 @@ app.config(function($routeProvider) {
 			"check": function($location, $rootScope) {
 				if($rootScope.logged){
 					$location.path("/home");
-				}		
+				}
 			}
 		},
 		templateUrl: 'views/login.html',
@@ -32,7 +32,7 @@ app.config(function($routeProvider) {
 			"check": function($location, $rootScope) {
 				if(!$rootScope.logged){
 					$location.path("/");
-				}		
+				}
 			}
 		},
         templateUrl: 'views/home.html',
@@ -46,7 +46,7 @@ app.config(function($routeProvider) {
 		redirectTo: '/'
 	});
 });
-	
+
 app.factory('usuarioTipoService', function($http, $rootScope){
 	var getUserTipo = function(user, senha){
 		return $http.get("http://localhost:1337/usuario?login=" + user + "&senha=" + senha)
@@ -104,6 +104,8 @@ app.controller('registerCtrl', function($scope, $location, userService){
         $scope.falha = false;
         $scope.sucesso = false;
         $scope.dataLoading = true;
+        $scope.user['tipo'] = "Descritor";
+
         userService.cadastraUser($scope.user)
         .then(
             function(response){
@@ -111,8 +113,10 @@ app.controller('registerCtrl', function($scope, $location, userService){
                 $location.path('/login');
             },
             function(error){
+                $scope.falha = true;
+                $scope.dataLoading = false;
         })
     };
 
 });
-	
+
