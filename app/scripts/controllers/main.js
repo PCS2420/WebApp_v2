@@ -51,7 +51,10 @@ app.factory('usuarioTipoService', function($http, $rootScope){
 	var getUserTipo = function(user, senha){
 		return $http.get("http://localhost:1337/usuario?login=" + user + "&senha=" + senha)
 		.success(function(response){
-			return response[0].tipo;
+            if('tipo' in response){
+                return response[0].tipo;
+            }
+            return null;
 		});
 	};
 	return { getUserTipo: getUserTipo };
@@ -77,19 +80,35 @@ app.service('userService', function userService($http, $q){
 });
 
 app.controller('loginCtrl', function($scope, $location, $rootScope, usuarioTipoService){
-	$scope.submit = function(){
-		var myDataPromisse = usuarioTipoService.getUserTipo($scope.username, $scope.password);
-		myDataPromisse.then(function(response){
-			//console.log(response.data[0].tipo);
-			$rootScope.usuario = response.data[0];
-			if(response.data[0].tipo === 'Descritor'){
-			$rootScope.logged = true;
-			$location.path('/home');
-			}
-			else{
-				alert("nop");
-			}
-		})
+	$scope.falha = false;
+    $scope.naoDescritor = false;
+    $scope.submit = function(){
+        if($scope.username && $scope.password)
+        {
+            var myDataPromisse = usuarioTipoService.getUserTipo($scope.username, $scope.password);
+            myDataPromisse.then(
+                function(response){
+                    console.log(response);
+                    $rootScope.usuario = response.data[0];
+                    if(response.data['length'] === 0){
+                        $scope.falha = true;
+                    }
+                    else if(response.data[0].tipo === 'Descritor'){
+                        $rootScope.logged = true;
+                        $location.path('/home');
+                    }
+                    else{
+                        $scope.naoDescritor = true;
+                    }
+                },
+                function(error){
+                    $scope.falha = true;
+                }
+            )
+        }
+        else{
+            $scope.falha = true;
+        }
 	};
 	$scope.register = function(){
 		$location.path('/register');
@@ -113,6 +132,7 @@ app.controller('registerCtrl', function($scope, $location, userService){
                 $location.path('/login');
             },
             function(error){
+                $scope.causa = error;
                 $scope.falha = true;
                 $scope.dataLoading = false;
         })
