@@ -1,0 +1,47 @@
+<div class="container-fluid" ng-init="montaPagina()">
+
+
+  <!--Image-->
+  <div class="row">      
+      <!--<img src="images/hp_img1.jpg" class="img-rounded center" alt="Cinque Terre" >-->
+      <img ng-src="http://localhost:1337/{{imagem.local}}" class="img-rounded center" alt="Cinque Terre" >
+      <!--<img ng-src="{{imageUrl}}">-->
+
+      <!--<ul class="livros">
+        <li ng-repeat="livro in livros | filter:query | orderBy:orderProp" class="thumbnail phone-listing">
+          <a href="{{livro.titulo}}" class="thumb"></a>
+          <a href="{{livro.id}}">{{livro.titulo}}</a>
+          <p>{{livro.autor}}</p>
+        </li>
+      </ul>-->
+ 
+  </div>
+
+  <!--Text area for description and buttons-->
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+  <div class="row">  
+    <form ng-submit="enviar()">
+      <div class="form-group">
+        <label for="descricao">Descreva a imagem no campo abaixo</label>
+        <textarea class="form-control" rows="5" id="descricao" ng-model="formData.descricao" required></textarea>
+      </div>
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()">Contexto</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="submit" class="btn btn-primary button-top" ng-model="singleModel">Enviar</button>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+   </div>
+
+
+  
+
+</div>
+</div>
+

@@ -11,7 +11,8 @@ var app=angular.module('webAppV2App',[
 	'ngRoute',
 	'ngResource',  
 	'ui.bootstrap',
-	'homeControllers'
+	'homeControllers',
+	'descricaoControllers'
 ]);
 	
 app.config(function($routeProvider) {
@@ -37,6 +38,17 @@ app.config(function($routeProvider) {
 		},
         templateUrl: 'views/home.html',
 		controller: 'HomeCtrl'
+    })
+    .when('/selecionaImagem/:imagem_id', {
+		resolve: {
+			"check": function($location, $rootScope) {
+				//if(!$rootScope.logged){
+				//	$location.path("/");
+				//}		
+			}
+		},
+        templateUrl: 'views/selecionaImagem.html',
+		controller: 'DescricaoCtrl'
     })
     .when('/register', {
         templateUrl: 'views/register.html',
