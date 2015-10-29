@@ -1,17 +1,17 @@
-<div class="container" ng-controller="loginCtrl">
+<div class="container">
 	<form action ="/" id="myLogin" >
 		<h2 class="form-signin-heading">Login</h2>
 
 		<div ng-show="falha" class="alert alert-danger">Usuário ou senha incorretos.<br></div>
 
 		<label for="username" >Nome de usuário</label><br>
-		<input type="text" id="username" class="form-control" ng-model="user.username"><br>
+		<input type="text" id="username" class="form-control" ng-model="userLogin.username"><br>
 
 		<label for="password" >Senha</label><br>
-		<input type="password" id="password" class="form-control" ng-model="user.password"><br><br>
+		<input type="password" id="password" class="form-control" ng-model="userLogin.password"><br><br>
 
 		<div id="lowerLogButs">
-			<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="submit(user)" >Login</button>
+			<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="submit(userLogin)" >Login</button>
 			<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="register()" >Registrar</button>
 		</div>
 	</form>

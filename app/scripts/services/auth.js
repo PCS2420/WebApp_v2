@@ -1,39 +1,5 @@
-'use strict';
-
-var authModule=angular.module('authModule', []);
-
-authModule.constant('AccessLevels', {
-    anon: 0,
-    user: 1
-  });
-
-authModule.factory('CurrentUser', function(LocalService) {
-  return {
-    user: function() {
-      if (LocalService.get('auth_token')) {
-        return angular.fromJson(LocalService.get('auth_token')).user;
-      } else {
-        return {};
-      }
-    }
-  };
-});
-
-authModule.factory('LocalService', function() {
-    return {
-      get: function(key) {
-        return localStorage.getItem(key);
-      },
-      set: function(key, val) {
-        return localStorage.setItem(key, val);
-      },
-      unset: function(key) {
-        return localStorage.removeItem(key);
-      }
-    }
-  });
-
-authModule.factory('Auth', function($http, LocalService, AccessLevels) {
+angular.module('webAppV2App')
+.factory('Auth', function($http, LocalService, AccessLevels) {
     return {
       authorize: function(access) {
         if (access === AccessLevels.user) {
@@ -46,7 +12,7 @@ authModule.factory('Auth', function($http, LocalService, AccessLevels) {
         return LocalService.get('auth_token');
       },
       login: function(credentials) {
-        var login = $http.post('http://localhost:1337/auth/process', credentials);
+        var login = $http.post('http://localhost:1337/auth/authenticate', credentials);
 
         login.success(function(result) {
             LocalService.set('auth_token', JSON.stringify(result));
@@ -59,7 +25,7 @@ authModule.factory('Auth', function($http, LocalService, AccessLevels) {
       },
       register: function(formData) {
         LocalService.unset('auth_token');
-        var register = $http.post('/auth/register', formData);
+        var register = $http.post('http://localhost:1337/usuario/cadastro', formData);
         register.success(function(result) {
           LocalService.set('auth_token', JSON.stringify(result));
         });
@@ -69,8 +35,6 @@ authModule.factory('Auth', function($http, LocalService, AccessLevels) {
   })
   .factory('AuthInterceptor', function($q, $injector) {
     var LocalService = $injector.get('LocalService');
-
-    console.log("Interceptor");
 
     return {
       request: function(config) {
@@ -85,11 +49,9 @@ authModule.factory('Auth', function($http, LocalService, AccessLevels) {
       },
       responseError: function(response) {
 
-        console.log("Interceptor responseError");
-        console.log($injector.get('$route'));
         if (response.status === 401 || response.status === 403) {
           LocalService.unset('auth_token');
-          $injector.get('$route').path('/login');
+          $injector.get('$state').go('anon.login');
         }
         return $q.reject(response);
       }

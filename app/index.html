@@ -49,7 +49,7 @@
 			<h2 class="text-center">Sinestesia</h2>
 			<h4 class="text-center" style="color:#ccc;">Pictures for thought</h4>
 		</div>
-		<div ng-view></div>
+		<div ui-view></div>
     </div>
 
 
@@ -75,17 +75,26 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/auth.js"></script>
-        <script src="scripts/controllers/navController.js"></script>
-		<script src="scripts/controllers/homeControllers.js"></script>
+        <script src="scripts/routes.js"></script>
+        <script src="scripts/controllers/HomeCtrl.js"></script>
+        <script src="scripts/controllers/LoginCtrl.js"></script>
+        <script src="scripts/controllers/RegisterCtrl.js"></script>
+        <script src="scripts/controllers/NavCtrl.js"></script>
+        <script src="scripts/services/accessLevels.js"></script>
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/currentUser.js"></script>
+        <script src="scripts/services/localStorage.js"></script>
+        <script src="scripts/services/listaLivro.js"></script>
         <!-- endbuild -->
 
 	<!-- Dependências do Diego -->
-	<script type="text/javascript" src="scripts/diego/angular.min.js"></script>
+  <!--
+  <script type="text/javascript" src="scripts/diego/angular.min.js"></script>
+   -->
 	<script type="text/javascript" src="scripts/diego/angular-animate.js"></script>
 	<script type="text/javascript" src="scripts/diego/angular-resource.js"></script>
-	<script type="text/javascript" src="scripts/diego/angular-route.min.js"></script>
+  <script type="text/javascript" src="scripts/diego/angular-route.min.js"></script>
+	<script type="text/javascript" src="scripts/diego/angular-ui-router.js"></script>
 	<script type="text/javascript" src="scripts/diego/ui-bootstrap-tpls.js"></script>
 	<!-- fim Diego-->
 </body>
