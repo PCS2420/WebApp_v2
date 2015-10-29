@@ -1,0 +1,14 @@
+<div class="container-fluid" ng-init="montaPagina()">
+
+  <div class="images">
+    <h3>Lista de livros para este curso:</h3>
+    <div ng-init=bookImages>
+      <ul class="example-container">
+        <li class="repeat" ng-repeat="book in books">
+          <a ng-href="/.html"><img ng-src="http://localhost:1337/{{book.capa}}" class="img-rounded center" alt="livro {{index}}"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

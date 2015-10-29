@@ -12,7 +12,8 @@ var app=angular.module('webAppV2App',[
 	'ngResource',  
 	'ui.bootstrap',
 	'homeControllers',
-	'descricaoControllers'
+	'descricaoControllers',
+    'booksControllers'
 ]);
 	
 app.config(function($routeProvider) {
@@ -53,6 +54,17 @@ app.config(function($routeProvider) {
     .when('/register', {
         templateUrl: 'views/register.html',
 		controller: 'registerCtrl'
+    })
+    .when('/books/:curso_id', {
+        resolve: {
+            "check": function($location, $rootScope) {
+                //if(!$rootScope.logged){
+                //  $location.path("/");
+                //}     
+            }
+        },
+        templateUrl: 'views/books.html',
+        controller: 'booksCtrl'
     })
 	.otherwise({
 		redirectTo: '/'
