@@ -1,6 +1,6 @@
-<div class="container-fluid" ng-init="montaHome()">
+<div class="container-fluid" ng-init="montaHome()" ng-controller="HomeCtrl">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-10">
       <!--Sidebar content-->
 
       Buscar: <input ng-model="query">
@@ -11,9 +11,9 @@
       </select>
 
     </div>
-	
-	
-	
+
+
+
     <div class="col-md-10">
       <!--Body content-->
 
@@ -24,10 +24,10 @@
           <p>{{livro.autor}}</p>
         </li>
       </ul>
-		
+
     </div>
 	<div id="lowerLogButs">
-		<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()" >Logout</button>	
+		<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()" >Logout</button>
 	</div>
   </div>
 </div>

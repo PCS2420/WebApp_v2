@@ -7,14 +7,16 @@
  * # MainCtrl
  * Controller of the webAppV2App
  */
+
 var app=angular.module('webAppV2App',[
 	'ngRoute',
 	'ngResource',
-	'ui.bootstrap',
+    'ui.bootstrap',
+    'authModule',
 	'homeControllers'
 ]);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, AccessLevels) {
 	$routeProvider
 	.when('/', {
 		resolve: {
@@ -36,7 +38,8 @@ app.config(function($routeProvider) {
 			}
 		},
         templateUrl: 'views/home.html',
-		controller: 'HomeCtrl'
+		controller: 'HomeCtrl',
+        access: AccessLevels.user
     })
     .when('/register', {
         templateUrl: 'views/register.html',
@@ -49,10 +52,11 @@ app.config(function($routeProvider) {
 
 app.factory('usuarioTipoService', function($http, $rootScope){
 	var getUserTipo = function(user, senha){
-		return $http.get("http://localhost:1337/usuario?login=" + user + "&senha=" + senha)
+        return $http.post("http://localhost:1337/auth/process", {username: user, password: senha})
+		// return $http.get("http://localhost:1337/auth/process?login=" + user + "&senha=" + senha)
 		.success(function(response){
-            if('tipo' in response){
-                return response[0].tipo;
+            if('tipo' in response.user){
+                return response.user.tipo;
             }
             return null;
 		});
@@ -66,12 +70,16 @@ app.service('userService', function userService($http, $q){
 
 	userService.cadastraUser = function(user){
 		var defer = $q.defer();
+        console.log("USUER")
+        console.log(user)
 		return $http.post("http://localhost:1337/usuario/cadastro", user)
 		.success(function(response){
+            console.log("response");
 			console.log(response);
 			defer.resolve(response);
 		})
 		.error(function(error){
+            console.log("error");
 			console.log(error);
 			defer.reject(error);
 		})
@@ -79,32 +87,52 @@ app.service('userService', function userService($http, $q){
 	}
 });
 
-app.controller('loginCtrl', function($scope, $location, $rootScope, usuarioTipoService){
+app.controller('loginCtrl', function($scope, $location, $rootScope, usuarioTipoService, Auth){
+    $scope.user = {
+        username: "",
+        password: ""
+    }
+
 	$scope.falha = false;
-    $scope.naoDescritor = false;
-    $scope.submit = function(){
-        if($scope.username && $scope.password)
+    $scope.submit = function(user){
+        if(user.username && user.password)
         {
-            var myDataPromisse = usuarioTipoService.getUserTipo($scope.username, $scope.password);
-            myDataPromisse.then(
-                function(response){
-                    console.log(response);
-                    $rootScope.usuario = response.data[0];
-                    if(response.data['length'] === 0){
-                        $scope.falha = true;
-                    }
-                    else if(response.data[0].tipo === 'Descritor'){
-                        $rootScope.logged = true;
-                        $location.path('/home');
-                    }
-                    else{
-                        $scope.naoDescritor = true;
-                    }
-                },
-                function(error){
+
+            $scope.errors = [];
+            var loginResult = Auth.login($scope.user);
+            loginResult.then(function(result) {
+                if('token' in result.data){
+                    $location.path('/home');
+                    $rootScope.logged = true;
+                }
+                else
+                {
                     $scope.falha = true;
                 }
-            )
+            },function(err) {
+                $scope.falha = true;
+                $scope.errors.push(err);
+            });
+
+
+
+            // var myDataPromisse = usuarioTipoService.getUserTipo(user.username, user.password);
+            // myDataPromisse.then(
+            //     function(response){
+            //         console.log(response);
+            //         $rootScope.usuario = response.data.user;
+            //         if(response.data['length'] === 0){
+            //             $scope.falha = true;
+            //         }
+            //         else if($rootScope.usuario.tipo === 'Descritor'){
+            //             $rootScope.logged = true;
+            //             $location.path('/home');
+            //         }
+            //     },
+            //     function(error){
+            //         $scope.falha = true;
+            //     }
+            // )
         }
         else{
             $scope.falha = true;
@@ -117,22 +145,21 @@ app.controller('loginCtrl', function($scope, $location, $rootScope, usuarioTipoS
 
 app.controller('registerCtrl', function($scope, $location, userService){
 
+    $scope.falha = false;
+    $scope.sucesso = false;
 
-    $scope.register = function() {
+    $scope.register = function(userInfo) {
 
-        $scope.falha = false;
-        $scope.sucesso = false;
         $scope.dataLoading = true;
-        $scope.user['tipo'] = "Descritor";
+        userInfo['tipo'] = "Descritor";
 
-        userService.cadastraUser($scope.user)
+        userService.cadastraUser(userInfo)
         .then(
             function(response){
                 $scope.sucesso = true;
                 $location.path('/login');
             },
             function(error){
-                $scope.causa = error;
                 $scope.falha = true;
                 $scope.dataLoading = false;
         })
@@ -140,3 +167,22 @@ app.controller('registerCtrl', function($scope, $location, userService){
 
 });
 
+app.run(function($rootScope, $location, Auth) {
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+
+    if(Auth.isAuthenticated()){
+        $rootScope.logged = true;
+    }
+    else
+    {
+        $rootScope.logged = false;
+    }
+
+      if (!Auth.authorize(next.access)) {
+
+        event.preventDefault();
+
+        $location.path('/login');
+      }
+    });
+  });
