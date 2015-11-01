@@ -1,10 +1,8 @@
 angular.module('webAppV2App')
   .controller('NavCtrl', function($scope, Auth, CurrentUser) {
-    $scope.isCollapsed = true;
-    $scope.auth = Auth;
-    $scope.user = CurrentUser.user;
 
-    $scope.logout = function() {
-      Auth.logout();
-    }
+    console.log("NAV CTRL");
+
+    $scope.auth = Auth;
+    $scope.loggedUser = CurrentUser.user;
   });

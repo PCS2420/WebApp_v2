@@ -24,7 +24,7 @@
 
 
   </head>
-  <body ng-app="webAppV2App">
+  <body ng-app="webAppV2App" ng-controller="NavCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -35,7 +35,7 @@
         <div class="container">
           <div class="navbar-header">
 
-            <a class="navbar-brand" href="#/">webAppV2</a>
+            <a class="navbar-brand" ui-sref="anon.login">webAppV2</a>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
