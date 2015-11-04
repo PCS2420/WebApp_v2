@@ -30,8 +30,7 @@ angular.module('webAppV2App')
 	};
 
 	$scope.cancela = function(){
-		var livro_id = $scope.imagem.livro.id
-		$state.go("user.livro({livro_id : " + livro_id + "})");
+		$state.go("user.livro", {livro_id: $scope.imagem.livro.id });
 	};
 
 	$scope.mostraContexto = function(){

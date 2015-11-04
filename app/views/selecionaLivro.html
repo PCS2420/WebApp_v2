@@ -5,7 +5,7 @@
     </ol>
     <div class="carousel-inner">
       <div ng-class="{item: true, active : ($index === 0)}" ng-repeat="imagem in imagens"> 
-        <a ui-sref="user.imagem({ imagem_id: imagem.id })"> 
+        <a href="" ng-click="statego(imagem.id)">
           <img ng-src="{{uri}}/{{imagem.local}}" class="img-rounded center" alt="{{imagem.id}}">
         </a>
         

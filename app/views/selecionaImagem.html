@@ -19,9 +19,7 @@
           <button type="submit" class="btn btn-primary button-top" ng-model="singleModel">Enviar</button>
         </div>
         <div class="btn-group" role="group">
-          <a ui-sref="user.livro({ livro_id: imagem.livro.id })"> 
-            <button type="button" class="btn btn-primary button-top" ng-model="singleModel">Cancelar</button>
-          </a>
+            <button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="cancela()">Cancelar</button>
         </div>
       </div>
     </form>
