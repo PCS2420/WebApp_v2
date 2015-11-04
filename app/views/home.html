@@ -1,34 +1,13 @@
-<div class="container-fluid" ng-init="montaHome()">
-  <div class="row">
-    <div class="col-md-2">
-      <!--Sidebar content-->
-
-      Buscar: <input ng-model="query">
-      Listar em ordem:
-      <select ng-model="orderProp">
-        <option value="name">Alfabética</option>
-        <option value="age">Novidade</option>
-      </select>
-
-    </div>
-	
-	
-	
-    <div class="col-md-10">
-      <!--Body content-->
-
-      <ul class="livros">
-        <li ng-repeat="livro in livros | filter:query | orderBy:orderProp" class="thumbnail phone-listing">
-          <a href="{{livro.titulo}}" class="thumb"></a>
-          <a href="{{livro.id}}">{{livro.titulo}}</a>
-          <p>{{livro.autor}}</p>
-        </li>
-      </ul>
-		
-    </div>
-	<div id="lowerLogButs">
-		<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="exit()" >Logout</button>	
+<div id="myCarousel" descricao-carousel class="carousel slide" data-ride="carousel">
+	<ol id="sinestesia_indicators" class="carousel-indicators">
+		<li ng-repeat="livro in livros" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active: $index==0}"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="item" ng-repeat="livro in livros">
+			<img ng-src="http://localhost:1337/images/{{livro.id}}.jpg" style="margin:auto;">
+			<!--<div class="carousel-caption" style="display:block;">
+				<h4>Slide {{livro.titulo}}</h4>
+			</div>-->
+		</div>
 	</div>
-  </div>
 </div>
-

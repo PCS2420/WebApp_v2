@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Sinestesia Home</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -16,55 +16,29 @@
 	<link rel="stylesheet" href="styles/app.css">
 	<link rel="stylesheet" href="styles/animations.css">
     <!-- endbuild -->
-	
-	<!-- dependências Diego-->
-	<link rel="stylesheet" href="styles/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Sigmar+One">
-	<!-- fim Diego -->
-	
+
+	<!-- CSS's adicionais -->
+	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
+	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/footer_sinestesia.css">
+	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/carousel.css">
+	<!-- fim CSS adicionais -->
 	
   </head>
-  <body ng-app="webAppV2App">
+  <body ng-app="webAppV2App" ng-controller="NavCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <a class="navbar-brand" href="#/">webAppV2</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-		<div class="synHeader2">
-			<h2 class="text-center">Sinestesia</h2>
-			<h4 class="text-center" style="color:#ccc;">Pictures for thought</h4>
-		</div>
-		<div ng-view></div>
-    </div>
-
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
+    <!-- USUARIO DESLOGADO -->
+	<div ng-if="$state.includes('anon')" ng-include="'/views/header_deslogado.html'"></div>
+	<br><br><div ng-if="$state.includes('anon')" class="container" ui-view></div>
+	<div ng-if="$state.includes('anon')" ng-include="'/views/footer_deslogado.html'"></div>
+	
+	<!-- USUARIO LOGADO -->
+	<header ng-if="$state.includes('user')" ng-include="'/views/header.html'"></header>
+	<div class="container-fluid" ng-if="$state.includes('user')" id="sinestesia_content"><div ui-view></div></div>
+	<footer ng-if="$state.includes('user')" class="footer" ng-include="'/views/footer.html'"></footer>
+	
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -73,18 +47,28 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-		<script src="scripts/controllers/homeControllers.js"></script>
-        <!-- endbuild -->
-		
-	<!-- Dependências do Diego -->
-	<script type="text/javascript" src="scripts/diego/angular.min.js"></script>
-	<script type="text/javascript" src="scripts/diego/angular-animate.js"></script>
-	<script type="text/javascript" src="scripts/diego/angular-resource.js"></script>
-	<script type="text/javascript" src="scripts/diego/angular-route.min.js"></script>
-	<script type="text/javascript" src="scripts/diego/ui-bootstrap-tpls.js"></script>
-	<!-- fim Diego-->
+	<!-- Dependências do Adicionais -->
+	<script type="text/javascript" src="scripts/libs/angular-animate.js"></script>
+	<script type="text/javascript" src="scripts/libs/angular-resource.js"></script>
+	<script type="text/javascript" src="scripts/libs/angular-route.min.js"></script>
+	<script type="text/javascript" src="scripts/libs/angular-ui-router.js"></script>
+	<script type="text/javascript" src="scripts/libs/ui-bootstrap-tpls.js"></script>
+	<script type="text/javascript" src="scripts/libs/bootstrap-touch-carousel.js"></script>
+	<!---->
+	
+	<!-- build:js({.tmp,app}) scripts/scripts.js -->
+	<script src="scripts/app.js"></script>
+	<script src="scripts/routes.js"></script>
+	<script src="scripts/controllers/HomeCtrl.js"></script>
+	<script src="scripts/controllers/LoginCtrl.js"></script>
+	<script src="scripts/controllers/RegisterCtrl.js"></script>
+	<script src="scripts/controllers/NavCtrl.js"></script>
+	<script src="scripts/controllers/AboutCtrl.js"></script>
+	<script src="scripts/services/accessLevels.js"></script>
+	<script src="scripts/services/auth.js"></script>
+	<script src="scripts/services/currentUser.js"></script>
+	<script src="scripts/services/localStorage.js"></script>
+	<script src="scripts/services/listaLivro.js"></script>
+	<!-- endbuild -->
 </body>
 </html>
