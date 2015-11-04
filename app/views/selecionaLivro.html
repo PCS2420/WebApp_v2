@@ -1,18 +1,18 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
 
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" ng-repeat="livro in livros" class="{active : ($index === 0)}" data-slide-to="{{$index}}"></li>
+      <li data-target="#myCarousel" ng-repeat="imagem in imagens" class="{active : ($index === 0)}" data-slide-to="{{$index}}"></li>
     </ol>
     <div class="carousel-inner">
-      <div ng-class="{item: true, active : ($index === 0)}" ng-repeat="livro in livros"> 
-        <a ui-sref="user.livro({ livro_id: livro.id })"> 
-          <img ng-src="{{uri}}/{{livro.capa}}" class="img-rounded center" alt="{{livro.titulo}}">
+      <div ng-class="{item: true, active : ($index === 0)}" ng-repeat="imagem in imagens"> 
+        <a ui-sref="user.imagem({ imagem_id: imagem.id })"> 
+          <img ng-src="{{uri}}/{{imagem.local}}" class="img-rounded center" alt="{{imagem.id}}">
         </a>
         
         <div class="container">
   
           <div class="carousel-caption" style="display:block;"> 
-            <h4>{{livro.titulo}}</h4>
+            
           </div>
         </div>
       
@@ -26,5 +26,4 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-
 </div>

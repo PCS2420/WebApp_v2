@@ -37,6 +37,16 @@ angular.module('webAppV2App')
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
+      .state('user.livro', { // caso ele esteja logado e requisitando /home
+        url: '/selecionaLivro/:livro_id',
+        templateUrl: 'views/selecionaLivro.html',
+        controller: 'LivroCtrl'        
+      })
+      .state('user.imagem', { // caso ele esteja logado e requisitando /home
+        url: '/selecionaImagem/:imagem_id',
+        templateUrl: 'views/selecionaImagem.html',
+        controller: 'ImagemCtrl'        
+      })
       ;
 
     $urlRouterProvider.otherwise('/'); // caso a rota nao seja encontrada, envia para login
