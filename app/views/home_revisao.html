@@ -1,0 +1,16 @@
+<div ng-if="flash.hasAlert()" class="alert alert-{{flash.getType()}}">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	{{flash.getMessage()}}
+</div>
+<div id="myCarousel" descricao-carousel class="carousel slide" data-ride="carousel">
+	<ol id="sinestesia_indicators" class="carousel-indicators">
+		<li ng-repeat="livro in livros" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active: $index==0}"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="item" ng-repeat="livro in livros">
+			<a ui-sref="user.revlivro({ livro_id: livro.id })">
+				<img ng-src="{{uri}}/{{livro.capa}}" style="margin:auto;" alt="{{livro.titulo}}">
+			</a>
+		</div>
+	</div>
+</div>

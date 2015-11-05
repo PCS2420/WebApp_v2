@@ -15,7 +15,7 @@ angular.module('webAppV2App')
             loginResult.then(
             function(result) {
                 if('token' in result.data){
-                    $state.go('user.home');
+                    $state.go('user.home_descrever');
                 }
                 else
                 {

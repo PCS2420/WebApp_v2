@@ -12,9 +12,9 @@
 	</div>
 	<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
 	  <ul class="nav navbar-nav">
-		<li ng-class="{active: $state.includes('anon.about')}"><a ui-sref="anon.about">Sobre</a></li>
-		<li ng-class="{active: $state.includes('anon.login')}"><a ui-sref="anon.login">Entrar</a></li>
-		<li ng-class="{active: $state.includes('anon.register')}"><a ui-sref="anon.register">Registrar</a></li>
+		<li ng-class="{active: $state.includes('anon.about')}"><a ui-sref="anon.about" data-toggle="collapse" data-target=".in">Sobre</a></li>
+		<li ng-class="{active: $state.includes('anon.login')}"><a ui-sref="anon.login" data-toggle="collapse" data-target=".in">Entrar</a></li>
+		<li ng-class="{active: $state.includes('anon.register')}"><a ui-sref="anon.register" data-toggle="collapse" data-target=".in">Registrar</a></li>
 	  </ul>
 	</div><!--/.nav-collapse -->
   </div>

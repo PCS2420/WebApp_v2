@@ -32,20 +32,30 @@ angular.module('webAppV2App')
           access: AccessLevels.user
         }
       })
-      .state('user.home', { // caso ele esteja logado e requisitando /home
-        url: '/home',
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+      .state('user.home_descrever', { // caso ele esteja logado e requisitando /home/descrever
+        url: '/home/descrever',
+        templateUrl: 'views/home_descricao.html',
+        controller: 'HomeCtrl',
       })
-      .state('user.livro', { // caso ele esteja logado e requisitando /home
-        url: '/selecionaLivro/:livro_id',
+	  .state('user.home_revisar', { // caso ele esteja logado e requisitando /home/revisar
+        url: '/home/revisar',
+        templateUrl: 'views/home_revisao.html',
+        controller: 'HomeCtrl',
+      })
+      .state('user.desclivro', { // caso ele esteja logado e selecionando livro
+        url: '/selecionaLivroDescrever/:livro_id',
         templateUrl: 'views/selecionaLivro.html',
         controller: 'LivroCtrl'        
       })
-      .state('user.imagem', { // caso ele esteja logado e requisitando /home
+      .state('user.revlivro', { // caso ele esteja logado e selecionando livro
+        url: '/selecionaLivroRevisar/:livro_id',
+        templateUrl: 'views/selecionaLivro.html',
+        controller: 'LivroCtrl'        
+      })
+      .state('user.imagem', { // caso ele esteja logado e requisitando uma imagem especifica do livro
         url: '/selecionaImagem/:imagem_id',
         templateUrl: 'views/selecionaImagem.html',
-        controller: 'ImagemCtrl'        
+        controller: 'DescricaoCtrl'        
       })
 	  .state('user.revisao', { // caso ele esteja logado e requisitando /revisaImagem
 		url: '/revisaImagem/:imagem_id',

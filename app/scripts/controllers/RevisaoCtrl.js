@@ -1,7 +1,8 @@
 angular.module('webAppV2App')
-.controller('RevisaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth){
+.controller('RevisaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash){
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
-
+	$scope.flash = flash;
+	
 	var imagem_id = $stateParams.imagem_id
 	var myDataPromise = MostraImagem.getImagem(imagem_id);
 
@@ -32,8 +33,8 @@ angular.module('webAppV2App')
 	};
 
 	$scope.cancela = function(){
-		var livro_id = $scope.imagem.livro.id
-		$state.go("user.livro({livro_id : " + livro_id + "})");
+		flash.setAlert({msg : 'A revisão foi cancelada.', type : 'info'});
+		$state.go("user.home_revisar");
 	};
 
 	$scope.mostraContexto = function(){
@@ -46,12 +47,14 @@ angular.module('webAppV2App')
         EnviaDescricao.enviar($scope.imagem.id, $scope.formData)
         .then(
             function(response){
-                $scope.sucesso = true;
-                $scope.addAlert()
-                //$location.path('/login');
+				flash.setAlert({msg : 'Descrição aceita com sucesso!', type : 'success'});
+				$state.go("user.home_revisar");
             },
             function(error){
-        })
+				flash.setAlert({msg : 'Ocorreu algum erro ao aceitar a descrição.', type : 'error'});
+				$state.go("user.home_revisar");
+			}
+		)
     };
 	
 	$scope.rejeitar = function(){
@@ -61,10 +64,12 @@ angular.module('webAppV2App')
 		EnviaDescricao.enviar($scope.imagem.id, $scope.formData)
 		.then(
 			function(response){
-				$scope.sucesso = true;
-				$scope.addAlert()
+				flash.setAlert({msg : 'Descrição rejeitada com sucesso.', type : 'success'});
+				$state.go("user.home_revisar");
 			},
 			function(error){
+				flash.setAlert({msg : 'Ocorreu algum erro ao rejeitar a descrição.', type : 'error'});
+				$state.go("user.home_revisar");
 			}
 		)
 	};

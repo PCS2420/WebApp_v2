@@ -1,29 +1,12 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
-
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" ng-repeat="imagem in imagens" class="{active : ($index === 0)}" data-slide-to="{{$index}}"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div ng-class="{item: true, active : ($index === 0)}" ng-repeat="imagem in imagens"> 
-        <a href="" ng-click="statego(imagem.id)">
-          <img ng-src="{{uri}}/{{imagem.local}}" class="img-rounded center" alt="{{imagem.id}}">
-        </a>
-        
-        <div class="container">
-  
-          <div class="carousel-caption" style="display:block;"> 
-            
-          </div>
-        </div>
-      
-      </div>
-    </div>
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+<div id="imagens_carousel" carousel-livro class="carousel slide" data-ride="carousel">
+	<ol id="sinestesia_indicators" class="carousel-indicators">
+		<li ng-repeat="imagem in imagens" data-target="#imagens_carousel" data-slide-to="{{$index}}" ng-class="{active: $index==0}"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="item" ng-repeat="imagem in imagens">
+			<a href="" ng-click="statego(imagem.id)">
+				<img ng-src="{{uri}}/{{imagem.local}}" style="margin:auto;" alt="{{imagem.id}}">
+			</a>
+		</div>
+	</div>
 </div>

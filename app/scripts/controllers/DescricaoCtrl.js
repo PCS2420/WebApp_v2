@@ -1,22 +1,23 @@
 angular.module('webAppV2App')
-.controller('ImagemCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth){
+.controller('DescricaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash){
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
-
+	$scope.flash = flash;
+	
 	var imagem_id = $stateParams.imagem_id
 	var myDataPromise = MostraImagem.getImagem(imagem_id);
-
+	
 	myDataPromise.then(function(response){
 		//filtra por id do curso.
         //$scope.imagens = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
 		$scope.imagem = response.data;
-		console.log(response.data)
+		console.log(response.data);
     });
 
     $scope.formData = {}
 	$scope.alerts = [];
 
 	$scope.addAlert = function() {
-	   $scope.alerts.push({ type: 'success', msg: 'Descrição enviada com sucesso!' });
+		$scope.alerts.push({ type: 'success', msg: '' });
 	};
 
 	$scope.closeAlert = function(index) {
@@ -30,7 +31,8 @@ angular.module('webAppV2App')
 	};
 
 	$scope.cancela = function(){
-		$state.go("user.livro", {livro_id: $scope.imagem.livro.id });
+		flash.setAlert({msg : 'A descrição foi cancelada.', type : 'info'});
+		$state.go("user.home_descrever");
 	};
 
 	$scope.mostraContexto = function(){
@@ -43,12 +45,14 @@ angular.module('webAppV2App')
         EnviaDescricao.enviar($scope.imagem.id, $scope.formData)
         .then(
             function(response){
-                $scope.sucesso = true;
-                $scope.addAlert()
-                //$location.path('/login');
+				flash.setAlert({msg : 'A descrição foi feita com sucesso!', type : 'success'});
+				$state.go("user.home_descrever");
             },
             function(error){
-        })
+				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error'});
+				$state.go("user.home_descrever");
+			}
+		)
     };
 
 	$scope.w = window.innerWidth;
