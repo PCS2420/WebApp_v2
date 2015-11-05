@@ -48,7 +48,7 @@ directive('carouselLivro', function($rootScope) {
 						$(".footer_nav>li").removeClass("active_footer");
 						$(this).addClass("active_footer");
 					});
-				}, 1000);
+				}, 2000);
 			});
 	   }
 	};

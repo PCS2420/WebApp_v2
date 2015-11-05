@@ -1,6 +1,6 @@
 angular.module('webAppV2App')
 .controller('HomeCtrl', function($scope, $filter, $state, $stateParams, ListaLivro, Auth, flash){
-	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
+	$scope.$state = $state;
 
 	var curso = $scope.loggedUser().curso
 	var myDataPromise = ListaLivro.getLivros(curso);
@@ -8,8 +8,6 @@ angular.module('webAppV2App')
 	$scope.images = [];
 	
 	myDataPromise.then(function(response){
-		//filtra por id do curso.
-        //$scope.livros = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
 		$scope.livros= response.data.livros;
 		console.log($scope.livros)
     });
@@ -41,7 +39,7 @@ directive('descricaoCarousel', function($rootScope) {
 						$(".footer_nav>li").removeClass("active_footer");
 						$(this).addClass("active_footer");
 					});
-				}, 1440);
+				}, 2000);
 			});
 		
 			scope.$on('$destroy', function(){
@@ -63,7 +61,7 @@ directive('revisaoCarousel', function($rootScope) {
 						$(".footer_nav>li").removeClass("active_footer");
 						$(this).addClass("active_footer");
 					});
-				}, 1440);
+				}, 2000);
 			});
 		}
 	};
