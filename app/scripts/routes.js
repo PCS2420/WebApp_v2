@@ -47,6 +47,12 @@ angular.module('webAppV2App')
         templateUrl: 'views/selecionaImagem.html',
         controller: 'ImagemCtrl'        
       })
+	  .state('user.revisao', { // caso ele esteja logado e requisitando /revisaImagem
+		url: '/revisaImagem/:imagem_id',
+		templateUrl:'views/revisaImagem.html',
+		controller: 'RevisaoCtrl'
+	  
+	  })
       ;
 
     $urlRouterProvider.otherwise('/'); // caso a rota nao seja encontrada, envia para login
