@@ -14,15 +14,7 @@ angular.module('webAppV2App')
     });
 
     $scope.formData = {}
-	$scope.alerts = [];
 
-	$scope.addAlert = function() {
-		$scope.alerts.push({ type: 'success', msg: '' });
-	};
-
-	$scope.closeAlert = function(index) {
-	   $scope.alerts.splice(index, 1);
-	};
 
 	$scope.exit = function(){
 		$scope.loggedUser = undefined;
@@ -33,10 +25,6 @@ angular.module('webAppV2App')
 	$scope.cancela = function(){
 		flash.setAlert({msg : 'A descrição foi cancelada.', type : 'info'});
 		$state.go("user.home_descrever");
-	};
-
-	$scope.mostraContexto = function(){
-		//$state.go("anon.login");
 	};
 
 	$scope.enviar= function() {
