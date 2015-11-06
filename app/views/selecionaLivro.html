@@ -1,12 +1,22 @@
-<div id="imagens_carousel" carousel-livro class="carousel slide" data-ride="carousel">
-	<ol id="sinestesia_indicators" class="carousel-indicators">
-		<li ng-repeat="imagem in imagens" data-target="#imagens_carousel" data-slide-to="{{$index}}" ng-class="{active: $index==0}"></li>
-	</ol>
-	<div class="carousel-inner">
-		<div class="item" ng-repeat="imagem in imagens">
-			<a href="" ng-click="statego(imagem.id)">
-				<img ng-src="{{uri}}/{{imagem.local}}" style="margin:auto;" alt="{{imagem.id}}">
-			</a>
+<div ng-switch="isLoading">
+	<p ng-switch-when="true">
+		<img src="styles/ajax-loader.gif" style="position: absolute; top: 40%;right: 45.5%;"/>
+	</p>
+	<div ng-switch-when="false" ng-switch="isSuccessful">
+		<div ng-switch-when="true" id="myCarousel" carousel-preloader class="carousel slide" data-ride="carousel">
+			<ol id="sinestesia_indicators" class="carousel-indicators">
+				<li ng-repeat="imagem in imagens" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active: $index==0}"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="item" ng-repeat="imagem in imagens">
+					<a ng-click="statego(imagem.id)">
+						<img ng-src="{{preloaded_images[$index]}}" style="margin:auto;" alt="{{imagem.id}}">
+					</a>
+				</div>
+			</div>
 		</div>
+		<p ng-switch-when="false">
+			<strong>Oops</strong>: One of your images failed to load :(
+		</p>
 	</div>
 </div>
