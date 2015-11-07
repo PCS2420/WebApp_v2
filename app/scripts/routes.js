@@ -58,11 +58,15 @@ angular.module('webAppV2App')
         controller: 'DescricaoCtrl'        
       })
 	  .state('user.revisao', { // caso ele esteja logado e requisitando /revisaImagem
-		url: '/revisaImagem/:imagem_id',
-		templateUrl:'views/revisaImagem.html',
-		controller: 'RevisaoCtrl'
-	  
-	  })
+    url: '/revisaImagem/:imagem_id',
+    templateUrl:'views/revisaImagem.html',
+    controller: 'RevisaoCtrl'
+    })
+    .state('user.mudar', { // caso ele esteja logado e quer trocar seu senha
+    url: '/mudar/:login/:senha',
+    templateUrl:'views/mudarSenha.html',
+    controller: 'MudarSenhaCtrl'
+    })
       ;
 
     $urlRouterProvider.otherwise('/'); // caso a rota nao seja encontrada, envia para login

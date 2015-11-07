@@ -7,6 +7,7 @@ angular.module('webAppV2App')
     }
 	
 	$scope.update = function(userN){
+		console.log("in the function")
 		console.log(userN);
 		mudarSenha.mudar(userN.login, userN.senha);
 	}
