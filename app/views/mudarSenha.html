@@ -1,0 +1,7 @@
+<form novalidate class="myForm">
+    Login: <input type="text" ng-model="user.login"><br/>
+    Senha: <input type="password" ng-model="user.senha" /><br />
+    Outra vez: <input type="password" ng-model="senha2" ng-match="user.senha" /><br />
+    <span data-ng-show="myForm.senha2.$error.match">Passswords have to match!</span>
+    <input type="submit" ng-click="update(user.login, user.senha)" value="Save" />
+  </form>
