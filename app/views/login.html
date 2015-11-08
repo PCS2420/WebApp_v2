@@ -1,5 +1,5 @@
 <div class="container">
-	<form action ="/" id="myLogin" >
+	<form id="myLogin" ng-submit="submit(userLogin)">
 		<h2 class="form-signin-heading">Login</h2>
 
 		<div ng-show="falha" class="alert alert-danger">Usuário ou senha incorretos.<br></div>
@@ -11,8 +11,8 @@
 		<input type="password" id="password" class="form-control" ng-model="userLogin.password"><br><br>
 
 		<div id="lowerLogButs">
-			<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="submit(userLogin)" >Login</button>
-			<button type="button" class="btn btn-primary button-top" ng-model="singleModel" ng-click="register()" >Registrar</button>
+			<button type="submit" class="btn btn-primary button-top">Login</button>
+			<button type="button" class="btn btn-primary button-top" ng-click="register()">Registrar</button>
 		</div>
 	</form>
 </div>

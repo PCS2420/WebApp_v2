@@ -2,8 +2,12 @@
 	cursor: pointer;
 }
 #myCarousel {
-	height: 93%;
+	height: 84vh;
 }
 #sinestesia_indicators{
 	bottom: 150px;
+}
+
+.touch-carousel .carousel-inner>.item {
+	height: 77vh;
 }

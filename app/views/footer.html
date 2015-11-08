@@ -1,19 +1,20 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container">
 		<ul class="nav footer_nav">
-			<li class="active_footer">
+			<li ng-click="$state.go('user.home_descrever')" ng-class="{active_footer: $state.includes('user.home_descrever')}">
 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				<span class="glyphicon-class">Home</span>
 			</li>
-			<li>
+			<li ng-click="$state.go('user.perfil')" ng-class="{active_footer: $state.includes('user.perfil')}">
 				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 				<span class="glyphicon-class">User</span>
 			</li>
-			<li>
+			<li ng-click="$state.go('user.historico')" ng-class="{active_footer: $state.includes('user.historico')}">
 				<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
 				<span class="glyphicon-class">Histórico</span>
+				
 			</li>
-			<li>
+			<li ng-click="$state.go('user.buscar')" ng-class="{active_footer: $state.includes('user.buscar')}">
 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				<span class="glyphicon-class">Buscar</span>
 			</li>

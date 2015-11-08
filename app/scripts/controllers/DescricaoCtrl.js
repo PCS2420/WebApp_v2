@@ -5,7 +5,7 @@ angular.module('webAppV2App')
 	
 	var imagem_id = $stateParams.imagem_id
 	var myDataPromise = MostraImagem.getImagem(imagem_id);
-	
+
 	myDataPromise.then(function(response){
 		//filtra por id do curso.
         //$scope.imagens = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});

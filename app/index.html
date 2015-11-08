@@ -18,9 +18,9 @@
     <!-- endbuild -->
 
 	<!-- CSS's adicionais -->
-	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
-	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/footer_sinestesia.css">
-	<link ng-if="$state.includes('user')" rel="stylesheet" href="styles/carousel.css">
+	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
+	<link rel="stylesheet" href="styles/footer_sinestesia.css">
+	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/carousel.css">
 	<!-- fim CSS adicionais -->
 	
   </head>
@@ -29,15 +29,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- USUARIO DESLOGADO -->
-	<div ng-if="$state.includes('anon')" ng-include="'/views/header_deslogado.html'"></div>
-	<br><br><div ng-if="$state.includes('anon')" class="container" ui-view></div>
-	<div ng-if="$state.includes('anon')" ng-include="'/views/footer_deslogado.html'"></div>
-	
-	<!-- USUARIO LOGADO -->
-	<header ng-if="$state.includes('user')" ng-include="'/views/header.html'"></header>
-	<div class="container-fluid" ng-if="$state.includes('user')" id="sinestesia_content"><div ui-view></div></div>
-	<footer ng-if="$state.includes('user')" class="footer" ng-include="'/views/footer.html'"></footer>
+	<header ui-view="header"></header>
+	<br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div>
+	<footer ui-view="footer"></footer>
 	
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -67,6 +61,13 @@
 	<script src="scripts/controllers/LivroCtrl.js"></script>
 	<script src="scripts/controllers/DescricaoCtrl.js"></script>
 	<script src="scripts/controllers/RevisaoCtrl.js"></script>
+	<script src="scripts/controllers/PerfilCtrl.js"></script>
+	<script src="scripts/controllers/HistoricoCtrl.js"></script>
+	<script src="scripts/controllers/BuscarCtrl.js"></script>
+	<script src="scripts/controllers/AdminRegistrarCtrl.js"></script>
+	<script src="scripts/controllers/AdminAdicionarUsuariosCtrl.js"></script>
+	<script src="scripts/controllers/AdminGerenciarUsuariosCtrl.js"></script>
+	<script src="scripts/controllers/AdminBuscarCtrl.js"></script>
 	<script src="scripts/services/accessLevels.js"></script>
 	<script src="scripts/services/auth.js"></script>
 	<script src="scripts/services/currentUser.js"></script>
