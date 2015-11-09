@@ -13,7 +13,14 @@ var app = angular.module('webAppV2App',['ngResource', 'ui.bootstrap', 'ui.router
 app.run(function($rootScope, $state, CurrentUser, Auth) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
-        var userType = CurrentUser.user().tipo;
+        var userType;
+
+        if(CurrentUser.user().tipo){
+            userType = CurrentUser.user().tipo;
+        }
+        else{
+            userType = 'anon';
+        }
 
         var isAuthorized = Auth.authorize(toState.data.access, userType);
 

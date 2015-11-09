@@ -23,7 +23,10 @@ angular.module('webAppV2App')
           permission = 0;
         }
 
-        if (access <= permission) {
+        if(access === 0){
+          return true;
+        }
+        else if (access <= permission) {
           return this.isAuthenticated();
         } else {
           return false;
