@@ -8,7 +8,7 @@ angular.module('webAppV2App')
 			template: '<ui-view/>',
 			data: {
 				access: AccessLevels.anon
-			}, 
+			},
 			views: { // adicionando header e footer para todas as paginas anonimas
 				'header': {
 					templateUrl: 'views/header_deslogado.html'
@@ -45,7 +45,7 @@ angular.module('webAppV2App')
 				}
 			}
 		});
-		
+
 	//-----ADMIN ROUTES------
 	//-----------------------
 	$stateProvider
@@ -54,7 +54,7 @@ angular.module('webAppV2App')
 			template: '<ui-view/>',
 			data: {
 				access: AccessLevels.admin
-			}, 
+			},
 			views: { // adicionando header e footer para todas as paginas logadas como administrador
 				'header': {
 					templateUrl: 'views/header_admin.html'
@@ -100,7 +100,7 @@ angular.module('webAppV2App')
 				}
 			}
 		});
-		
+
 	//------USER ROUTES-------
 	//------------------------
 	$stateProvider
@@ -109,7 +109,7 @@ angular.module('webAppV2App')
 			template: '<ui-view/>',
 			data: {
 				access: AccessLevels.user
-			}, 
+			},
 			views: {
 				'header': {
 					templateUrl: 'views/header.html'
@@ -128,30 +128,12 @@ angular.module('webAppV2App')
 				}
 			}
 		})
-		.state('user.home_revisar', { // caso ele esteja logado e requisitando /home/revisar
-			url: '/home/revisar',
-			views: {
-				'content@': {
-					templateUrl: 'views/home_revisao.html',
-					controller: 'HomeCtrl'
-				}
-			}
-		})
 		.state('user.desclivro', { // caso ele esteja logado e selecionando livro
 			url: '/selecionaLivroDescrever/:livro_id',
 			views: {
 				'content@': {
 					templateUrl: 'views/selecionaLivro.html',
-					controller: 'LivroCtrl'   
-				}
-			}
-		})
-		.state('user.revlivro', { // caso ele esteja logado e selecionando livro
-			url: '/selecionaLivroRevisar/:livro_id',
-			views: {
-				'content@': {
-					templateUrl: 'views/selecionaLivro.html',
-					controller: 'LivroCtrl'    
+					controller: 'LivroCtrl'
 				}
 			}
 		})
@@ -160,16 +142,7 @@ angular.module('webAppV2App')
 			views: {
 				'content@': {
 					templateUrl: 'views/selecionaImagem.html',
-					controller: 'DescricaoCtrl'   
-				}
-			}
-		})
-		.state('user.revisao', { // caso ele esteja logado e requisitando /revisaImagem
-			url: '/revisaImagem/:imagem_id',
-			views: {
-				'content@': {
-					templateUrl:'views/revisaImagem.html',
-					controller: 'RevisaoCtrl'
+					controller: 'DescricaoCtrl'
 				}
 			}
 		})
@@ -197,6 +170,51 @@ angular.module('webAppV2App')
 				'content@': {
 					templateUrl:'views/buscar.html',
 					controller: 'BuscarCtrl'
+				}
+			}
+		});
+	//------REVISOR ROUTES-------
+	//------------------------
+	$stateProvider
+		.state('revisor', { // para o usuario que é conhecido, também nao pode ser instanciado
+			abstract: true,
+			template: '<ui-view/>',
+			data: {
+				access: AccessLevels.revisor
+			},
+			views: {
+				'header': {
+					templateUrl: 'views/header.html'
+				},
+				'footer': {
+					templateUrl: 'views/footer.html'
+				}
+			}
+		})
+		.state('revisor.home_revisar', { // caso ele esteja logado e requisitando /home/revisar
+			url: '/home/revisar',
+			views: {
+				'content@': {
+					templateUrl: 'views/home_revisao.html',
+					controller: 'HomeCtrl'
+				}
+			}
+		})
+		.state('revisor.revlivro', { // caso ele esteja logado e selecionando livro
+			url: '/selecionaLivroRevisar/:livro_id',
+			views: {
+				'content@': {
+					templateUrl: 'views/selecionaLivro.html',
+					controller: 'LivroCtrl'
+				}
+			}
+		})
+		.state('revisor.revisao', { // caso ele esteja logado e requisitando /revisaImagem
+			url: '/revisaImagem/:imagem_id',
+			views: {
+				'content@': {
+					templateUrl:'views/revisaImagem.html',
+					controller: 'RevisaoCtrl'
 				}
 			}
 		});

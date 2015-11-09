@@ -23,7 +23,7 @@ angular.module('webAppV2App')
 						$state.go('user.home_descrever');
 					} else if (user.tipo == 'Revisor') {
 						flash.setAlert({msg : 'Bem vindo(a),'+user.nome+' , à página de Revisão', type : 'success'});
-						$state.go('user.home_revisar');
+						$state.go('revisor.home_revisar');
 					} else if (user.tipo == 'DescritorRevisor') {
 						flash.setAlert({msg : 'Bem vindo(a),'+user.nome+' , à página de Descrição', type : 'success'});
 						$state.go('user.home_descrever');

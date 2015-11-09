@@ -13,7 +13,7 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="item" ng-repeat="livro in livros">
-					<a ui-sref="user.revlivro({ livro_id: livro.id })">
+					<a ui-sref="revisor.revlivro({ livro_id: livro.id })">
 						<img ng-src="{{preloaded_images[$index]}}" style="margin:auto;" alt="{{livro.titulo}}">
 					</a>
 				</div>

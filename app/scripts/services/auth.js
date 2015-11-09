@@ -1,15 +1,41 @@
 angular.module('webAppV2App')
 .factory('Auth', function($http, LocalService, AccessLevels) {
     return {
-      authorize: function(access) {
-        if (access === AccessLevels.user) {
+      authorize: function(access, userType) {
+        var permission;
+
+        if(userType === 'Publicador'){
+          permission = 1;
+        }
+        else if(userType === 'Descritor'){
+          permission = 2;
+        }
+        else if(userType === 'DescritorRevisor'){
+          permission = 2;
+        }
+        else if(userType === 'Revisor'){
+          permission = 3;
+        }
+        else if(userType === 'Administrador'){
+          permission = 4;
+        }
+        else{
+          permission = 0;
+        }
+
+        if (access <= permission) {
           return this.isAuthenticated();
         } else {
-          return true;
+          return false;
         }
       },
       isAuthenticated: function() {
-        return LocalService.get('auth_token');
+        if(LocalService.get('auth_token') === null){
+          return false;
+        }
+        else{
+          return true;
+        }
       },
       login: function(credentials) {
         var login = $http.post('http://localhost:1337/auth/authenticate', credentials);

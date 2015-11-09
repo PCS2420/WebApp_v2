@@ -1,18 +1,18 @@
 angular.module('webAppV2App')
 .controller('LivroCtrl', function($scope, $filter, $state, $stateParams, ListaImagem, Auth, preloader){
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
-	
+
 	var livro_id = $stateParams.livro_id
 	var isDescricao = $state.includes('user.desclivro');
 	console.log("isDescricao?", $state.includes('user.desclivro'));
-	
+
 	var myDataPromise = ListaImagem.getImagens(livro_id, isDescricao);
 
 	// I keep track of the state of the loading images.
 	$scope.isLoading = true;
 	$scope.isSuccessful = false;
 	$scope.percentLoaded = 0;
-	
+
 	myDataPromise.then(function(response){
 		//filtra por id do curso.
         //$scope.livros = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
@@ -45,7 +45,7 @@ angular.module('webAppV2App')
 			}
 		);
 	});
-	
+
 	$scope.exit = function(){
 		$scope.loggedUser = undefined;
 		Auth.logout();
@@ -58,13 +58,13 @@ angular.module('webAppV2App')
 		{
 			$state.go("user.imagem" , { imagem_id: imagem_id});
 		}
-		else 
+		else
 		{
-			$state.go("user.revisao" , { imagem_id: imagem_id});
+			$state.go("revisor.revisao" , { imagem_id: imagem_id});
 		}
 	};
 
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
-    $scope.uri = "http://localhost:1337"; 
+    $scope.uri = "http://localhost:1337";
 });

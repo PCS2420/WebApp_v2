@@ -10,11 +10,19 @@
 
 var app = angular.module('webAppV2App',['ngResource', 'ui.bootstrap', 'ui.router']);
 
-app.run(function($rootScope, $state, Auth) {
+app.run(function($rootScope, $state, CurrentUser, Auth) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-		if (!Auth.authorize(toState.data.access)) {
+
+        var userType = CurrentUser.user().tipo;
+
+        var isAuthorized = Auth.authorize(toState.data.access, userType);
+
+		if (!isAuthorized) {
 			event.preventDefault();
-			$state.go('anon.login');
+
+            if(typeof fromState === 'undefined'){
+    			$state.go('anon.login');
+            }
 		}
     });
 });
