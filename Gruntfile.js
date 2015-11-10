@@ -117,7 +117,29 @@ module.exports = function (grunt) {
           open: true,
           base: '<%= yeoman.dist %>'
         }
-      }
+      },
+	  reallivereload: {
+        options: {
+          port:9091,
+          hostname: '0.0.0.0',
+          open: true,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect().use(
+                '/bower_components',
+                connect.static('./bower_components')
+              ),
+              connect().use(
+                '/app/styles',
+                connect.static('./app/styles')
+              ),
+              connect.static(appConfig.app)
+            ];
+          }
+        }
+      },
+
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -422,6 +444,21 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
+      'watch'
+    ]);
+  });
+  
+  grunt.registerTask('real', 'Compile then start a connect web server at port 80', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'wiredep',
+      'concurrent:server',
+      'autoprefixer:server',
+      'connect:reallivereload',
       'watch'
     ]);
   });
