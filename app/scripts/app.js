@@ -8,7 +8,7 @@
  * Controller of the webAppV2App
  */
 
-var app = angular.module('webAppV2App', ['ngResource', 'ui.bootstrap', 'ui.router', 'ngVideo']);
+var app = angular.module('webAppV2App', ['ngResource', 'ui.bootstrap', 'ui.router']);
 
 app.run(function ($rootScope, $state, CurrentUser, Auth) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

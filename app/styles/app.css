@@ -114,7 +114,7 @@ h1 {
 
 .synHeader2 {
 
-	font-family: 'Sigmar One', serif; 
+	font-family: 'Sigmar One', serif;
 	border-bottom: 2px solid #DDD;
 }
 
@@ -133,4 +133,9 @@ h1 {
 }
 .button-top {
 	margin-top: 10px;
+}
+
+video {
+  width: 100%;
+  height: auto;
 }
