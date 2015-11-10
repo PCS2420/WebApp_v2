@@ -12,6 +12,7 @@
 	</div>
 	<div id="header_navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
 	  <ul class="nav navbar-nav">
+    <li ng-class="{active: $state.includes('anon.tutorial')}"><a ui-sref="anon.tutorial" data-toggle="collapse" data-target=".in">Tutorial</a></li>
 		<li ng-class="{active: $state.includes('user.home_descrever')}"><a href="/#/home/descrever" data-toggle="collapse" data-target=".in">Descrever</a></li>
 		<li ng-if="loggedUser().tipo === 'Revisor'|| loggedUser().tipo === 'DescritorRevisor'" ng-class="{active: $state.includes('user.home_revisar')}"><a href="/#/home/revisar" data-toggle="collapse" data-target=".in">Revisar</a></li>
 		<li><a href="#sair" ng-model="singleModel" ng-click="exit()">Sair</a></li>
