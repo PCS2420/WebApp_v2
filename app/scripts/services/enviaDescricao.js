@@ -6,7 +6,7 @@ angular.module('webAppV2App')
 	EnviaDescricao.enviar = function(imagem_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put("http://localhost:1337/imagem/" + imagem_id, formData)
+		return $http.put(URI.api+"imagem/" + imagem_id, formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -21,7 +21,7 @@ angular.module('webAppV2App')
 	EnviaDescricao.aceita = function(imagem_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put("http://localhost:1337/imagem/" + imagem_id + "/aceita", formData)
+		return $http.put(URI.api+"imagem/" + imagem_id + "/aceita", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -36,7 +36,7 @@ angular.module('webAppV2App')
 	EnviaDescricao.editada = function(imagem_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put("http://localhost:1337/imagem/" + imagem_id + "/editada", formData)
+		return $http.put(URI.api+"imagem/" + imagem_id + "/editada", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -51,7 +51,7 @@ angular.module('webAppV2App')
 	EnviaDescricao.rejeitada = function(imagem_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put("http://localhost:1337/imagem/" + imagem_id + "/rejeitada", formData)
+		return $http.put(URI.api+"imagem/" + imagem_id + "/rejeitada", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);

@@ -1,26 +1,27 @@
+"use strict";
 angular.module('webAppV2App')
-.factory('Auth', function($http, LocalService, AccessLevels) {
+.factory('Auth', function($http, LocalService, AccessLevels, URI) {
     return {
       authorize: function(access, userType) {
         var permission;
 
         if(userType === 'Publicador'){
-          permission = 1;
+          permission = AccessLevels.publicador;
         }
         else if(userType === 'Descritor'){
-          permission = 2;
+          permission = AccessLevels.user;
         }
         else if(userType === 'DescritorRevisor'){
-          permission = 2;
+          permission = AccessLevels.user;
         }
         else if(userType === 'Revisor'){
-          permission = 3;
+          permission = AccessLevels.revisor;
         }
         else if(userType === 'Administrador'){
-          permission = 4;
+          permission = AccessLevels.admin;
         }
         else{
-          permission = 0;
+          permission = AccessLevels.anon;
         }
 
         if(access === 0){
@@ -41,7 +42,7 @@ angular.module('webAppV2App')
         }
       },
       login: function(credentials) {
-        var login = $http.post('http://localhost:1337/auth/authenticate', credentials);
+        var login = $http.post(URI.api+'auth/authenticate', credentials);
 
         login.success(function(result) {
             LocalService.set('auth_token', JSON.stringify(result));
@@ -54,13 +55,13 @@ angular.module('webAppV2App')
       },
       register: function(formData) {
         LocalService.unset('auth_token');
-        var register = $http.post('http://localhost:1337/usuario/cadastro', formData);
+        var register = $http.post(URI.api+'usuario/cadastro', formData);
         register.success(function(result) {
           LocalService.set('auth_token', JSON.stringify(result));
         });
         return register;
       }
-    }
+    };
   })
   .factory('AuthInterceptor', function($q, $injector) {
     var LocalService = $injector.get('LocalService');
@@ -84,7 +85,7 @@ angular.module('webAppV2App')
         }
         return $q.reject(response);
       }
-    }
+    };
   })
   .config(function($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');

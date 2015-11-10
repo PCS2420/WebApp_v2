@@ -1,8 +1,8 @@
 angular.module('webAppV2App')
-.factory('ListaLivro', function($http, $rootScope){
+.factory('ListaCurso', function($http, $rootScope, URI){
    	return {
-    	getLivros: function(curso_id) {
-            return $http.get("http://localhost:1337/curso/" + curso_id);
+		getCursos: function(curso_id) {
+			return curso_id !== undefined ? $http.get(URI.api+"curso/"+curso_id) : $http.get(URI.api+"curso");
 		}
-	}
+	};
 });

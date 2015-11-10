@@ -20,8 +20,7 @@
             <!-- <input type="text" name="course" id="course" class="form-control" ng-model="user.curso" required /> -->
             <select ng-model="user.curso" class="form-control" required>
                 <option value="">Selecione um curso</option>
-                <option value="Engenharia Eletrica">Engenharia Eletrica</option>
-                <option value="Direito">Direito</option>
+                <option ng-repeat="curso in cursos" value="{{curso.nome}}">{{curso.nome}}</option>
             </select>
             <span ng-show="myForm.course.$dirty && myForm.course.$error.required" class="help-block">Campo obrigatório.</span>
         </div>

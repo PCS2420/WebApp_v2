@@ -1,3 +1,4 @@
+"use strict";
 // I provide a utility class for preloading image objects.
 angular.module('webAppV2App').factory(
 	"preloader",
@@ -112,7 +113,7 @@ angular.module('webAppV2App').factory(
 				// we bind the event handlers BEFORE we actually set the image
 				// source. Failure to do so will prevent the events from proper
 				// triggering in some browsers.
-				var image = $( new Image() )
+				var image = angular.element( new Image() )
 					.load(
 						function( event ) {
 							// Since the load event is asynchronous, we have to

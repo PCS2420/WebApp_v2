@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .config(function($stateProvider, $urlRouterProvider, AccessLevels) {
 	//-----ANONYMOUS ROUTES------
@@ -95,8 +96,17 @@ angular.module('webAppV2App')
 			url: '/adminBuscar',
 			views: {
 				'content@': {
-					templateUrl: 'views/buscar.html',
+					templateUrl: 'views/adminBuscar.html',
 					controller: 'AdminBuscarCtrl'
+				}
+			}
+		})
+		.state('admin.config', { // usuario desconhecido requisitando '/adminConfig'
+			url: '/adminConfig',
+			views: {
+				'content@': {
+					templateUrl: 'views/adminConfig.html',
+					controller: 'AdminConfigCtrl'
 				}
 			}
 		});

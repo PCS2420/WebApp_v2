@@ -1,5 +1,5 @@
 angular.module('webAppV2App')
-.controller('HomeCtrl', function($scope, $filter, $state, $stateParams, ListaLivro, Auth, flash, preloader){
+.controller('HomeCtrl', function($scope, $filter, $state, $stateParams, ListaLivro, Auth, flash, preloader, URI){
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
 	
 	var curso = $scope.loggedUser().curso
@@ -53,7 +53,7 @@ angular.module('webAppV2App')
 
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
-    $scope.uri = "http://localhost:1337"; 
+    $scope.uri = URI.api; 
 });
 
 angular.module('webAppV2App').

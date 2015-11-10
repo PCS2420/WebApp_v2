@@ -1,11 +1,13 @@
 angular.module('webAppV2App')
-    .controller('RegisterCtrl', function($scope, $state, Auth){
+    .controller('RegisterCtrl', function($scope, $state, Auth, ListaCurso){
 	$scope.$state = $state;
     $scope.falha = false;
     $scope.sucesso = false;
-
+	ListaCurso.getCursos().then(function(response) {
+		$scope.cursos = response.data;
+	});
+	
     $scope.register = function(userInfo) {
-
         $scope.dataLoading = true;
         userInfo['tipo'] = "Descritor";
 

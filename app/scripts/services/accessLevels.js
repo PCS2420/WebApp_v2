@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
     .constant('AccessLevels', {
         anon: 0,

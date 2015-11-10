@@ -8,13 +8,12 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" ui-sref="anon.login">Sinestesia - Seja bem vindo</a>
+	  <a class="navbar-brand" ui-sref="admin.cadastrar_livro">Sinestesia - Painel Administrador</a>
 	</div>
 	<div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
 	  <ul class="nav navbar-nav">
-		<li ng-class="{active: $state.includes('anon.about')}"><a ui-sref="anon.about" data-toggle="collapse" data-target=".in">Sobre</a></li>
-		<li ng-class="{active: $state.includes('anon.login')}"><a ui-sref="anon.login" data-toggle="collapse" data-target=".in">Entrar</a></li>
-		<li ng-class="{active: $state.includes('anon.register')}"><a ui-sref="anon.register" data-toggle="collapse" data-target=".in">Registrar</a></li>
+		<li ng-class="{active: $state.includes('admin.config')}"><a ui-sref="admin.config" data-toggle="collapse" data-target=".in">Configurações de Pontos</a></li>
+		<li><a href="#sair" ng-model="singleModel" ng-click="exit()">Sair</a></li>
 	  </ul>
 	</div><!--/.nav-collapse -->
   </div>
