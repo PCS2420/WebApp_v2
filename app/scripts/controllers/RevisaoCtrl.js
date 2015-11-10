@@ -1,5 +1,5 @@
 angular.module('webAppV2App')
-.controller('RevisaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash){
+.controller('RevisaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash, URI){
 	$scope.$state = $state;
 	$scope.flash = flash;
 
@@ -86,5 +86,5 @@ angular.module('webAppV2App')
 
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
-    $scope.uri = "http://localhost:1337";
+    $scope.uri = URI.api;
 });

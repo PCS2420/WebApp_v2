@@ -1,5 +1,5 @@
 angular.module('webAppV2App')
-.service('EnviaDescricao', function EnviaDescricao($http, $q){
+.service('EnviaDescricao', function EnviaDescricao($http, $q, URI){
 
 	var EnviaDescricao = this;
 

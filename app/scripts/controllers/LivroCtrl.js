@@ -1,5 +1,5 @@
 angular.module('webAppV2App')
-.controller('LivroCtrl', function($scope, $filter, $state, $stateParams, ListaImagem, Auth, preloader){
+.controller('LivroCtrl', function($scope, $filter, $state, $stateParams, ListaImagem, Auth, preloader, URI){
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
 
 	var livro_id = $stateParams.livro_id
@@ -66,5 +66,5 @@ angular.module('webAppV2App')
 
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
-    $scope.uri = "http://localhost:1337";
+    $scope.uri = URI.api;
 });

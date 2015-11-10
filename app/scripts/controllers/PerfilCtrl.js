@@ -1,5 +1,5 @@
 angular.module('webAppV2App')
-.controller('PerfilCtrl', function($scope, $http){
+.controller('PerfilCtrl', function($scope, $http, URI){
 
     $scope.showForm = false;
 
@@ -14,7 +14,7 @@ angular.module('webAppV2App')
             newPassword: newPassword
         }
 
-        var changed = $http.post('http://localhost:1337/usuario/mudarSenha', passwordChange);
+        var changed = $http.post(URI.api + 'usuario/mudarSenha', passwordChange);
 
         changed.then(
             function(response){

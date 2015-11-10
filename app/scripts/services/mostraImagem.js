@@ -1,8 +1,8 @@
 angular.module('webAppV2App')
-.factory('MostraImagem', function($http, $rootScope){
+.factory('MostraImagem', function($http, $rootScope, URI){
    	return {
     	getImagem: function(imagem_id) {
-            return $http.get("http://localhost:1337/imagem/" + imagem_id);
+            return $http.get(URI.api + "imagem/" + imagem_id);
 		}
 	}
 });
