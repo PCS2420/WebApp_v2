@@ -82,6 +82,17 @@ angular.module('webAppV2App')
 		)
 	};
 
+  // Adiciona a funcionalidade de ouvir a descricao que esta presente no form
+  $scope.ouvir= function() {
+    var formData = $scope.formData.texto
+
+    console.log( formData );
+
+    var voice = 'Brazilian Portuguese Female';
+
+    setTimeout(responsiveVoice.speak( formData, voice),15000);
+  };
+
 
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
