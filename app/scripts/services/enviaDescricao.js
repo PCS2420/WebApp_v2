@@ -3,10 +3,10 @@ angular.module('webAppV2App')
 
 	var EnviaDescricao = this;
 
-	EnviaDescricao.enviar = function(imagem_id, formData){
+	EnviaDescricao.enviar = function(formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put(URI.api+"imagem/" + imagem_id, formData)
+		return $http.post(URI.api+"descricao/descreve", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -18,10 +18,10 @@ angular.module('webAppV2App')
 	return defer.promise;
 	},
 
-	EnviaDescricao.aceita = function(imagem_id, formData){
+	EnviaDescricao.aceita = function(descricao_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put(URI.api+"imagem/" + imagem_id + "/aceita", formData)
+		return $http.put(URI.api+"descricao/" + descricao_id + "/aceita", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -33,10 +33,10 @@ angular.module('webAppV2App')
 	return defer.promise;
 	},
 
-	EnviaDescricao.editada = function(imagem_id, formData){
+	EnviaDescricao.editada = function(descricao_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put(URI.api+"imagem/" + imagem_id + "/editada", formData)
+		return $http.put(URI.api+"imagem/" + descricao_id + "/editada", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
@@ -48,10 +48,10 @@ angular.module('webAppV2App')
 	return defer.promise;
 	},
 
-	EnviaDescricao.rejeitada = function(imagem_id, formData){
+	EnviaDescricao.rejeitada = function(descricao_id, formData){
 		console.log(formData)
 		var defer = $q.defer();
-		return $http.put(URI.api+"imagem/" + imagem_id + "/rejeitada", formData)
+		return $http.put(URI.api+"descricao/" + descricao_id + "/rejeitada", formData)
 		.success(function(response){
 			console.log(response);
 			defer.resolve(response);
