@@ -11,3 +11,8 @@
 .touch-carousel .carousel-inner>.item {
 	height: 77vh;
 }
+
+.carousel-control {
+	top:8%;
+    height: 70%;
+}

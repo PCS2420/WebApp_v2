@@ -73,10 +73,6 @@ directive('carouselPreloader', function($rootScope) {
 				if (scope.isSuccessful) {
 					console.log("LOADED");
 					angular.element(document).find("#myCarousel").carousel({interval: false, toughness: 0.5});
-					$(".footer_nav>li").click(function(evt) {
-						$(".footer_nav>li").removeClass("active_footer");
-						$(this).addClass("active_footer");
-					});
 				}
 			});
 		}
