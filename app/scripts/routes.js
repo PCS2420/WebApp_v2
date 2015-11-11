@@ -173,8 +173,7 @@ angular.module('webAppV2App')
           }
         }
       })
-
-      .state('anon.tutorial', { // usuario desconhecido requisitando tutorial '/tutorial'
+      .state('user.tutorial', { // caso ele esteja logado e  requisitando tutorial
         url: '/tutorial',
         views: {
           'content@': {
