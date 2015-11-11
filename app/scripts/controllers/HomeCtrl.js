@@ -51,6 +51,14 @@ angular.module('webAppV2App')
 		$state.go("anon.login");
 	};
 
+	$scope.next = function(){
+		angular.element('#myCarousel').carousel('next');
+	};
+
+	$scope.prev = function(){
+		angular.element('#myCarousel').carousel('prev');
+	};
+
 	$scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
     $scope.uri = URI.api; 

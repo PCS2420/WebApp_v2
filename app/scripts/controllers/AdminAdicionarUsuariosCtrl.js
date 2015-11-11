@@ -1,6 +1,5 @@
 angular.module('webAppV2App')
 .controller('AdminAdicionarUsuariosCtrl', function($scope, $state, Auth, ListaCurso){
-	console.log("@TODO AdminAdicionarUsuariosCtrl controller");
 	$scope.$state = $state;
     $scope.falha = false;
     $scope.sucesso = false;
@@ -9,20 +8,22 @@ angular.module('webAppV2App')
 		$scope.cursos = response.data;
 	});
 	
-    $scope.register = function(userInfo) {
+    $scope.registerAdmin = function(userInfo) {
 
         $scope.dataLoading = true;
         userInfo['tipo'] = "Revisor";
+		userInfo['senha'] = userInfo['login']; // same pass as uname
 
-        Auth.register(userInfo)
-        .then(
-            function(response){
-                $scope.sucesso = true;
-                $state.go('admin.adicionar_usuarios');
-            },
-            function(error){
-                $scope.falha = true;
-                $scope.dataLoading = false;
-        })
+		Auth.register(userInfo)
+		.then(
+			function(response){
+				$scope.sucesso = true;
+				$scope.dataLoading = false;
+				$scope.user = null;
+		   },
+			function(error){
+				$scope.falha = true;
+				$scope.dataLoading = false;
+		});
     };
 });
