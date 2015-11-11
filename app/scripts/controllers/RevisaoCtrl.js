@@ -8,8 +8,8 @@ angular.module('webAppV2App')
 
 	myDataPromise.then(function(response){
 		$scope.imagem = response.data;
-		$scope.formData = response.data;
-		$scope.descricaoOriginal = $scope.imagem.descricao
+		$scope.formData.texto = $scope.imagem.descricao.texto;
+		$scope.descricaoOriginal = $scope.imagem.descricao.texto
 		console.log(response.data)
     });
 
@@ -29,13 +29,12 @@ angular.module('webAppV2App')
 
 	$scope.aceitar= function() {
 		var formData = $scope.formData
-		formData.estado = "Revisado"
+		formData.revisor = $scope.loggedUser().id
 
-
-		if (formData.descricao == $scope.descricaoOriginal)
+		if (formData.texto == $scope.descricaoOriginal)
 		{
 			//Aceita descricao sem editar
-			EnviaDescricao.aceita($scope.imagem.id, $scope.formData)
+			EnviaDescricao.aceita($scope.imagem.descricao.id, $scope.formData)
         	.then(
 	            function(response){
 					flash.setAlert({msg : 'Descrição aceita com sucesso!', type : 'success'});
@@ -50,7 +49,7 @@ angular.module('webAppV2App')
 		else
 		{
 			//Aceita descricao com correcao
-			EnviaDescricao.editada($scope.imagem.id, $scope.formData)
+			EnviaDescricao.editada($scope.imagem.descricao.id, $scope.formData)
         	.then(
 	            function(response){
 					flash.setAlert({msg : 'Descrição aceita com sucesso!', type : 'success'});
@@ -67,10 +66,10 @@ angular.module('webAppV2App')
 
 	$scope.rejeitar = function(){
 		var formData = $scope.formData
-		formData.estado = "Aberto"
+		formData.revisor = $scope.loggedUser().id
 
 		//Rejeita descricao
-		EnviaDescricao.rejeitada($scope.imagem.id, $scope.formData)
+		EnviaDescricao.rejeitada($scope.imagem.descricao.id, $scope.formData)
 		.then(
 			function(response){
 				flash.setAlert({msg : 'Descrição rejeitada com sucesso.', type : 'success'});

@@ -7,8 +7,6 @@ angular.module('webAppV2App')
 	var myDataPromise = MostraImagem.getImagem(imagem_id);
 
 	myDataPromise.then(function(response){
-		//filtra por id do curso.
-        //$scope.imagens = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
 		$scope.imagem = response.data;
 		console.log(response.data);
     });
@@ -29,8 +27,10 @@ angular.module('webAppV2App')
 
 	$scope.enviar= function() {
 		var formData = $scope.formData
-		formData.estado = "Pronto"
-        EnviaDescricao.enviar($scope.imagem.id, $scope.formData)
+		formData.imagem = $stateParams.imagem_id
+		formData.descritor = $scope.loggedUser().id
+
+        EnviaDescricao.enviar($scope.formData)
         .then(
             function(response){
 				flash.setAlert({msg : 'A descrição foi feita com sucesso!', type : 'success'});
