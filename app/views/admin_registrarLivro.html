@@ -14,6 +14,11 @@
             <input type="text" name="editora" id="editora" class="form-control" ng-model="livro.editora" required ng-disabled="isEditing==false"/>
             <span ng-show="myForm.editora.$dirty && myForm.editora.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.prioridade.$dirty && myForm.prioridade.$error.required }">
+            <label for="prioridade">Prioridade</label>
+            <input type="text" name="prioridade" id="prioridade" class="form-control" ng-model="livro.prioridade" required ng-disabled="isEditing==false"/>
+            <span ng-show="myForm.prioridade.$dirty && myForm.prioridade.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
         <div class="form-group" ng-class="{ 'has-error': myForm.edicao.$dirty && myForm.edicao.$error.required }">
             <label for="edicao">Edição</label>
             <input type="text" name="edicao" id="edicao" class="form-control" ng-model="livro.login" required ng-disabled="isEditing==false"/>
