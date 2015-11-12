@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('AdminBooksCtrl', function($scope, $state, ListaLivro){
+	angular.element("#texto_header").html("Admin - Gerenciar Livros");
     $scope.$state = $state;
     
     var myDataPromise = ListaLivro.getAllLivros();

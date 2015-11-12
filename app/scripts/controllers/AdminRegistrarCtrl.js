@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, ListaCurso, ListaLivro){
+	angular.element("#texto_header").html("Admin - Incluir Livro");
     $scope.$state = $state;
     ListaCurso.getCursos().then(function (res) {
         $scope.listaCursos = res.data;
