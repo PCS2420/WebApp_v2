@@ -42,10 +42,10 @@
     <hr>
     <div ng-show="isNotFinished" class="alert alert-warning">Salve ou cancele a edicao primeiro.</div>
     <a href="" ng-click="isEditing? finishiEdit() : openModal()" class="btn btn-primary">Adicionar Imagem</a>
-    <ul>
+    <ul class="livros-lista">
         <li class="item" ng-repeat="imagem in livro.imagens">
             <a ng-click="openModal(imagem)">
-                {{$index}}) {{imagem.estado}} : {{imagem.pagina}} pagina
+                {{imagem.pagina}} pagina <br><span>Status: {{imagem.estado}}</span>
             </a>
         </li>
     </ul>
