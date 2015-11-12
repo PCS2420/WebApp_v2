@@ -29,7 +29,7 @@ angular.module('webAppV2App')
 						$state.go('user.home_descrever');
 					} else if (user.tipo == 'Administrador') {
 						flash.setAlert({msg : 'Bem vindo(a),'+user.nome+' , à página de Administração', type : 'success'});
-						$state.go('admin.cadastrar_livro');
+						$state.go('admin.lista_livro');
 					} else {
 						$scope.falha = true;
 					}

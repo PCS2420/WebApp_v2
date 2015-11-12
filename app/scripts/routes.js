@@ -65,8 +65,17 @@ angular.module('webAppV2App')
 				}
 			}
 		})
-		.state('admin.cadastrar_livro', { // usuario desconhecido requisitando '/registrarLivro'
-			url: '/registerBook',
+		.state('admin.lista_livro', { // usuario desconhecido requisitando '/registrarLivro'
+			url: '/books',
+			views: {
+				'content@': {
+					templateUrl: 'views/admin_livros.html',
+					controller: 'AdminBooksCtrl'
+				}
+			}
+		})
+		.state('admin.form_livro', { // usuario desconhecido requisitando '/registrarLivro'
+			url: '/books/form/:livro_id',
 			views: {
 				'content@': {
 					templateUrl: 'views/admin_registrarLivro.html',

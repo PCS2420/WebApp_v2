@@ -1,1 +1,52 @@
-@todo registrarLivro
+<div class="container">
+    <form name="myForm" role="form" id="myForm" ng-submit="submit()">
+        <h2 class="form-sigin-heading"></h2>
+        <div ng-show="isSuccess" class="alert alert-success">Salvo com sucesso!</div>
+        <div ng-show="isError" class="alert alert-danger">Erro ao salvar livro!<br></div>
+
+        <div class="form-group" ng-class="{ 'has-error': myForm.titulo.$dirty && myForm.titulo.$error.required }">
+            <label for="titulo">Titulo</label>
+            <input type="text" name="titulo" id="titulo" class="form-control" ng-model="livro.titulo" required ng-disabled="isEditing==false" />
+            <span ng-show="myForm.titulo.$dirty && myForm.titulo.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.editora.$dirty && myForm.editora.$error.required }">
+            <label for="editora">Editora</label>
+            <input type="text" name="editora" id="editora" class="form-control" ng-model="livro.editora" required ng-disabled="isEditing==false"/>
+            <span ng-show="myForm.editora.$dirty && myForm.editora.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.edicao.$dirty && myForm.edicao.$error.required }">
+            <label for="edicao">Edição</label>
+            <input type="text" name="edicao" id="edicao" class="form-control" ng-model="livro.login" required ng-disabled="isEditing==false"/>
+            <span ng-show="myForm.edicao.$dirty && myForm.edicao.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.autor.$dirty && myForm.autor.$error.required }">
+            <label for="autor">Autor</label>
+            <input type="text" name="autor" id="autor" class="form-control" ng-model="livro.autor" required ng-disabled="isEditing==false"/>
+            <span ng-show="myForm.autor.$dirty && myForm.autor.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.curso.$dirty && myForm.curso.$error.required }">
+            <label for="curso">Curso</label>
+            <select ng-model="livro.curso" class="form-control" required ng-disabled="isEditing==false">
+                <option ng-repeat="curso in listaCursos" value="{{curso.id}}" ng-selected="curso.id==livro.curso.id">{{curso.nome}}</option>
+            </select>
+            <span ng-show="myForm.curso.$dirty && myForm.curso.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-actions">
+            <button ng-show="isEditing" type="submit" ng-disabled="myForm.$invalid || dataLoading " class="btn btn-primary">Salvar</button>
+            <a ng-show="isEditing==false" class="btn btn-primary" ng-click="isEditing=true">Editar</a>
+            <img ng-if="isSaving" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a href="#/books" ng-show="isEditing && livro_id==''" class="btn btn-link">Cancelar</a>
+            <a href="" ng-show="isEditing && livro_id" ng-click="rollback()" class="btn btn-link">Cancelar</a>
+        </div>
+    </form>
+    <hr>
+    <div ng-show="isNotFinished" class="alert alert-warning">Salve ou cancele a edicao primeiro.</div>
+    <a href="" ng-click="isEditing? finishiEdit() : openModal()" class="btn btn-primary">Adicionar Imagem</a>
+    <ul>
+        <li class="item" ng-repeat="imagem in livro.imagens">
+            <a ng-click="openModal(imagem)">
+                {{$index}}) {{imagem.estado}} : {{imagem.pagina}} pagina
+            </a>
+        </li>
+    </ul>
+</div>

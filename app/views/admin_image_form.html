@@ -1,0 +1,45 @@
+<div style="padding: 15px;">
+    <form name="arquivoForm" role="form" id="arquivoForm" ng-submit="submit()" enctype="multipart/form-data">
+        <div ng-show="isSuccess" class="alert alert-success">Salvo com sucesso!</div>
+        <div ng-show="isError" class="alert alert-danger">Erro ao salvar livro!<br></div>
+
+        <div class="form-group" ng-class="{ 'has-error': arquivoForm.arquivo.$dirty && arquivoForm.arquivo.$error.required }">
+            <label for="arquivo">Arquivo</label>
+            <input type="file" name="arquivo" id="arquivo" class="form-control" ng-model="arquivos.arquivo" required />
+            <span ng-show="arquivoForm.arquivo.$dirty && arquivoForm.arquivo.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+    </form>
+
+    <form name="myForm" role="form" id="myForm" ng-submit="submit()">
+        <div class="form-group" ng-class="{ 'has-error': myForm.pagina.$dirty && myForm.pagina.$error.required }">
+            <label for="pagina">Pagina</label>
+            <input type="number" name="pagina" id="pagina" class="form-control" ng-model="livro.pagina" required />
+            <span ng-show="myForm.pagina.$dirty && myForm.pagina.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.tipoDeContexto.$dirty && myForm.tipoDeContexto.$error.required }">
+            <label for="tipoDeContexto">Tipo de Contexto</label>
+            <select ng-model="livro.tipoDeContexto" class="form-control" required >
+                <option value="imagem" >Imagem</option>
+                <option value="texto">Texto</option>
+            </select>
+            <span ng-show="myForm.tipoDeContexto.$dirty && myForm.tipoDeContexto.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+    </form>
+    <form name="contextForm" role="form" id="contextForm" ng-submit="submit()" enctype="multipart/form-data">
+        <div class="form-group" ng-show="livro.tipoDeContexto=='texto'" ng-class="{ 'has-error': contextForm.contexto.$dirty && contextForm.contexto.$error.required }">
+            <label for="contexto">Contexto</label>
+            <input type="text" name="contexto" id="contexto" class="form-control" ng-model="livro.contexto" ng-required="livro.tipoDeContexto=='texto'" />
+            <span ng-show="contextForm.contexto.$dirty && contextForm.contexto.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-group" ng-show="livro.tipoDeContexto=='imagem'" ng-class="{ 'has-error': contextForm.contextoFile.$dirty && contextForm.contextoFile.$error.required }">
+            <label for="contextoFile">Contexto</label>
+            <input type="file" name="contextoFile" id="contextoFile" class="form-control" ng-model="arquivos.contextoFile" ng-required="livro.tipoDeContexto=='imagem'" />
+            <span ng-show="contextForm.contextoFile.$dirty && contextForm.contextoFile.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <img ng-if="isSaving" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a href="" ng-click="rollback()" class="btn btn-link">Cancelar</a>
+        </div>
+    </form>
+</div>
