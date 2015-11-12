@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('AdminImageCtrl', function($scope, $timeout, $modalInstance, imagem, livro_id, Imagem){
+    window.scope = $scope;
     $scope.isSuccess = false;
     $scope.isError = false;
     $scope.arquivos = {};
@@ -15,13 +16,25 @@ angular.module('webAppV2App')
 
     $scope.submit = function () {
         $scope.isSaving = true;
+        console.log($scope.arquivos.arquivo);
         var imagem = $scope.imagem;
         if ($scope.imagem_id) {
             Imagem.updateImagem(imagem).then(function () {
-                $scope.isSaving = false;
+                return Imagem.uploadImagem($scope.imagem_id, document.getElementById('arquivo').files[0]);
+            }).then(function (res) {
+                if (imagem.tipoDeContexto == "imagem") {
+                    return Imagem.uploadContexto($scope.imagem_id, document.getElementById('contextoFile').files[0]);
+                }
+                else {
+                    return res;
+                }
+            }).then(function () {
                 success();
+                $scope.isSaving = false;
+                $scope.close;
             }, function (err) {
                 error();
+                $scope.isSaving = false;
             });
         }
         else {
@@ -30,12 +43,10 @@ angular.module('webAppV2App')
             Imagem.createImagem(imagem).then(function (res) {
                 $scope.imagem_id = res.data.id;
                 $scope.imagem.id = res.data.id;
-                console.log($scope.arquivo);
-                return Imagem.uploadImagem($scope.imagem_id, $scope.arquivos.arquivo);
+                return Imagem.uploadImagem($scope.imagem_id, document.getElementById('arquivo').files[0]);
             }).then(function (res) {
                 if (imagem.tipoDeContexto == "imagem") {
-                    console.log($scope.contextoFile);
-                    return Imagem.uploadContexto($scope.imagem_id, $scope.arquivos.contextoFile);
+                    return Imagem.uploadContexto($scope.imagem_id, document.getElementById('contextoFile').files[0]);
                 }
                 else {
                     return res;
@@ -43,8 +54,10 @@ angular.module('webAppV2App')
             }).then(function () {
                 success();
                 $scope.isSaving = false;
+                $scope.close;
             }, function (err) {
                 error();
+                $scope.isSaving = false;
             });
         }
     }

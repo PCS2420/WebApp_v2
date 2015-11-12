@@ -1,11 +1,11 @@
 <div style="padding: 15px;">
     <form name="arquivoForm" role="form" id="arquivoForm" ng-submit="submit()" enctype="multipart/form-data">
         <div ng-show="isSuccess" class="alert alert-success">Salvo com sucesso!</div>
-        <div ng-show="isError" class="alert alert-danger">Erro ao salvar livro!<br></div>
+        <div ng-show="isError" class="alert alert-danger">Erro ao salvar imagem!<br></div>
 
         <div class="form-group" ng-class="{ 'has-error': arquivoForm.arquivo.$dirty && arquivoForm.arquivo.$error.required }">
             <label for="arquivo">Arquivo</label>
-            <input type="file" name="arquivo" id="arquivo" class="form-control" ng-model="arquivos.arquivo" required />
+            <input type="file" name="arquivo" id="arquivo" class="form-control" file-model="arquivos.arquivo" required />
             <span ng-show="arquivoForm.arquivo.$dirty && arquivoForm.arquivo.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
     </form>
@@ -13,12 +13,12 @@
     <form name="myForm" role="form" id="myForm" ng-submit="submit()">
         <div class="form-group" ng-class="{ 'has-error': myForm.pagina.$dirty && myForm.pagina.$error.required }">
             <label for="pagina">Pagina</label>
-            <input type="number" name="pagina" id="pagina" class="form-control" ng-model="livro.pagina" required />
+            <input type="number" name="pagina" id="pagina" class="form-control" ng-model="imagem.pagina" required />
             <span ng-show="myForm.pagina.$dirty && myForm.pagina.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': myForm.tipoDeContexto.$dirty && myForm.tipoDeContexto.$error.required }">
             <label for="tipoDeContexto">Tipo de Contexto</label>
-            <select ng-model="livro.tipoDeContexto" class="form-control" required >
+            <select ng-model="imagem.tipoDeContexto" class="form-control" required >
                 <option value="imagem" >Imagem</option>
                 <option value="texto">Texto</option>
             </select>
@@ -26,14 +26,14 @@
         </div>
     </form>
     <form name="contextForm" role="form" id="contextForm" ng-submit="submit()" enctype="multipart/form-data">
-        <div class="form-group" ng-show="livro.tipoDeContexto=='texto'" ng-class="{ 'has-error': contextForm.contexto.$dirty && contextForm.contexto.$error.required }">
+        <div class="form-group" ng-show="imagem.tipoDeContexto=='texto'" ng-class="{ 'has-error': contextForm.contexto.$dirty && contextForm.contexto.$error.required }">
             <label for="contexto">Contexto</label>
-            <input type="text" name="contexto" id="contexto" class="form-control" ng-model="livro.contexto" ng-required="livro.tipoDeContexto=='texto'" />
+            <textarea name="contexto" id="contexto" class="form-control" ng-model="imagem.contexto" ng-required="imagem.tipoDeContexto=='texto'" ></textarea>
             <span ng-show="contextForm.contexto.$dirty && contextForm.contexto.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
-        <div class="form-group" ng-show="livro.tipoDeContexto=='imagem'" ng-class="{ 'has-error': contextForm.contextoFile.$dirty && contextForm.contextoFile.$error.required }">
+        <div class="form-group" ng-show="imagem.tipoDeContexto=='imagem'" ng-class="{ 'has-error': contextForm.contextoFile.$dirty && contextForm.contextoFile.$error.required }">
             <label for="contextoFile">Contexto</label>
-            <input type="file" name="contextoFile" id="contextoFile" class="form-control" ng-model="arquivos.contextoFile" ng-required="livro.tipoDeContexto=='imagem'" />
+            <input type="file" name="contextoFile" id="contextoFile" class="form-control" file-model="arquivos.contextoFile" ng-required="imagem.tipoDeContexto=='imagem'" />
             <span ng-show="contextForm.contextoFile.$dirty && contextForm.contextoFile.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
         <div class="form-actions">
