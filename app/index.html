@@ -13,16 +13,16 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-	<link rel="stylesheet" href="styles/app.css">
-	<link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/app.css">
+    <link rel="stylesheet" href="styles/animations.css">
     <!-- endbuild -->
 
-	<!-- CSS's adicionais -->
-	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
-	<link rel="stylesheet" href="styles/footer_sinestesia.css">
-	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/carousel.css">
-	<link ng-if="$state.includes('user.perfil')" rel="stylesheet" href="styles/perfil.css">
-	<!-- fim CSS adicionais -->
+    <!-- CSS's adicionais -->
+    <link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
+    <link rel="stylesheet" href="styles/footer_sinestesia.css">
+    <link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/carousel.css">
+    <link ng-if="$state.includes('user.perfil')" rel="stylesheet" href="styles/perfil.css">
+    <!-- fim CSS adicionais -->
 
   </head>
   <body ng-app="webAppV2App" ng-controller="NavCtrl">
@@ -30,9 +30,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-	<header ui-view="header"></header>
-	<br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div><br><br>
-	<footer ui-view="footer"></footer>
+    <header ui-view="header"></header>
+    <br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div><br><br>
+    <footer ui-view="footer"></footer>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -42,52 +42,55 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-	<!-- Dependências do Adicionais -->
-	<script type="text/javascript" src="scripts/libs/angular-animate.js"></script>
-	<script type="text/javascript" src="scripts/libs/angular-resource.js"></script>
-	<script type="text/javascript" src="scripts/libs/angular-route.min.js"></script>
-	<script type="text/javascript" src="scripts/libs/angular-ui-router.js"></script>
-	<script type="text/javascript" src="scripts/libs/ui-bootstrap-tpls.js"></script>
-	<script type="text/javascript" src="scripts/libs/bootstrap-touch-carousel.js"></script>
-	<!---->
+    <!-- Dependências do Adicionais -->
+    <script type="text/javascript" src="scripts/libs/angular-animate.js"></script>
+    <script type="text/javascript" src="scripts/libs/angular-resource.js"></script>
+    <script type="text/javascript" src="scripts/libs/angular-route.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/angular-ui-router.js"></script>
+    <script type="text/javascript" src="scripts/libs/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="scripts/libs/bootstrap-touch-carousel.js"></script>
+    <!---->
 
-	<!-- build:js({.tmp,app}) scripts/scripts.js -->
-	<script src="scripts/app.js"></script>
-	<script src="scripts/routes.js"></script>
-	<script src="scripts/controllers/HomeCtrl.js"></script>
-	<script src="scripts/controllers/LoginCtrl.js"></script>
-	<script src="scripts/controllers/RegisterCtrl.js"></script>
-	<script src="scripts/controllers/NavCtrl.js"></script>
-	<script src="scripts/controllers/AboutCtrl.js"></script>
-	<script src="scripts/controllers/LivroCtrl.js"></script>
-	<script src="scripts/controllers/DescricaoCtrl.js"></script>
-	<script src="scripts/controllers/RevisaoCtrl.js"></script>
-	<script src="scripts/controllers/PerfilCtrl.js"></script>
-	<script src="scripts/controllers/HistoricoCtrl.js"></script>
-	<script src="scripts/controllers/HistoricoLivroCtrl.js"></script>
-	<script src="scripts/controllers/BuscarCtrl.js"></script>
-	<script src="scripts/controllers/AdminRegistrarCtrl.js"></script>
-	<script src="scripts/controllers/AdminAdicionarUsuariosCtrl.js"></script>
-	<script src="scripts/controllers/AdminGerenciarUsuariosCtrl.js"></script>
-	<script src="scripts/controllers/AdminBuscarCtrl.js"></script>
-	<script src="scripts/controllers/AdminConfigCtrl.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/routes.js"></script>
+    <script src="scripts/controllers/HomeCtrl.js"></script>
+    <script src="scripts/controllers/LoginCtrl.js"></script>
+    <script src="scripts/controllers/RegisterCtrl.js"></script>
+    <script src="scripts/controllers/NavCtrl.js"></script>
+    <script src="scripts/controllers/AboutCtrl.js"></script>
+    <script src="scripts/controllers/LivroCtrl.js"></script>
+    <script src="scripts/controllers/DescricaoCtrl.js"></script>
+    <script src="scripts/controllers/RevisaoCtrl.js"></script>
+    <script src="scripts/controllers/PerfilCtrl.js"></script>
+    <script src="scripts/controllers/HistoricoCtrl.js"></script>
+    <script src="scripts/controllers/HistoricoLivroCtrl.js"></script>
+    <script src="scripts/controllers/BuscarCtrl.js"></script>
+    <script src="scripts/controllers/AdminBooksCtrl.js"></script>
+    <script src="scripts/controllers/AdminRegistrarCtrl.js"></script>
+    <script src="scripts/controllers/AdminImageCtrl.js"></script>
+    <script src="scripts/controllers/AdminAdicionarUsuariosCtrl.js"></script>
+    <script src="scripts/controllers/AdminGerenciarUsuariosCtrl.js"></script>
+    <script src="scripts/controllers/AdminBuscarCtrl.js"></script>
+    <script src="scripts/controllers/AdminConfigCtrl.js"></script>
   <script src="scripts/controllers/TutorialCtrl.js"></script>
-	<!-- Services -->
-	<script src="scripts/services/accessLevels.js"></script>
-	<script src="scripts/services/auth.js"></script>
-	<script src="scripts/services/currentUser.js"></script>
-	<script src="scripts/services/localStorage.js"></script>
-	<script src="scripts/services/listaLivro.js"></script>
-	<script src="scripts/services/listaCurso.js"></script>
-	<script src="scripts/services/listaImagem.js"></script>
-	<script src="scripts/services/listaPontuacao.js"></script>
-	<script src="scripts/services/listaImagem.js"></script>
-	<script src="scripts/services/listaUsuario.js"></script>
-	<script src="scripts/services/mostraImagem.js"></script>
-	<script src="scripts/services/enviaDescricao.js"></script>
-	<script src="scripts/services/flash.js"></script>
-	<script src="scripts/services/preloader.js"></script>
-	<script src="scripts/services/uri.js"></script>
-	<!-- endbuild -->
+    <!-- Services -->
+    <script src="scripts/services/accessLevels.js"></script>
+    <script src="scripts/services/auth.js"></script>
+    <script src="scripts/services/currentUser.js"></script>
+    <script src="scripts/services/localStorage.js"></script>
+    <script src="scripts/services/listaLivro.js"></script>
+    <script src="scripts/services/listaCurso.js"></script>
+    <script src="scripts/services/listaImagem.js"></script>
+    <script src="scripts/services/listaPontuacao.js"></script>
+    <script src="scripts/services/listaImagem.js"></script>
+    <script src="scripts/services/listaUsuario.js"></script>
+    <script src="scripts/services/imagem.js"></script>
+    <script src="scripts/services/mostraImagem.js"></script>
+    <script src="scripts/services/enviaDescricao.js"></script>
+    <script src="scripts/services/flash.js"></script>
+    <script src="scripts/services/preloader.js"></script>
+    <script src="scripts/services/uri.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
