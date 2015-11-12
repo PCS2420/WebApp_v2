@@ -14,9 +14,17 @@ angular.module('webAppV2App')
             return $http.get(URI.api + "livro/" + livro_id);
         },
 
-
         createLivro: function(livro) {
             return $http.post(URI.api + "livro", livro);
+        },
+
+        uploadCapa: function(livro_id, file) {
+            var fd = new FormData();
+            fd.append('imagem', file);
+            return $http.post(URI.api + "livro/" + livro_id + "/capa", fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            });
         },
 
         updateLivro: function(livro) {

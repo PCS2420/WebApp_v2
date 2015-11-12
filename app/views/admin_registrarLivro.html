@@ -31,6 +31,11 @@
             </select>
             <span ng-show="myForm.curso.$dirty && myForm.curso.$error.required" class="help-block">Campo obrigatório.</span>
         </div>
+        <div class="form-group" ng-class="{ 'has-error': myForm.capaFile.$dirty && myForm.capaFile.$error.required }">
+            <label for="capaFile">Capa</label>
+            <input type="file" name="capaFile" id="capaFile" class="form-control" ng-model="capaFile" ng-disabled="isEditing==false"/>
+            <span ng-show="myForm.capaFile.$dirty && myForm.capaFile.$error.required" class="help-block">Campo obrigatório.</span>
+        </div>
         <div class="form-actions">
             <button ng-show="isEditing" type="submit" ng-disabled="myForm.$invalid || dataLoading " class="btn btn-primary">Salvar</button>
             <a ng-show="isEditing==false" class="btn btn-primary" ng-click="isEditing=true">Editar</a>

@@ -1,6 +1,6 @@
 angular.module('webAppV2App')
 .controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, ListaCurso, ListaLivro){
-	angular.element("#texto_header").html("Admin - Incluir Livro");
+    angular.element("#texto_header").html("Admin - Incluir Livro");
     $scope.$state = $state;
     ListaCurso.getCursos().then(function (res) {
         $scope.listaCursos = res.data;
@@ -25,11 +25,16 @@ angular.module('webAppV2App')
         $scope.isSaving = true;
         var livro = $scope.livro;
         if ($scope.livro_id) {
-            ListaLivro.updateLivro(livro).then(function () {
+            ListaLivro.updateLivro(livro)
+            .then(function (){
+                return ListaLivro.uploadCapa($scope.livro_id, document.getElementById('capaFile').files[0]);
+            })
+            .then(function () {
                 $scope.isSaving = false;
                 $scope.isEditing = false;
                 success();
             }, function (err) {
+                $scope.isSaving = false;
                 error();
             });
         }
@@ -37,6 +42,9 @@ angular.module('webAppV2App')
             ListaLivro.createLivro(livro).then(function (res) {
                 $scope.livro_id = res.data.id;
                 $scope.livro.id = res.data.id;
+                return ListaLivro.uploadCapa($scope.livro_id, document.getElementById('capaFile').files[0]);
+            })
+            .then(function () {
                 $scope.isSaving = false;
                 $scope.isEditing = false;
                 success();
