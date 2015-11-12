@@ -1,1 +1,5 @@
-@todo historico aqui
+<div class="item" ng-repeat="capa in capas">
+	<a ui-sref="user.historico.livro({ livro_id: capa.livro.id })">
+		{{capa.livro.titulo}}
+	</a>
+</div>

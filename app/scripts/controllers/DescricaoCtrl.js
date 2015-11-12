@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('DescricaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash, URI){
+	angular.element("#texto_header").html("Sinestesia - Descrever");
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
 	$scope.flash = flash;
 

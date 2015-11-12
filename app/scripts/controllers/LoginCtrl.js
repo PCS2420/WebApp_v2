@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('LoginCtrl', function($scope, $state, Auth, LocalService, flash){
+	angular.element("#texto_header").html("Sinestesia - Login");
 	$scope.$state = $state;
 	$scope.flash = flash;
     $scope.userLogin = {

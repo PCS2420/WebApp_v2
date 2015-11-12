@@ -165,6 +165,15 @@ angular.module('webAppV2App')
           }
         }
       })
+	  .state('user.historico.livro', { // caso ele esteja logado e requisitando historico
+		url: '/historico/livro/:livro_id',
+		views: {
+		  'content@': {
+			templateUrl:'views/historico_livro.html',
+			controller: 'HistoricoLivroCtrl'
+	      }
+		}
+	  })
       .state('user.perfil', { // caso ele esteja logado e requisitando perfil
         url: '/perfil',
         views: {

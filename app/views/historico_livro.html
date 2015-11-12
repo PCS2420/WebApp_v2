@@ -1,0 +1,27 @@
+<ul>
+<li ng-repeat="imagem in imagens">
+	<img class="imagem" src="{{imagem.src}}"></img>
+	<span>{{imagem.estado}}</span>
+	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#descricao" ng-click="populaModal(imagem.descricao)" >Descricao</button>
+
+</li>
+</ul>
+
+<div align="left"><a ng-click=$state.go('user.historico') class="btn btn-primary">Voltar</a></div>
+
+
+<div class="modal fade" id="descricao" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Descricao</h4>
+      </div>
+      <div class="modal-body">
+      <div id="descricao_modal"></div>
+
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>

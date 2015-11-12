@@ -1,3 +1,7 @@
+<div ng-if="flash.hasAlert()" class="alert alert-{{flash.getType()}}">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	{{flash.getMessage()}}
+</div>
 <div class="container">
 	<form id="myLogin" ng-submit="submit(userLogin)">
 		<h2 class="form-signin-heading">Login</h2>

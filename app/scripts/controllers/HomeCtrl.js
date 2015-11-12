@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('HomeCtrl', function($scope, $filter, $state, $stateParams, ListaLivro, Auth, flash, preloader, URI){
+	angular.element("#texto_header").html("Sinestesia - Página Inicial");
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
 	
 	var curso = $scope.loggedUser().curso

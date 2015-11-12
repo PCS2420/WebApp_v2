@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
-    .controller('RegisterCtrl', function($scope, $state, Auth, ListaCurso){
+    .controller('RegisterCtrl', function($scope, $state, Auth, ListaCurso, flash){
+	angular.element("#texto_header").html("Sinestesia - Cadastrar");
 	$scope.$state = $state;
     $scope.falha = false;
     $scope.sucesso = false;
@@ -14,8 +15,10 @@ angular.module('webAppV2App')
         Auth.register(userInfo)
         .then(
             function(response){
+				flash.setAlert({msg: 'O cadastro foi feito com sucesso!', type: 'success'});
                 $scope.sucesso = true;
                 $state.go('anon.login');
+				
             },
             function(error){
                 $scope.falha = true;

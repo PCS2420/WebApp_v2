@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
   .controller('TutorialCtrl', function ($scope, $state, Auth, CurrentUser) {
+	angular.element("#texto_header").html("Sinestesia - Tutorial");
     $scope.$state = $state;
   });
 

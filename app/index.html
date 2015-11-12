@@ -21,6 +21,7 @@
 	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
 	<link rel="stylesheet" href="styles/footer_sinestesia.css">
 	<link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/carousel.css">
+	<link ng-if="$state.includes('user.perfil')" rel="stylesheet" href="styles/perfil.css">
 	<!-- fim CSS adicionais -->
 
   </head>
@@ -30,7 +31,7 @@
     <![endif]-->
 
 	<header ui-view="header"></header>
-	<br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div>
+	<br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div><br><br>
 	<footer ui-view="footer"></footer>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -63,6 +64,7 @@
 	<script src="scripts/controllers/RevisaoCtrl.js"></script>
 	<script src="scripts/controllers/PerfilCtrl.js"></script>
 	<script src="scripts/controllers/HistoricoCtrl.js"></script>
+	<script src="scripts/controllers/HistoricoLivroCtrl.js"></script>
 	<script src="scripts/controllers/BuscarCtrl.js"></script>
 	<script src="scripts/controllers/AdminRegistrarCtrl.js"></script>
 	<script src="scripts/controllers/AdminAdicionarUsuariosCtrl.js"></script>
@@ -77,6 +79,8 @@
 	<script src="scripts/services/localStorage.js"></script>
 	<script src="scripts/services/listaLivro.js"></script>
 	<script src="scripts/services/listaCurso.js"></script>
+	<script src="scripts/services/listaImagem.js"></script>
+	<script src="scripts/services/listaPontuacao.js"></script>
 	<script src="scripts/services/listaImagem.js"></script>
 	<script src="scripts/services/listaUsuario.js"></script>
 	<script src="scripts/services/mostraImagem.js"></script>

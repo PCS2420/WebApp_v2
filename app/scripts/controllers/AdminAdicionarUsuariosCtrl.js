@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('AdminAdicionarUsuariosCtrl', function($scope, $state, Auth, ListaCurso){
+	angular.element("#texto_header").html("Admin - Incluir Revisores");
 	$scope.$state = $state;
     $scope.falha = false;
     $scope.sucesso = false;

@@ -1,5 +1,6 @@
 angular.module('webAppV2App')
 .controller('LivroCtrl', function($scope, $filter, $state, $stateParams, ListaImagem, Auth, preloader, URI){
+	angular.element("#texto_header").html("Sinestesia - Imagens");
 	$scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
 
 	var livro_id = $stateParams.livro_id
