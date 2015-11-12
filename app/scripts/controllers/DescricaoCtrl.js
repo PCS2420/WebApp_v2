@@ -5,16 +5,62 @@ angular.module('webAppV2App')
 	$scope.flash = flash;
 
 	var imagem_id = $stateParams.imagem_id
-	var myDataPromise = MostraImagem.getImagem(imagem_id);
+	var myDataPromise = MostraImagem.getDescricao(imagem_id);
 
 	myDataPromise.then(function(response){
 		$scope.imagem = response.data;
+		console.log($scope.imagem);
+		$scope.update = response.data;
 		console.log(response.data);
+		$scope.ocupado();
     });
 
-    $scope.formData = {}
+    $scope.formData = {};
 
-
+	//atualiza o status do livro para EmAndamento, para reserva-lo ao usuario
+	$scope.ocupado = function(){
+		var update = $scope.update;
+		update.estado = "EmAndamento";
+		EnviaDescricao.emAndamento($scope.imagem.id, $scope.update)
+		.then(
+            function(response){
+				flash.setAlert({msg : 'Você é o único descrevendo', type : 'success'});
+            },
+            function(error){
+				flash.setAlert({msg : 'Ocorreu algum erro ao reservar a descrição', type : 'error'});
+				$state.go("user.home_descrever");
+			}
+		)
+	};
+	
+	//caso descricao seja interrompida por mudança de rota, voltar ao estado inicial
+	$scope.intDescricao = function (){ 
+		var update = $scope.update;
+		update.estado = "Aberto";
+		EnviaDescricao.intDescricao($scope.imagem.id, $scope.update)
+		.then(
+            function(response){
+				flash.setAlert({msg : 'Mudou rota', type : 'success'});
+            },
+            function(error){
+				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error'});
+				$state.go("user.home_descrever");
+			}
+		)
+	
+	};
+	
+	
+	//listener do evento de mudança de rota
+	$scope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
+		if($scope.enviou) {
+			console.log("Descrição enviada");
+		} else {
+			console.log("a descricao foi interrompida");
+			$scope.intDescricao();
+		}
+    });
+	
     $scope.exit = function () {
       $scope.loggedUser = undefined;
       Auth.logout();
@@ -26,15 +72,16 @@ angular.module('webAppV2App')
       $state.go("user.home_descrever");
     };
 
-	$scope.enviar= function() {
-		var formData = $scope.formData
-		formData.imagem = $stateParams.imagem_id
-		formData.descritor = $scope.loggedUser().id
+	$scope.enviar = function() {
+		var formData = $scope.formData;
+		formData.imagem = $stateParams.imagem_id;
+		formData.descritor = $scope.loggedUser().id;
 
         EnviaDescricao.enviar($scope.formData)
         .then(
           function (response) {
             flash.setAlert({msg: 'A descrição foi feita com sucesso!', type: 'success'});
+			$scope.enviou = true;
             $state.go("user.home_descrever");
           },
           function (error) {
@@ -44,14 +91,12 @@ angular.module('webAppV2App')
         )
     };
 
+
     // Adiciona a funcionalidade de ouvir a descricao que esta presente no form
-    $scope.ouvir= function() {
-      var formData = $scope.formData.texto
-
+    $scope.ouvir = function() {
+      var formData = $scope.formData.texto;
       console.log( formData );
-
       var voice = 'Brazilian Portuguese Female';
-
       setTimeout(responsiveVoice.speak( formData, voice),15000);
     };
 
