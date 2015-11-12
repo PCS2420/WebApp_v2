@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .factory('ListaLivro', function($http, $rootScope, URI){
     return {
@@ -30,5 +31,5 @@ angular.module('webAppV2App')
         updateLivro: function(livro) {
             return $http.put(URI.api + "livro/" + livro.id, livro);
         }
-    }
+    };
 });

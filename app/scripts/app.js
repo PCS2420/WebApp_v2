@@ -15,6 +15,7 @@ app.run(function ($rootScope, $state, CurrentUser, Auth) {
 
     var userType;
 
+    void(fromParams);  //Evitar erro de 'nao utilizado'
     if (CurrentUser.user().tipo) {
       userType = CurrentUser.user().tipo;
     }

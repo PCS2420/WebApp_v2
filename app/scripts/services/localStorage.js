@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .factory('LocalService', function() {
     return {
@@ -10,5 +11,5 @@ angular.module('webAppV2App')
       unset: function(key) {
         return localStorage.removeItem(key);
       }
-    }
+    };
   });

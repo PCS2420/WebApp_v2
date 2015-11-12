@@ -1,5 +1,6 @@
+"use strict";
 angular.module('webAppV2App')
-.controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, ListaCurso, ListaLivro){
+.controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, ListaCurso, ListaLivro, JQuery){
     angular.element("#texto_header").html("Admin - Incluir Livro");
     $scope.$state = $state;
     ListaCurso.getCursos().then(function (res) {
@@ -13,8 +14,8 @@ angular.module('webAppV2App')
         $scope.isEditing = false;
         ListaLivro.getLivro($scope.livro_id).then(function (res) {
             $scope.livro = res.data;
-            livroCopy = $.extend(true, {}, $scope.livro);
-        })
+            livroCopy = JQuery.extend(true, {}, $scope.livro);
+        });
     }
     else {
         $scope.isEditing = true;
@@ -34,6 +35,7 @@ angular.module('webAppV2App')
                 $scope.isEditing = false;
                 success();
             }, function (err) {
+                void(err);//Evitar erro de 'nao utilizado'
                 $scope.isSaving = false;
                 error();
             });
@@ -49,22 +51,23 @@ angular.module('webAppV2App')
                 $scope.isEditing = false;
                 success();
             }, function (err) {
+                void(err); //Evitar erro de 'nao utilizado'
                 error();
             });
         }
-    }
+    };
 
     $scope.rollback = function () {
-        $scope.livro = $.extend(true, {}, livroCopy);
+        $scope.livro = JQuery.extend(true, {}, livroCopy);
         $scope.isEditing = false;
-    }
+    };
 
     $scope.finishiEdit = function () {
         $scope.isNotFinished = true;
         $timeout(function () {
             $scope.isNotFinished = false;
         }, 3000);
-    }
+    };
 
     $scope.openModal = function (imagem) {
         $uibModal.open({
@@ -79,8 +82,8 @@ angular.module('webAppV2App')
                     return $scope.livro_id;
                 }
             }
-        })
-    }
+        });
+    };
 
     function success () {
         $scope.isSuccess = true;

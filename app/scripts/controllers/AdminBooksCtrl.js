@@ -1,6 +1,7 @@
+"use strict";
 angular.module('webAppV2App')
 .controller('AdminBooksCtrl', function($scope, $state, ListaLivro){
-	angular.element("#texto_header").html("Admin - Gerenciar Livros");
+    angular.element("#texto_header").html("Admin - Gerenciar Livros");
     $scope.$state = $state;
     
     var myDataPromise = ListaLivro.getAllLivros();
@@ -21,12 +22,12 @@ angular.module('webAppV2App')
 
     $scope.describedImages = function (booksList) {
         return booksList.reduce(function (prev, livro) {
-            if (livro.estado == "Revisado"){
+            if (livro.estado === "Revisado"){
                 return prev + 1;
             }
             else {
                 return prev;
             }
         }, 0);
-    }
+    };
 });

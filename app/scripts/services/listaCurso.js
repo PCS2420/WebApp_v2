@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .factory('ListaCurso', function($http, $rootScope, URI){
    	return {
