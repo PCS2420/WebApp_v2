@@ -1,14 +1,16 @@
 "use strict";
 angular.module('webAppV2App')
 .controller('RevisaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash, URI){
+	angular.element("#texto_header").html("Sinestesia - Revisar");
     $scope.$state = $state;
     $scope.flash = flash;
 
-    var imagem_id = $stateParams.imagem_id;
-    var myDataPromise = MostraImagem.getImagem(imagem_id);
+    	var imagem_id = $stateParams.imagem_id;
+	var myDataPromise = MostraImagem.getDescricao(imagem_id);
 
     myDataPromise.then(function(response){
         $scope.imagem = response.data;
+	console.log($scope.imagem);
         $scope.formData.texto = $scope.imagem.descricao.texto;
         $scope.descricaoOriginal = $scope.imagem.descricao.texto;
         console.log(response.data);
