@@ -1,5 +1,8 @@
+"use strict";
 angular.module('webAppV2App')
 .controller('HistoricoCtrl', function($scope, $http, URI, ListaLivro, CurrentUser){
+        void(ListaLivro); //Evitar erro de 'nao utilizado'
+        void(CurrentUser); //Evitar erro de 'nao utilizado'
 	angular.element("#texto_header").html("Sinestesia - Historico");
 	
 	console.log("@TODO HistoricoCtrl controller");
@@ -8,25 +11,23 @@ angular.module('webAppV2App')
 	var myDataPromise;
 	var user = $scope.loggedUser();
 	angular.element("#texto_header").html("Sinestesia - Historico");
-	
-	
-	var descImagens;
-	var capas = [];
-	
 	myDataPromise = $http.get(URI.api + "descricao?descritor=" + user.id);
 	
 	myDataPromise.then(function(response){
 		// console.log(response.data);
-		
 		var imagens = response.data;
+<<<<<<< HEAD
 		console.log(response.data);
 		var myDataPromise2 = $http.get(URI.api + "imagem/")
+=======
+		var myDataPromise2 = $http.get(URI.api + "imagem/");
+>>>>>>> origin/master
 		myDataPromise2.then(function(response){
-			
-			var capas = []
+		        var img, descImg, i;	
+			var capas = [];
 			for(img in response.data){
 				for(descImg in imagens){
-					if(response.data[img].id == imagens[descImg].imagem.id){
+					if(response.data[img].id === imagens[descImg].imagem.id){
 						// console.log(response.data[img]);
 						// console.log(imagens[descImg]);
 						capas.push(response.data[img]);
@@ -35,6 +36,7 @@ angular.module('webAppV2App')
 				}
 			}
 			
+<<<<<<< HEAD
 			// capas.sort();
 			// for(var i = 1; i < capas.length; ){
 				// if(capas[i-1].id == capas[i].id){
@@ -43,10 +45,20 @@ angular.module('webAppV2App')
 					// i++;
 				// }
 			// }
+=======
+			capas.sort();
+			for(i = 1; i < capas.length; ){
+				if(capas[i-1].id === capas[i].id){
+					capas.splice(i, 1);
+				} else {
+					i++;
+				}
+			}
+>>>>>>> origin/master
 			
 			capas.sort();
-			for(var i = 1; i < capas.length; ){
-				if(capas[i-1].livro.id == capas[i].livro.id){
+			for(i = 1; i < capas.length; ){
+				if(capas[i-1].livro.id === capas[i].livro.id){
 					capas.splice(i, 1);
 				} else {
 					i++;
@@ -57,7 +69,7 @@ angular.module('webAppV2App')
 			
 			
 			var preloaded_images = [];
-			for(var img in capas) {
+			for(img in capas) {
 				preloaded_images.push($scope.uri+"/"+ capas[img].livro.capa);
 			}
 			$scope.preloaded_images = preloaded_images;

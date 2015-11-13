@@ -1,4 +1,6 @@
-app.factory("flash", function($rootScope) {
+"use strict";
+angular.module('webAppV2App')
+.factory("flash", function($rootScope) {
   var queue = [];
   var currentElement = null;
 
@@ -18,9 +20,12 @@ app.factory("flash", function($rootScope) {
 		},
 		hasAlert: function() {
 			return currentElement !== null;
+<<<<<<< HEAD
 		},
 		shiftQueue: function() {
 			currentElement = queue.shift() || null;
+=======
+>>>>>>> origin/master
 		}
 	};
 });

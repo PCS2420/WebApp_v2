@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .factory('Imagem', function($http, $rootScope, URI){
     return {
@@ -29,5 +30,5 @@ angular.module('webAppV2App')
                 headers: {'Content-Type': undefined}
             });
         },
-    }
+    };
 });

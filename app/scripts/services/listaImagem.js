@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .factory('ListaImagem', function($http, $rootScope, URI){
    	return {
@@ -11,5 +12,5 @@ angular.module('webAppV2App')
     		}
             
 		}
-	}
+	};
 });

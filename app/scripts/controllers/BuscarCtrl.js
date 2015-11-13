@@ -1,4 +1,6 @@
+"use strict";
 angular.module('webAppV2App')
+<<<<<<< HEAD
 .controller('BuscarCtrl', function($scope, $http, URI){
 	angular.element("#texto_header").html("Sinestesia - Buscar");
 	console.log("@TODO BuscarCtrl controller");
@@ -20,3 +22,10 @@ angular.module('webAppV2App')
 	
 	$scope.URI = URI.api;
 });
+=======
+.controller('BuscarCtrl', function($scope){
+        void($scope); //Evitar erro de 'nao utilizado'
+	angular.element("#texto_header").html("Sinestesia - Buscar");
+	console.log("@TODO BuscarCtrl controller");
+});
+>>>>>>> origin/master

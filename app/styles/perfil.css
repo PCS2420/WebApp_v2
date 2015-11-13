@@ -1,19 +1,19 @@
 .user-row {
-    margin-bottom 14px;
+    margin-bottom: 14px;
 }
 
 .user-rowlast-child {
-    margin-bottom 0;
+    margin-bottom: 0;
 }
 
 .dropdown-user {
-    margin 13px 0;
-    padding 5px;
-    height 100%;
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
 }
 
 .dropdown-userhover {
-    cursor pointer;
+    cursor: pointer;
 }
 
 .table-user-information  tbody  tr {
@@ -21,13 +21,14 @@
 }
 
 .table-user-information  tbody  trfirst-child {
-    border-top 0;
+    border-top: 0;
 }
 
 
 .table-user-information  tbody  tr  td {
-    border-top 0;
+    border-top: 0;
 }
 .toppad
-{margin-top20px;
+{
+    margin-top: 20px;
 }

@@ -1,6 +1,9 @@
+"use strict";
 angular.module('webAppV2App')
   .controller('TutorialCtrl', function ($scope, $state, Auth, CurrentUser) {
-	angular.element("#texto_header").html("Sinestesia - Tutorial");
+    void(Auth); //Evitar erro de 'nao utilizado'
+    void(CurrentUser); //Evitar erro de 'nao utilizado'
+    angular.element("#texto_header").html("Sinestesia - Tutorial");
     $scope.$state = $state;
   });
 

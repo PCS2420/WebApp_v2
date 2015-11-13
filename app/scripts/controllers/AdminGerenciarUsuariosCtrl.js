@@ -1,3 +1,4 @@
+"use strict";
 angular.module('webAppV2App')
 .controller('AdminGerenciarUsuariosCtrl', function($scope, $state, $http, ListaUsuario, ListaCurso, URI, flash) {
 	angular.element("#texto_header").html("Admin - Gerenciar Usuários");
@@ -13,6 +14,7 @@ angular.module('webAppV2App')
 		$scope.usuarios = response.data;
 	  });
 	});
+<<<<<<< HEAD
 
 	$scope.fillEdit = function(user_id) {
 		var line = angular.element('#'+user_id).find("td");
@@ -88,3 +90,6 @@ angular.module('webAppV2App')
 		});
 	}
 });
+=======
+});
+>>>>>>> origin/master
