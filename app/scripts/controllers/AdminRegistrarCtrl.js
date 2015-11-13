@@ -1,6 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, ListaCurso, ListaLivro, JQuery){
+.controller('AdminRegistrarCtrl', function($scope, $state, $stateParams, $timeout, $uibModal, $window, ListaCurso, ListaLivro){
     angular.element("#texto_header").html("Admin - Incluir Livro");
     $scope.$state = $state;
     ListaCurso.getCursos().then(function (res) {
@@ -14,7 +14,7 @@ angular.module('webAppV2App')
         $scope.isEditing = false;
         ListaLivro.getLivro($scope.livro_id).then(function (res) {
             $scope.livro = res.data;
-            livroCopy = JQuery.extend(true, {}, $scope.livro);
+            livroCopy = $window.jQuery.extend(true, {}, $scope.livro);
         });
     }
     else {
@@ -58,7 +58,7 @@ angular.module('webAppV2App')
     };
 
     $scope.rollback = function () {
-        $scope.livro = JQuery.extend(true, {}, livroCopy);
+        $scope.livro = $window.jQuery.extend(true, {}, livroCopy);
         $scope.isEditing = false;
     };
 

@@ -52,6 +52,7 @@ angular.module('webAppV2App')
 	$stateProvider
 		.state('admin', {  // admin abstrato
 			abstract: true,
+			url: '/admin',
 			template: '<ui-view/>',
 			data: {
 				access: AccessLevels.admin
@@ -83,21 +84,57 @@ angular.module('webAppV2App')
 				}
 			}
 		})
-		.state('admin.adicionar_usuarios', { // usuario desconhecido requisitando '/adicionarUsuario'
-			url: '/adicionarUsuario',
+		.state('admin.adicionar_usuarios', { // usuario desconhecido requisitando '/etc'
+			url: '/adicionarUsuarios',
 			views: {
 				'content@': {
-					templateUrl: 'views/admin_adicionarUsuarios.html',
-					controller: 'AdminAdicionarUsuariosCtrl'
+					templateUrl: 'views/adminConfig.html',
+					controller: 'AdminConfigCtrl'
 				}
 			}
 		})
-		.state('admin.gerenciar_usuarios', { // usuario desconhecido requisitando '/gerenciarUsuarios'
-			url: '/gerenciarUsuarios',
+		.state('admin.gerenciar', { // usuario desconhecido requisitando '/gerenciarUsuarios'
+			url: '/gerenciar',
 			views: {
 				'content@': {
-					templateUrl: 'views/admin_gerenciarUsuarios.html',
+					templateUrl: 'views/adminGerenciar.html',
+					controller: 'AdminGerenciarCtrl'
+				}
+			}
+		})
+		.state('admin.gerenciar.usuarios', { // usuario desconhecido requisitando '/gerenciarUsuarios'
+			url: '/usuarios',
+			views: {
+				'content@': {
+					templateUrl: 'views/adminGerenciarUsuarios.html',
 					controller: 'AdminGerenciarUsuariosCtrl'
+				}
+			}
+		})
+		.state('admin.gerenciar.pontos', { // usuario desconhecido requisitando '/gerenciarUsuarios'
+			url: '/pontos',
+			views: {
+				'content@': {
+					templateUrl: 'views/adminGerenciarPontos.html',
+					controller: 'AdminGerenciarPontosCtrl'
+				}
+			}
+		})
+		.state('admin.gerenciar.denuncias', { // usuario desconhecido requisitando '/gerenciarUsuarios'
+			url: '/denuncias',
+			views: {
+				'content@': {
+					templateUrl: 'views/adminGerenciarDenuncias.html',
+					controller: 'AdminGerenciarDenunciasCtrl'
+				}
+			}
+		})
+		.state('admin.gerenciar.etc', { // usuario desconhecido requisitando '/etc'
+			url: '/etc',
+			views: {
+				'content@': {
+					templateUrl: 'views/adminGerenciarEtc.html',
+					controller: 'AdminGerenciarEtcCtrl'
 				}
 			}
 		})
@@ -107,15 +144,6 @@ angular.module('webAppV2App')
 				'content@': {
 					templateUrl: 'views/adminBuscar.html',
 					controller: 'AdminBuscarCtrl'
-				}
-			}
-		})
-		.state('admin.config', { // usuario desconhecido requisitando '/adminConfig'
-			url: '/adminConfig',
-			views: {
-				'content@': {
-					templateUrl: 'views/adminConfig.html',
-					controller: 'AdminConfigCtrl'
 				}
 			}
 		});

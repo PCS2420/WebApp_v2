@@ -12,6 +12,7 @@ angular.module('webAppV2App')
     $scope.errors = [];
     $scope.falha = false;
     $scope.submit = function(userLogin){
+		$scope.loading = true;
         if(userLogin.username && userLogin.password)
         {
             var loginResult = Auth.login(userLogin);
@@ -20,7 +21,9 @@ angular.module('webAppV2App')
                 if('token' in result.data){
                     var user = angular.fromJson(LocalService.get('auth_token')).user;
                     console.log(user);
-                    if (user.tipo === 'Descritor') {
+					if (user.tipo === 'Banido') {
+						 $scope.banido = true;
+					} else if (user.tipo === 'Descritor') {
                         flash.setAlert({msg : 'Bem vindo(a),'+user.nome+' , à página de Descrição', type : 'success'});
                         $state.go('user.home_descrever');
                     } else if (user.tipo === 'Revisor') {
@@ -35,14 +38,17 @@ angular.module('webAppV2App')
                     } else {
                         $scope.falha = true;
                     }
+					$scope.loading = false;
                 }
                 else
                 {
                     $scope.falha = true;
+					$scope.loading = false;
                 }
             },function(err) {
                 $scope.falha = true;
                 $scope.errors.push(err);
+				$scope.loading = false;
             });
         }
         else{

@@ -4,20 +4,23 @@ angular.module('webAppV2App')
     return {
       authorize: function(access, userType) {
         var permission;
-
-        if(userType === 'Publicador'){
+		
+		if (userType === 'Banido') {
+			permission = AccessLevels.banido;
+		}
+        else if(userType === 'Publicador') {
           permission = AccessLevels.publicador;
         }
-        else if(userType === 'Descritor'){
+        else if(userType === 'Descritor') {
           permission = AccessLevels.user;
         }
-        else if(userType === 'DescritorRevisor'){
+        else if(userType === 'DescritorRevisor') {
           permission = AccessLevels.user;
         }
-        else if(userType === 'Revisor'){
+        else if(userType === 'Revisor') {
           permission = AccessLevels.revisor;
         }
-        else if(userType === 'Administrador'){
+        else if(userType === 'Administrador') {
           permission = AccessLevels.admin;
         }
         else{
@@ -45,7 +48,7 @@ angular.module('webAppV2App')
         var login = $http.post(URI.api+'auth/authenticate', credentials);
 
         login.success(function(result) {
-            LocalService.set('auth_token', JSON.stringify(result));
+			LocalService.set('auth_token', JSON.stringify(result));
         });
         return login;
       },

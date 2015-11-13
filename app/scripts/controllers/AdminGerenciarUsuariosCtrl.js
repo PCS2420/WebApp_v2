@@ -1,6 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('AdminGerenciarUsuariosCtrl', function($scope, $state, $http, ListaUsuario, ListaCurso, URI, flash) {
+.controller('AdminGerenciarUsuariosCtrl', function($scope, $state, $http, ListaUsuario, ListaCurso, URI, Auth, flash) {
 	angular.element("#texto_header").html("Admin - Gerenciar Usuários");
 	$scope.$state = $state;
 	$scope.sucesso_update = false;
@@ -10,13 +10,18 @@ angular.module('webAppV2App')
 	
 	ListaCurso.getCursos().then(function(response) {
 	  $scope.cursos = response.data;
+	  loadUsuarios();
+	});
+
+	function loadUsuarios() {
+	  $scope.loading = true;
 	  ListaUsuario.getUsuarios().then(function(response) {
 		console.log(response.data);
 		$scope.usuarios = response.data;
 		$scope.loading = false;
 	  });
-	});
-
+	};
+	
 	$scope.fillEdit = function(user_id) {
 		var line = angular.element('#'+user_id).find("td");
 		var curso = angular.element('#'+user_id).find("input")[0].value;
@@ -64,7 +69,7 @@ angular.module('webAppV2App')
 		console.log(formData);
 		formData['tipo'] = 'Banido';
 		$scope.loading = true;
-		angular.element("#delete").modal('hide');
+		angular.element("#ban").modal('hide');
 		
 		var promise = $http.put(URI.api+'usuario/'+formData.id, formData);
 		promise.then(function(response) {
@@ -88,6 +93,28 @@ angular.module('webAppV2App')
 		  });
 		});
 	}
+	
+	$scope.registerAdmin = function(userInfo) {
+		angular.element("#adicionar").modal('hide');
+        $scope.loading = true;
+        userInfo.tipo = "Revisor";
+		userInfo.senha = userInfo.login; // same pass as uname
+		
+		Auth.register(userInfo)
+		.then(
+			function(response){
+                void(response); // Para nao dar erro de nao utilizado
+				$scope.sucesso_adicionar = true;
+				$scope.loading = false;
+				$scope.user = null;
+				$scope.loadList(response.data);
+		   },
+			function(error){
+                void(error); // Para nao dar erro de nao utilizado
+				$scope.falha = true;
+				$scope.loading = false;
+		});
+    };
 	
 	$scope.loadList = function(data) {
 		$scope.usuarios = data;

@@ -3,7 +3,9 @@ angular.module('webAppV2App')
 .controller('BuscarCtrl', function($scope, $http, URI){
 	angular.element("#texto_header").html("Sinestesia - Buscar");
 	console.log("@TODO BuscarCtrl controller");
+	
 	$scope.search = function(formData){
+		$scope.loading = true;
 		console.log(formData.radio);
 		var myDataPromise = $http.get(URI.api + "livro");
 		myDataPromise.then(function(response){
@@ -15,6 +17,7 @@ angular.module('webAppV2App')
 				}
 			}
 			$scope.isDescricao = formData.radio === 'descrever';
+			$scope.loading = false;
 		});
 	};
 	$scope.URI = URI.api;

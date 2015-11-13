@@ -4,10 +4,9 @@ angular.module('webAppV2App')
         void(ListaLivro); //Evitar erro de 'nao utilizado'
         void(CurrentUser); //Evitar erro de 'nao utilizado'
 	angular.element("#texto_header").html("Sinestesia - Historico");
-	
-	console.log("@TODO HistoricoCtrl controller");
-	
+		
 	$scope.uri = URI.api;
+	$scope.loading = true;
 	var myDataPromise;
 	var user = $scope.loggedUser();
 	angular.element("#texto_header").html("Sinestesia - Historico");
@@ -65,8 +64,8 @@ angular.module('webAppV2App')
 				preloaded_images.push($scope.uri+"/"+ capas[img].livro.capa);
 			}
 			$scope.preloaded_images = preloaded_images;
+			$scope.loading = false;
 			$scope.capas = capas;
-			
 		});
 		
 	});

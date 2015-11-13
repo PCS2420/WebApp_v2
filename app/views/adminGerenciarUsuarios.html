@@ -1,17 +1,21 @@
-<div ng-show="sucesso_ban" class="alert alert-success">Usuário Banido com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
-<div ng-show="sucesso_update" class="alert alert-success">Usuário Atualizado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
-<div ng-show="sucesso_delete" class="alert alert-success">Usuário Deletado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
-<div ng-show="falha" class="alert alert-danger">Ocorreu algum erro ao tentar manipular o usuário.<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
-<div class="container">
-  <div class="row" role="search-row">
-	<div class="col-xs-12 col-sm-5 col-md-5">
-	  <h3>Lista de Usuários</h3>
+<br><div class="container">
+  <div class="row">
+	<div ng-show="sucesso_ban" class="alert alert-success">Usuário Banido com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+	<div ng-show="sucesso_update" class="alert alert-success">Usuário Atualizado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+	<div ng-show="sucesso_delete" class="alert alert-success">Usuário Deletado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+	<div ng-show="sucesso_adicionar" class="alert alert-success">Usuário Adicionado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+	<div ng-show="falha" class="alert alert-danger">Ocorreu algum erro ao tentar manipular o usuário.<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+	  <h3 style="display:inline;">Usuários</h3>
+	  <a href="#" class="btn btn-info btn-sm" ng-class="{disabled: loading}" style="float: right;" data-toggle="modal" data-target="#adicionar" >
+	    <span class="glyphicon glyphicon-plus"></span>
+	  </a>
 	</div>
   </div>
-  <div class="row">
+  <img ng-show="loading" id="center_loader" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  <div class="row" ng-show="!loading">
     <div class="col-md-12">
-	  <img ng-show="loading" src="styles/ajax-loader.gif" style="position: absolute; top: 40%;right: 45.5%;"/>
-      <div ng-show="!loading" class="table-responsive">
+      <div class="table-responsive">
         <table id="mytable" class="table table-bordred table-striped">
           <thead>
             <th>Nome</th>
@@ -62,7 +66,6 @@
     </div>
   </div>
 </div>
-<br><br>
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -157,6 +160,59 @@
 	  <input type="hidden" ng-model="deleteUser" id="delete_user_id" value="" />
       <div class="modal-footer ">
         <button type="button" class="btn btn-success" ng-click="delete(deleteUser);"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+<div class="modal fade" id="adicionar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Incluir Revisor no Sistema</h4>
+      </div>
+      <div class="modal-body">
+	  <form name="regForm" role="form" id="regForm" ng-submit="registerAdmin(user);">
+		<h2 class="form-sigin-heading">Incluir Revisor</h2>
+
+		<div ng-show="sucesso" class="alert alert-success">Conta criada!</div>
+		<div ng-show="falha" class="alert alert-danger">Tentativa de criar a conta falhou!<br></div>
+
+		<div class="form-group" ng-class="{ 'has-error': regForm.name.$dirty && regForm.name.$error.required }">
+			<label for="name">Nome</label>
+			<input type="text" name="name" id="name" class="form-control" ng-model="user.nome" required />
+			<span ng-show="regForm.name.$dirty && regForm.name.$error.required" class="help-block">Campo obrigatório.</span>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': regForm.nusp.$dirty && regForm.nusp.$error.required }">
+			<label for="nusp">Nusp</label>
+			<input type="number" name="nusp" id="nusp" class="form-control" ng-model="user.cpf" required />
+			<span ng-show="regForm.nusp.$dirty && regForm.nusp.$error.required" class="help-block">Campo obrigatório.</span>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': regForm.course.$dirty && regForm.course.$error.required }">
+			<label for="course">Curso</label>
+			<select ng-model="user.curso" class="form-control" required>
+				<option value="">Selecione um curso</option>
+				<option ng-repeat="curso in cursos" value="{{curso.nome}}">{{curso.nome}}</option>
+			</select>
+			<span ng-show="regForm.course.$dirty && regForm.course.$error.required && regForm.course == ''" class="help-block">Campo obrigatório.</span>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error': regForm.username.$dirty && regForm.username.$error.required }">
+			<label for="username">Nome de usuário</label>
+			<input type="text" name="username" id="username" class="form-control" ng-model="user.login" required />
+			<span ng-show="regForm.username.$dirty && regForm.username.$error.required" class="help-block">Campo obrigatório.</span>
+		</div>
+		<div class="form-group">
+			A senha do revisor será o próprio login. Após entrar no sistema, ele deverá mudar a sua senha.
+			<hr>
+		</div>
+	  </form>
+      </div>
+	  <input type="hidden" ng-model="deleteUser" id="delete_user_id" value="" />
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ng-click="registerAdmin(user);"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
       </div>
     </div>

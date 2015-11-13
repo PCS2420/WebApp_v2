@@ -1,0 +1,111 @@
+<div class="container">
+  <div ng-show="sucesso" class="alert alert-success">Valor atualizado!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+  <div ng-show="falha" class="alert alert-danger">Tentativa de atualização falhou!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+  <div class="row" role="search-row">
+	<div class="col-xs-12 col-sm-5 col-md-5">
+	  <h3>Sistema de Pontuação</h3>
+	</div>
+  </div>
+  <img ng-show="loading" id="center_loader" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  <div class="row" ng-show="!loading">
+    <div class="col-md-12">
+	<uib-accordion>
+	  <uib-accordion-group heading="Mudar Limiar Positivo">
+		<h4>Limiar Positivo Atual: {{pontuacao.limiarPositivo}}</h4>
+		
+		<form name="changeFormLimiarNegativoLimiarPositivo" id="changeFormLimiarNegativoLimiarPositivo">
+		  <div class="form-group" ng-class="{ 'has-error': changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo1.$dirty && changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo1.$error.required }">
+			<label for="newLimiarPositivo1">Novo valor limiar positivo</label>
+			<input type="number" name="newLimiarPositivo1" id="newLimiarPositivo1" class="form-control" ng-model="newLimiarPositivo1" required />
+			<span ng-show="changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo1.$dirty && changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo1.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		  <div class="form-group" ng-class="{ 'has-error': changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo2.$dirty && changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo2.$error.required }">
+			<label for="newLimiarPositivo2">Confirme novo valor limiar positivo</label>
+			<input type="number" name="newLimiarPositivo2" id="newLimiarPositivo2" class="form-control" ng-model="newLimiarPositivo2" required />
+			<span ng-show="changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo2.$dirty && changeFormLimiarNegativoLimiarPositivo.newLimiarPositivo2.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		</form>
+
+		<button ng-disabled="changeFormLimiarNegativoLimiarPositivo.$invalid || changeDataLoadingLimiarPositivo " class="btn btn-primary" ng-click="limiarPositivoChange(newLimiarPositivo1, newLimiarPositivo2)" >Enviar</button>
+		<img ng-if="changeDataLoadingLimiarPositivo" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  </uib-accordion-group>
+	  <uib-accordion-group heading="Mudar Limiar Negativo">
+		<h4>Limiar Negativo Atual: {{pontuacao.limiarNegativo}}</h4>
+		
+		<form name="changeFormLimiarNegativo" id="changeFormLimiarNegativo">
+		  <div class="form-group" ng-class="{ 'has-error': changeFormLimiarNegativo.newLimiarNegativo1.$dirty && changeFormLimiarNegativo.newLimiarNegativo1.$error.required }">
+			<label for="newLimiarNegativo1">Novo valor limiar Negativo</label>
+			<input type="number" name="newLimiarNegativo1" id="newLimiarNegativo1" class="form-control" ng-model="newLimiarNegativo1" required />
+			<span ng-show="changeFormLimiarNegativo.newLimiarNegativo1.$dirty && changeFormLimiarNegativo.newLimiarNegativo1.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		  <div class="form-group" ng-class="{ 'has-error': changeFormLimiarNegativo.newLimiarNegativo2.$dirty && changeFormLimiarNegativo.newLimiarNegativo2.$error.required }">
+			<label for="newLimiarNegativo2">Confirme novo valor limiar Negativo</label>
+			<input type="number" name="newLimiarNegativo2" id="newLimiarNegativo2" class="form-control" ng-model="newLimiarNegativo2" required />
+			<span ng-show="changeFormLimiarNegativo.newLimiarNegativo2.$dirty && changeFormLimiarNegativo.newLimiarNegativo2.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		</form>
+		
+		<button ng-disabled="changeFormLimiarNegativo.$invalid || changeDataLoadingLimiarNegativo " class="btn btn-primary" ng-click="limiarNegativoChange(newLimiarNegativo1, newLimiarNegativo2)" >Enviar</button>
+		<img ng-if="changeDataLoadingLimiarNegativo" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  </uib-accordion-group>
+	  <uib-accordion-group heading="Pontuação ao aceitar Descrição">
+		<h4>Pontuação Atual: {{pontuacao.descricaoAceita}}</h4>
+		
+		<form name="changeFormDescricaoAceita" id="changeFormDescricaoAceita">
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoAceita.newDescricaoAceita1.$dirty && changeFormDescricaoAceita.newDescricaoAceita1.$error.required }">
+			<label for="newDescricaoAceita1">Novo valor descricao aceita</label>
+			<input type="number" name="newDescricaoAceita1" id="newDescricaoAceita1" class="form-control" ng-model="newDescricaoAceita1" required />
+			<span ng-show="changeFormDescricaoAceita.newDescricaoAceita1.$dirty && changeFormDescricaoAceita.newDescricaoAceita1.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoAceita.newDescricaoAceita2.$dirty && changeFormDescricaoAceita.newDescricaoAceita2.$error.required }">
+			<label for="newDescricaoAceita2">Confirme novo valor descricao aceita</label>
+			<input type="number" name="newDescricaoAceita2" id="newDescricaoAceita2" class="form-control" ng-model="newDescricaoAceita2" required />
+			<span ng-show="changeFormDescricaoAceita.newDescricaoAceita2.$dirty && changeFormDescricaoAceita.newDescricaoAceita2.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		</form>
+		  
+		<button ng-disabled="changeFormDescricaoAceita.$invalid || changeDataLoadingDescricaoAceita " class="btn btn-primary" ng-click="descricaoAceitaChange(newDescricaoAceita1, newDescricaoAceita2)" >Enviar</button>
+		<img ng-if="changeDataLoadingDescricaoAceita" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  </uib-accordion-group>
+	  <uib-accordion-group heading="Pontuação ao editar Descrição">
+		<h4>Pontuação Atual: {{pontuacao.descricaoEditada}}</h4>
+		
+		<form name="changeFormDescricaoEditada" id="changeFormDescricaoEditada">
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoEditada.newDescricaoEditada1.$dirty && changeFormDescricaoEditada.newDescricaoEditada1.$error.required }">
+			<label for="newDescricaoEditada1">Novo valor descricao Editada</label>
+			<input type="number" name="newDescricaoEditada1" id="newDescricaoEditada1" class="form-control" ng-model="newDescricaoEditada1" required />
+			<span ng-show="changeFormDescricaoEditada.newDescricaoEditada1.$dirty && changeFormDescricaoEditada.newDescricaoEditada1.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoEditada.newDescricaoEditada2.$dirty && changeFormDescricaoEditada.newDescricaoEditada2.$error.required }">
+			<label for="newDescricaoEditada2">Confirme novo valor descricao Editada</label>
+			<input type="number" name="newDescricaoEditada2" id="newDescricaoEditada2" class="form-control" ng-model="newDescricaoEditada2" required />
+			<span ng-show="changeFormDescricaoEditada.newDescricaoEditada2.$dirty && changeFormDescricaoEditada.newDescricaoEditada2.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		</form>
+		
+		<button ng-disabled="changeFormDescricaoEditada.$invalid || changeDataLoadingDescricaoEditada " class="btn btn-primary" ng-click="descricaoEditadaChange(newDescricaoEditada1, newDescricaoEditada2)" >Enviar</button>
+		<img ng-if="changeDataLoadingDescricaoEditada" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  </uib-accordion-group>
+	  <uib-accordion-group heading="Pontuação ao rejeitar Descrição">
+		<h4>Pontuação Atual: {{pontuacao.descricaoRejeitada}}</h4>
+		
+		<form name="changeFormDescricaoRejeitada" id="changeFormDescricaoRejeitada">
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoRejeitada.newDescricaoRejeitada1.$dirty && changeFormDescricaoRejeitada.newDescricaoRejeitada1.$error.required }">
+			<label for="newDescricaoRejeitada1">Novo valor descricao Rejeitada</label>
+			<input type="number" name="newDescricaoRejeitada1" id="newDescricaoRejeitada1" class="form-control" ng-model="newDescricaoRejeitada1" required />
+			<span ng-show="changeFormDescricaoRejeitada.newDescricaoRejeitada1.$dirty && changeFormDescricaoRejeitada.newDescricaoRejeitada1.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		  <div class="form-group" ng-class="{ 'has-error': changeFormDescricaoRejeitada.newDescricaoRejeitada2.$dirty && changeFormDescricaoRejeitada.newDescricaoRejeitada2.$error.required }">
+			<label for="newDescricaoRejeitada2">Confirme novo valor descricao Rejeitada</label>
+			<input type="number" name="newDescricaoRejeitada2" id="newDescricaoRejeitada2" class="form-control" ng-model="newDescricaoRejeitada2" required />
+			<span ng-show="changeFormDescricaoRejeitada.newDescricaoRejeitada2.$dirty && changeFormDescricaoRejeitada.newDescricaoRejeitada2.$error.required" class="help-block">Campo obrigatório.</span>
+		  </div>
+		</form>
+		
+		<button ng-disabled="changeFormDescricaoRejeitada.$invalid || changeDataLoadingDescricaoRejeitada " class="btn btn-primary" ng-click="descricaoRejeitadaChange(newDescricaoRejeitada1, newDescricaoRejeitada2)" >Enviar</button>
+		<img ng-if="changeDataLoadingDescricaoRejeitada" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	  </uib-accordion-group>
+	</uib-accordion>
+	</div>
+  </div>
+</div>

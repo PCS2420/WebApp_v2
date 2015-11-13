@@ -139,3 +139,9 @@ video {
   width: 100%;
   height: auto;
 }
+
+#center_loader {
+	position: absolute;
+    left: 47%;
+    top: 48%;
+}
