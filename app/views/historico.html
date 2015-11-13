@@ -1,5 +1,8 @@
-<div class="item" ng-repeat="capa in capas">
-	<a ui-sref="user.historico.livro({ livro_id: capa.livro.id })">
-		{{capa.livro.titulo}}
-	</a>
+<br>
+<div class="container">
+	<div class="list-group" ng-repeat="capa in capas">
+		<a ui-sref="user.historico.livro({ livro_id: capa.livro.id })" class="list-group-item">
+			{{capa.livro.titulo}}
+		</a>
+	</div>
 </div>

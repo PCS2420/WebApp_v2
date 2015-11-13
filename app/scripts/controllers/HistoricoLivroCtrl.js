@@ -1,6 +1,5 @@
 angular.module('webAppV2App')
 .controller('HistoricoLivroCtrl', function($scope, $filter, $state, $stateParams, $http, ListaLivro, URI){
-	angular.element("#texto_header").html("Sinestesia - @todo");
 	$scope.$state = $state;
 	$scope.uri = URI.api;
 	
@@ -22,10 +21,20 @@ angular.module('webAppV2App')
 					});
 			}
 		}
-		console.log(imagens);
+	
+		var myDataPromise2 = $http.get(URI.api + "livro/" + livro_id).then(function(response){
+			console.log(response.data);
+			angular.element("#texto_header").html(/*"Sinestesia - " + */response.data.titulo);
+			
+		})
+	
+		
+		
 	});
 	
 	$scope.imagens = imagens;
+	
+	
 	$scope.populaModal = function(descricao) {
 		angular.element("#descricao_modal").html(descricao);
 	}

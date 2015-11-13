@@ -5,17 +5,13 @@
     <title>Sinestesia Home</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
+	
+	<!-- incluindo dependencias CSS-->
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="styles/animations.css">
-    <!-- endbuild -->
+    <!-- fim dependencias CSS -->
 
     <!-- CSS's adicionais -->
     <link ng-if="$state.includes('descritor', 'revisor')" rel="stylesheet" href="styles/bootstrap-touch-carousel.css"> <!-- adiciona as divs caso o usuario esteja logado -->
@@ -26,32 +22,26 @@
 
   </head>
   <body ng-app="webAppV2App" ng-controller="NavCtrl">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
+	<!-- CONTEUDO -->
     <header ui-view="header"></header>
     <br><br><div class="container-fluid" id="sinestesia_content" ui-view="content"></div><br><br>
     <footer ui-view="footer"></footer>
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- Dependências do Adicionais -->
+	<!-- FIM CONTEUDO -->
+	
+    <!-- Dependências do APP -->
+    <script src="scripts/libs/jquery.min.js"></script>
+    <script src="scripts/libs/angular.min.js"></script>
+    <script	 src="scripts/libs/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/libs/angular-animate.js"></script>
     <script type="text/javascript" src="scripts/libs/angular-resource.js"></script>
     <script type="text/javascript" src="scripts/libs/angular-route.min.js"></script>
     <script type="text/javascript" src="scripts/libs/angular-ui-router.js"></script>
     <script type="text/javascript" src="scripts/libs/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="scripts/libs/bootstrap-touch-carousel.js"></script>
-    <!---->
+    <!-- fim dependencias -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- Controllers -->
     <script src="scripts/app.js"></script>
     <script src="scripts/routes.js"></script>
     <script src="scripts/controllers/HomeCtrl.js"></script>

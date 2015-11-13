@@ -3,7 +3,7 @@ app.factory("flash", function($rootScope) {
   var currentElement = null;
 
 	$rootScope.$on("$stateChangeSuccess", function() {
-		currentElement = queue.shift() || undefined;
+		currentElement = queue.shift() || null;
 	});
 
 	return {
@@ -17,7 +17,10 @@ app.factory("flash", function($rootScope) {
 			return currentElement.type;
 		},
 		hasAlert: function() {
-			return currentElement !== undefined;
+			return currentElement !== null;
+		},
+		shiftQueue: function() {
+			currentElement = queue.shift() || null;
 		}
 	};
 });

@@ -7,7 +7,6 @@ angular.module('webAppV2App')
 	$scope.uri = URI.api;
 	var myDataPromise;
 	var user = $scope.loggedUser();
-	
 	angular.element("#texto_header").html("Sinestesia - Historico");
 	
 	
@@ -20,7 +19,7 @@ angular.module('webAppV2App')
 		// console.log(response.data);
 		
 		var imagens = response.data;
-		
+		console.log(response.data);
 		var myDataPromise2 = $http.get(URI.api + "imagem/")
 		myDataPromise2.then(function(response){
 			
@@ -36,14 +35,14 @@ angular.module('webAppV2App')
 				}
 			}
 			
-			capas.sort();
-			for(var i = 1; i < capas.length; ){
-				if(capas[i-1].id == capas[i].id){
-					capas.splice(i, 1);
-				} else {
-					i++;
-				}
-			}
+			// capas.sort();
+			// for(var i = 1; i < capas.length; ){
+				// if(capas[i-1].id == capas[i].id){
+					// capas.splice(i, 1);
+				// } else {
+					// i++;
+				// }
+			// }
 			
 			capas.sort();
 			for(var i = 1; i < capas.length; ){
