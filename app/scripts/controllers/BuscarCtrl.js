@@ -10,14 +10,12 @@ angular.module('webAppV2App')
 			$scope.resultados = [];
 			console.log(response.data);
 			for (var i in response.data){
-				if (response.data[i].titulo.indexOf(formData.query) != -1){
+				if (response.data[i].titulo.indexOf(formData.query) !== -1){
 					$scope.resultados.push(response.data[i]);
 				}
 			}
-			$scope.isDescricao = formData.radio == 'descrever';
-		})
-		
-	}
-	
+			$scope.isDescricao = formData.radio === 'descrever';
+		});
+	};
 	$scope.URI = URI.api;
 });
