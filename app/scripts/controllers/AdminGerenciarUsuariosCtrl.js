@@ -6,12 +6,14 @@ angular.module('webAppV2App')
 	$scope.sucesso_update = false;
 	$scope.sucesso_ban = false;
 	$scope.falha = false;
+	$scope.loading = true;
 	
 	ListaCurso.getCursos().then(function(response) {
 	  $scope.cursos = response.data;
 	  ListaUsuario.getUsuarios().then(function(response) {
 		console.log(response.data);
 		$scope.usuarios = response.data;
+		$scope.loading = false;
 	  });
 	});
 
@@ -47,15 +49,13 @@ angular.module('webAppV2App')
 	
 	$scope.update = function(formData) {
 		console.log(formData);
+		$scope.loading = true;
+		angular.element("#edit").modal('hide');
 		var promise = $http.put(URI.api+'usuario/'+formData.id, formData);
 		promise.then(function(response){
-			console.log(response);
-			angular.element("#edit").modal('hide');
-			$scope.sucesso_update = true;
-			
 		  ListaUsuario.getUsuarios().then(function(response) {
-			$scope.usuarios = response.data;
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
+			$scope.sucesso_update = true;
+			$scope.loadList(response.data);
 		  });
 		});
 	}
@@ -63,29 +63,35 @@ angular.module('webAppV2App')
 	$scope.ban = function(formData) {
 		console.log(formData);
 		formData['tipo'] = 'Banido';
+		$scope.loading = true;
+		angular.element("#delete").modal('hide');
+		
 		var promise = $http.put(URI.api+'usuario/'+formData.id, formData);
 		promise.then(function(response) {
-			angular.element("#delete").modal('hide');
-			$scope.sucesso_ban = true;
-			
 		  ListaUsuario.getUsuarios().then(function(response) {
-			$scope.usuarios = response.data;
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
+			$scope.sucesso_ban = true;
+			$scope.loadList(response.data);
 		  });
 		});
 	}
 	
 	$scope.delete = function(formData) {
 		console.log(formData);
+		$scope.loading = true;
+		angular.element("#delete").modal('hide');
+		
 		var promise = $http.delete(URI.api+'usuario/'+formData.id);
 		promise.then(function(response) {
-			angular.element("#delete").modal('hide');
-			$scope.sucesso_delete = true;
-			
 		  ListaUsuario.getUsuarios().then(function(response) {
-			$scope.usuarios = response.data;
-			$('html, body').animate({ scrollTop: 0 }, 'fast');
+			$scope.sucesso_delete = true;
+			$scope.loadList(response.data);
 		  });
 		});
+	}
+	
+	$scope.loadList = function(data) {
+		$scope.usuarios = data;
+		$('html, body').animate({ scrollTop: 0 }, 'fast');
+		$scope.loading = false;
 	}
 });

@@ -1,8 +1,7 @@
-<div ng-show="sucesso_ban" class="alert alert-success">Usuário Banido com sucesso!</div>
-<div ng-show="sucesso_update" class="alert alert-success">Usuário Atualizado com sucesso!</div>
-<div ng-show="sucesso_delete" class="alert alert-success">Usuário Deletado com sucesso!</div>
-<div ng-show="falha" class="alert alert-danger">Ocorreu algum erro ao tentar manipular o usuário.<br></div>
-
+<div ng-show="sucesso_ban" class="alert alert-success">Usuário Banido com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="sucesso_update" class="alert alert-success">Usuário Atualizado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="sucesso_delete" class="alert alert-success">Usuário Deletado com sucesso!<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="falha" class="alert alert-danger">Ocorreu algum erro ao tentar manipular o usuário.<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
 <div class="container">
   <div class="row" role="search-row">
 	<div class="col-xs-12 col-sm-5 col-md-5">
@@ -11,7 +10,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="table-responsive">
+	  <img ng-show="loading" src="styles/ajax-loader.gif" style="position: absolute; top: 40%;right: 45.5%;"/>
+      <div ng-show="!loading" class="table-responsive">
         <table id="mytable" class="table table-bordred table-striped">
           <thead>
             <th>Nome</th>
