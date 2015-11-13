@@ -1,7 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
 .controller('HistoricoLivroCtrl', function($scope, $filter, $state, $stateParams, $http, ListaLivro, URI){
-<<<<<<< HEAD
 	$scope.$state = $state;
 	$scope.uri = URI.api;
 	
@@ -40,7 +39,6 @@ angular.module('webAppV2App')
 	$scope.populaModal = function(descricao) {
 		angular.element("#descricao_modal").html(descricao);
 	}
-=======
     angular.element("#texto_header").html("Sinestesia - @todo");
     $scope.$state = $state;
     $scope.uri = URI.api;
@@ -70,6 +68,5 @@ angular.module('webAppV2App')
     $scope.populaModal = function(descricao) {
         angular.element("#descricao_modal").html(descricao);
     };
->>>>>>> origin/master
 
 });

@@ -14,7 +14,6 @@ angular.module('webAppV2App')
 		$scope.usuarios = response.data;
 	  });
 	});
-<<<<<<< HEAD
 
 	$scope.fillEdit = function(user_id) {
 		var line = angular.element('#'+user_id).find("td");
@@ -90,6 +89,3 @@ angular.module('webAppV2App')
 		});
 	}
 });
-=======
-});
->>>>>>> origin/master

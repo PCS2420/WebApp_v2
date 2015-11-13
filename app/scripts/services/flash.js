@@ -20,12 +20,9 @@ angular.module('webAppV2App')
 		},
 		hasAlert: function() {
 			return currentElement !== null;
-<<<<<<< HEAD
 		},
 		shiftQueue: function() {
 			currentElement = queue.shift() || null;
-=======
->>>>>>> origin/master
 		}
 	};
 });

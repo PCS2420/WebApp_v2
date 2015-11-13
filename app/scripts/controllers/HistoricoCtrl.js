@@ -16,12 +16,7 @@ angular.module('webAppV2App')
 	myDataPromise.then(function(response){
 		// console.log(response.data);
 		var imagens = response.data;
-<<<<<<< HEAD
-		console.log(response.data);
-		var myDataPromise2 = $http.get(URI.api + "imagem/")
-=======
 		var myDataPromise2 = $http.get(URI.api + "imagem/");
->>>>>>> origin/master
 		myDataPromise2.then(function(response){
 		        var img, descImg, i;	
 			var capas = [];
@@ -36,7 +31,6 @@ angular.module('webAppV2App')
 				}
 			}
 			
-<<<<<<< HEAD
 			// capas.sort();
 			// for(var i = 1; i < capas.length; ){
 				// if(capas[i-1].id == capas[i].id){
@@ -45,7 +39,6 @@ angular.module('webAppV2App')
 					// i++;
 				// }
 			// }
-=======
 			capas.sort();
 			for(i = 1; i < capas.length; ){
 				if(capas[i-1].id === capas[i].id){
@@ -54,7 +47,6 @@ angular.module('webAppV2App')
 					i++;
 				}
 			}
->>>>>>> origin/master
 			
 			capas.sort();
 			for(i = 1; i < capas.length; ){
