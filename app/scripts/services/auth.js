@@ -5,9 +5,12 @@ angular.module('webAppV2App')
       authorize: function(access, userType) {
         var permission;
 		
-		if (userType === 'Banido') {
-			permission = AccessLevels.banido;
-		}
+    		if (userType === 'Banido') {
+    			permission = AccessLevels.banido;
+    		}
+        else if (userType === 'Bloqueado') {
+          permission = AccessLevels.banido;
+        }
         else if(userType === 'Publicador') {
           permission = AccessLevels.publicador;
         }
@@ -15,7 +18,7 @@ angular.module('webAppV2App')
           permission = AccessLevels.user;
         }
         else if(userType === 'DescritorRevisor') {
-          permission = AccessLevels.user;
+          permission = AccessLevels.revisor;
         }
         else if(userType === 'Revisor') {
           permission = AccessLevels.revisor;

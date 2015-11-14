@@ -23,7 +23,9 @@ angular.module('webAppV2App')
                     console.log(user);
 					if (user.tipo === 'Banido') {
 						 $scope.banido = true;
-					} else if (user.tipo === 'Descritor') {
+					} else if (user.tipo === 'Bloqueado') {
+                         $scope.bloqueado = true;
+                    }else if (user.tipo === 'Descritor') {
                         flash.setAlert({msg : 'Bem vindo(a),'+user.nome+' , à página de Descrição', type : 'success'});
                         $state.go('user.home_descrever');
                     } else if (user.tipo === 'Revisor') {
