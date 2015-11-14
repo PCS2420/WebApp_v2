@@ -5,7 +5,7 @@ angular.module('webAppV2App')
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     
     var pergunta = "precisaRevisar";
-    if ($state.includes('user.home_descrever')) {pergunta = "precisaDescrever"};
+    if ($state.includes('user.home_descrever')) {pergunta = "precisaDescrever";}
 
     var curso = $scope.loggedUser().curso;
 console.log("lalala");
