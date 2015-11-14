@@ -10,7 +10,7 @@ angular.module('webAppV2App')
     var avatar;
     //var avatar = $scope.loggedUser().nomePersonagem; //puxar do banco
     $scope.pontos =  $scope.loggedUser().pontuacao;
-    $scope.isDescritor = ($scope.loggedUser().tipo === "Descritor");
+    $scope.isDescritor = ($scope.loggedUser().tipo === "Descritor" || $scope.loggedUser().tipo === "DescritorRevisor");
     if (!$scope.isDescritor) {
         avatar = "GoldenRetriever";
     } else if ($scope.pontos<20){
