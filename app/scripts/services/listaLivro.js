@@ -2,9 +2,8 @@
 angular.module('webAppV2App')
 .factory('ListaLivro', function($http, $rootScope, URI){
     return {
-        getLivros: function(curso_id, estado_livro) {
-        
-            return $http.get(URI.api + "livro?curso=" + curso_id + "&estado=" + estado_livro + "&sort=prioridade");
+        getLivros: function(curso_id, pergunta) {
+            return $http.get(URI.api + "livro?curso=" + curso_id + "&" + pergunta + "=true&sort=prioridade");
         },
 
         getAllLivros: function() {
