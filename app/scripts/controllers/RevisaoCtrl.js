@@ -8,9 +8,9 @@ angular.module('webAppV2App')
     var myDataPromise = MostraImagem.getImagem(imagem_id);
 
     myDataPromise.then(function(response) {
-		console.log(response.data);
+        console.log(response.data);
         $scope.imagem = response.data;
-		$scope.descritor = response.data.descricao.descritor;
+        $scope.descritor = response.data.descricao.descritor;
         $scope.formData.texto = $scope.imagem.descricao.texto;
         $scope.descricaoOriginal = $scope.imagem.descricao.texto;
         console.log(response.data);
@@ -84,43 +84,44 @@ angular.module('webAppV2App')
         );
     };
 
-	$scope.denunciar = function(formData) {
-		formData.descricao = $scope.formData.texto;
-		formData.denunciado = $scope.descritor;
-		formData.revisor = $scope.loggedUser().id;
-		angular.element("#denunciar_modal").modal('hide');
-		console.log(formData);
-		
-		$http.post(URI.api + "denuncia", formData)
-		.then(function(response) {
-			var formData = $scope.formData;
-			formData.revisor = $scope.loggedUser().id;
+    $scope.denunciar = function(formData) {
+        formData.descricao = $scope.formData.texto;
+        formData.denunciado = $scope.descritor;
+        formData.revisor = $scope.loggedUser().id;
+        angular.element("#denunciar_modal").modal('hide');
+        console.log(formData);
+        
+        $http.post(URI.api + "denuncia", formData)
+        .then(function(response) {
+            void(response); //Evitar erro de 'nao utilizado'
+            var formData = $scope.formData;
+            formData.revisor = $scope.loggedUser().id;
 
-			//Rejeita descricao
-			EnviaDescricao.rejeitada($scope.imagem.descricao.id, formData)
-			.then(function(response) {
-				void(response); //Evitar erro de 'nao utilizado'
-				flash.setAlert({msg : 'Descrição denunciada com sucesso.', type : 'success'});
-				$state.go("revisor.home_revisar");
-			},function(error) {
-				void(error);
-				flash.setAlert({msg : 'Ocorreu algum erro ao denunciar a descrição.', type : 'error'});
-				$state.go("revisor.home_revisar");
-			});
-		}, function(error) {
-			void(error);
-			flash.setAlert({msg : 'Ocorreu algum erro ao denunciar a descrição. Cod2', type : 'error'});
-			$state.go("revisor.home_revisar");
-		});
-	};
-	
-	// Adiciona a funcionalidade de ouvir a descricao que esta presente no form
-	$scope.ouvir = function() {
-	  var formData = $scope.formData.texto;
-	  console.log( formData );
-	  var voice = 'Brazilian Portuguese Female';
-	  setTimeout(responsiveVoice.speak( formData, voice),15000); // jshint ignore:line
-	};
+            //Rejeita descricao
+            EnviaDescricao.rejeitada($scope.imagem.descricao.id, formData)
+            .then(function(response) {
+                void(response); //Evitar erro de 'nao utilizado'
+                flash.setAlert({msg : 'Descrição denunciada com sucesso.', type : 'success'});
+                $state.go("revisor.home_revisar");
+            },function(error) {
+                void(error);
+                flash.setAlert({msg : 'Ocorreu algum erro ao denunciar a descrição.', type : 'error'});
+                $state.go("revisor.home_revisar");
+            });
+        }, function(error) {
+            void(error);
+            flash.setAlert({msg : 'Ocorreu algum erro ao denunciar a descrição. Cod2', type : 'error'});
+            $state.go("revisor.home_revisar");
+        });
+    };
+    
+    // Adiciona a funcionalidade de ouvir a descricao que esta presente no form
+    $scope.ouvir = function() {
+      var formData = $scope.formData.texto;
+      console.log( formData );
+      var voice = 'Brazilian Portuguese Female';
+      setTimeout(responsiveVoice.speak( formData, voice),15000); // jshint ignore:line
+    };
 
 
     $scope.w = window.innerWidth;

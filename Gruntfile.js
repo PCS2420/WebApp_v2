@@ -10,7 +10,6 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
   });
 
   // Configurable paths for the application
@@ -144,7 +143,6 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
           src: '{,*/}*.css',
           dest: '.tmp/styles/'
         }]
@@ -237,7 +235,6 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
           dest: '<%= yeoman.dist %>/images'
         }]
@@ -298,13 +295,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -340,9 +330,9 @@ module.exports = function (grunt) {
       server: [
         'copy:styles'
       ],
-      dist: [
+      dist: [ //We had 'imagemin' here too, but it broke the build and we don't know what it was.
         'copy:styles',
-        'imagemin',
+		'imagemin',
         'svgmin'
       ]
     }
@@ -356,7 +346,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
@@ -371,7 +360,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
       'concurrent:server',
       'autoprefixer:server',
       'connect:reallivereload',
@@ -386,7 +374,6 @@ module.exports = function (grunt) {
   
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -394,9 +381,8 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
+    //'cssmin',
+    //'uglify',
     'filerev',
     'usemin',
     'htmlmin'

@@ -18,14 +18,14 @@ angular.module('webAppV2App')
     $scope.formData = {};
 
     //atualiza o status do livro para EmAndamento, para reserva-lo ao usuario
-	function ocupado() {
+    function ocupado() {
         var update = $scope.update;
         update.estado = "EmAndamento";
         var promise = EnviaDescricao.emAndamento(update.id, update);
         promise.then(
             function(response){
                 void(response); //Evitar erro de 'nao utilizado'
-				console.log("VOCE ESTA SUJANDO O BANCO DE DADOS, NAO ESQUECA DE DESSUJA-LO");	
+                console.log("VOCE ESTA SUJANDO O BANCO DE DADOS, NAO ESQUECA DE DESSUJA-LO");    
                 flash.setAlert({msg : 'Você é o único descrevendo', type : 'success'});
             },
             function(error){
@@ -34,7 +34,7 @@ angular.module('webAppV2App')
                 $state.go("user.home_descrever");
             }
         );
-    };
+    }
     
     //caso descricao seja interrompida por mudança de rota, voltar ao estado inicial
     $scope.intDescricao = function (){ 

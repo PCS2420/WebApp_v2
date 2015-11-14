@@ -2,7 +2,6 @@
 angular.module('webAppV2App')
 .controller('AdminGerenciarPontosCtrl', function($scope, $http, URI, ListaPontuacao){
     angular.element("#texto_header").html("Admin - Configurar Pontos");
-    updatePontuacao();
 	
 	function updatePontuacao() {
 		$scope.loading = true;
@@ -11,12 +10,13 @@ angular.module('webAppV2App')
 			console.log($scope.pontuacao);
 			$scope.loading = false;
 		});
-	};
+	}
+    updatePontuacao();
 
 	function clearAllFields() {
 		angular.element("input").val("");
 		updatePontuacao();
-	};
+	}
 	
     $scope.limiarPositivoChange = function(lim, conf){
 		$scope.changeDataLoadingLimiarPositivo = true;
@@ -99,7 +99,7 @@ angular.module('webAppV2App')
 		}	
     };
     
-    $scope.descricaoRejeitadaChange = function(newDescricaoRejeitada1, newDescricaoRejeitada2){
+    $scope.descricaoRejeitadaChange = function(pto, conf){
         $scope.changeDataLoadingDescricaoRejeitada = true;
         if (pto === conf) {
 			$http.post(URI.api + 'pontuacao/mudarDescricaoRejeitada', {newDescricaoRejeitada1: pto,newDescricaoRejeitada2: pto})
