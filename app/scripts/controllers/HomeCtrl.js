@@ -11,6 +11,7 @@ angular.module('webAppV2App')
     // I keep track of the state of the loading images.
     $scope.isLoading = true;
     $scope.isSuccessful = false;
+	$scope.emptyList = false;
     $scope.percentLoaded = 0;
     
     myDataPromise.then(function(response){
@@ -18,13 +19,17 @@ angular.module('webAppV2App')
         //$scope.livros = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
         $scope.livros = response.data.livros;
         console.log($scope.livros);
+		if (response.data[0] === undefined) {
+			$scope.isLoading = false;
+			$scope.isSuccessful = false;
+			$scope.emptyList = true;
+		}
         var preloaded_images = [];
         for(var img in $scope.livros) {
             preloaded_images.push($scope.uri+"/"+$scope.livros[img].capa);
         }
         $scope.preloaded_images = preloaded_images;
     }).then(function() {
-        console.log("after promises!");
         // Preload the images; then, update display when returned.
         preloader.preloadImages( $scope.preloaded_images ).then(
             function handleResolve( imageLocations ) {
@@ -42,7 +47,6 @@ angular.module('webAppV2App')
                 console.info( "Preload Failure" );
             },
             function handleNotify( event ) {
-                $scope.percentLoaded = event.percent;
                 console.info( "Percent loaded:", event.percent );
             }
         );
@@ -79,7 +83,7 @@ directive('carouselPreloader', function($rootScope) {
                 void(newValue); //Evitar erro de 'nao utilizado'
                 void(oldValue); //Evitar erro de 'nao utilizado'
                 if (scope.isSuccessful) {
-                    console.log("LOADED");
+                    console.log("Images successfully loaded. Starting carousel!");
                     angular.element(document).find("#myCarousel").carousel({interval: false, toughness: 0.5});
                 }
             });

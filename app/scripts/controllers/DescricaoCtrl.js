@@ -13,18 +13,19 @@ angular.module('webAppV2App')
         console.log($scope.imagem);
         $scope.update = response.data;
         console.log(response.data);
-        $scope.ocupado();
+        ocupado();
     });
     $scope.formData = {};
 
     //atualiza o status do livro para EmAndamento, para reserva-lo ao usuario
-    $scope.ocupado = function(){
+	function ocupado() {
         var update = $scope.update;
         update.estado = "EmAndamento";
-        EnviaDescricao.emAndamento($scope.imagem.id, $scope.update)
-        .then(
+        var promise = EnviaDescricao.emAndamento(update.id, update);
+        promise.then(
             function(response){
                 void(response); //Evitar erro de 'nao utilizado'
+				console.log("VOCE ESTA SUJANDO O BANCO DE DADOS, NAO ESQUECA DE DESSUJA-LO");	
                 flash.setAlert({msg : 'Você é o único descrevendo', type : 'success'});
             },
             function(error){
@@ -54,12 +55,7 @@ angular.module('webAppV2App')
     };
     
     //listener do evento de mudança de rota
-    $scope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
-        void(e); //Evitar erro de 'nao utilizado'
-        void(toState); //Evitar erro de 'nao utilizado'
-        void(toParams); //Evitar erro de 'nao utilizado'
-        void(fromState); //Evitar erro de 'nao utilizado'
-        void(fromParams); //Evitar erro de 'nao utilizado'
+    $scope.$on('$stateChangeStart', function () {
         if($scope.enviou) {
             console.log("Descrição enviada");
         } else {
@@ -67,12 +63,6 @@ angular.module('webAppV2App')
             $scope.intDescricao();
         }
     });
-    
-    $scope.exit = function () {
-        $scope.loggedUser = undefined;
-        Auth.logout();
-        $state.go("anon.login");
-    };
 
     $scope.cancela = function () {
         flash.setAlert({msg: 'A descrição foi cancelada.', type: 'info'});

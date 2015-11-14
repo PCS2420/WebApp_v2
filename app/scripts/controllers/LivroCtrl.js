@@ -13,6 +13,7 @@ angular.module('webAppV2App')
     // I keep track of the state of the loading images.
     $scope.isLoading = true;
     $scope.isSuccessful = false;
+	$scope.emptyList = false;
     $scope.percentLoaded = 0;
 
     myDataPromise.then(function(response){
@@ -20,6 +21,10 @@ angular.module('webAppV2App')
         //$scope.livros = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
         $scope.imagens = response.data;
         console.log(response.data);
+		if (response.data[0] === undefined) {
+			$scope.isLoading = false;
+			$scope.emptyList = true;
+		}
         var preloaded_images = [];
         for(var i in $scope.imagens) {
             preloaded_images.push($scope.uri+"/"+$scope.imagens[i].local);

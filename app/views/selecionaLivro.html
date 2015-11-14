@@ -15,8 +15,11 @@
 				</div>
 			</div>
 		</div>
-		<p ng-switch-when="false">
-			<strong>Oops</strong>: One of your images failed to load :(
+		<p ng-switch-when="false" ng-if="!emptyList">
+			<br><strong>Oops</strong>: One of your images failed to load :(
+		</p>
+		<p ng-show="!isLoading && emptyList">
+			<br><strong>Oops</strong>: Esse livro não tem imagens, favor contactar o administrador! :(
 		</p>
 	</div>
 </div>

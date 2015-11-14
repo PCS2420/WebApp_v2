@@ -22,5 +22,6 @@
 		<p ng-switch-when="false">
 			<strong>Oops</strong>: One of your images failed to load :(
 		</p>
+		<p ng-show="!isLoading && emptyList && !isSuccessful"><strong>Oops</strong>: Não existem imagens para mostrar, favor contactar o administrador! :(</p>
 	</div>
 </div>

@@ -18,7 +18,7 @@
 		<li ng-class="{active: $state.includes('user.home_descrever')}">
 		  <a ui-sref="user.home_descrever" data-toggle="collapse" data-target=".in">Descrever</a>
 		</li>
-		<li ng-if="loggedUser().tipo === 'Revisor'|| loggedUser().tipo === 'DescritorRevisor'" ng-class="{active: $state.includes('user.home_revisar')}">
+		<li ng-if="loggedUser().tipo === 'Revisor'|| loggedUser().tipo === 'DescritorRevisor'" ng-class="{active: $state.includes('revisor.home_revisar')}">
 		  <a ui-sref="revisor.home_revisar" data-toggle="collapse" data-target=".in">Revisar</a>
 		</li>
 		<li>
