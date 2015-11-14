@@ -4,8 +4,11 @@ angular.module('webAppV2App')
     angular.element("#texto_header").html("Sinestesia - Página Inicial");
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     
+    var estadoLivro = "PrecisaRevisar"
+    if ($state.includes('user.home_descrever')) estadoLivro = "PrecisaDescrever"
+
     var curso = $scope.loggedUser().curso;
-    var myDataPromise = ListaLivro.getLivros(curso);
+    var myDataPromise = ListaLivro.getLivros(curso, estadoLivro);
     $scope.flash = flash;
     
     // I keep track of the state of the loading images.
@@ -13,11 +16,13 @@ angular.module('webAppV2App')
     $scope.isSuccessful = false;
 	$scope.emptyList = false;
     $scope.percentLoaded = 0;
+
+
     
     myDataPromise.then(function(response){
         //filtra por id do curso.
         //$scope.livros = $filter('filter')(response.data, {curso : {id: $scope.loggedUser().curso}});
-        $scope.livros = response.data.livros;
+        $scope.livros = response.data;
         console.log($scope.livros);
 		if (response.data[0] === undefined) {
 			$scope.isLoading = false;
