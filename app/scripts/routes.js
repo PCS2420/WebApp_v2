@@ -237,6 +237,15 @@ angular.module('webAppV2App')
             controller: 'TutorialCtrl'
           }
         }
+      })
+	  .state('user.hall_of_fame', { // caso ele esteja logado e  requisitando tutorial
+        url: '/hallOfFame',
+        views: {
+          'content@': {
+            templateUrl: 'views/hallOfFame.html',
+            controller: 'HallOfFameCtrl'
+          }
+        }
       });
     //------REVISOR ROUTES-------
     //------------------------
