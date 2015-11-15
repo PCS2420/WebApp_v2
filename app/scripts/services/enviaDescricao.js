@@ -5,6 +5,9 @@ angular.module('webAppV2App')
 		enviar: function(formData) {
 			return $http.post(URI.api+"descricao/descreve", formData);
 		},
+		salvar: function(formData) {
+			return $http.post(URI.api+"descricao/salva", formData);
+		},
 		//quando uma descrição se inicia, seu estado é atualizado para EmAndamento
 		emAndamento: function(imagem_id, formData) {
 			return $http.put(URI.api+"imagem/" + imagem_id + "/emAndamento", formData);

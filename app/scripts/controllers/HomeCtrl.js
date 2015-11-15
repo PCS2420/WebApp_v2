@@ -4,12 +4,12 @@ angular.module('webAppV2App')
     angular.element("#texto_header").html("Sinestesia - Página Inicial");
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     
-    var pergunta = "precisaRevisar"
-    if ($state.includes('user.home_descrever')) pergunta = "precisaDescrever"
+    var pergunta = "precisaRevisar";
+    if ($state.includes('user.home_descrever')) {pergunta = "precisaDescrever";}
 
     var curso = $scope.loggedUser().curso;
-console.log("lalala")
-console.log(pergunta)
+console.log("lalala");
+console.log(pergunta);
     var myDataPromise = ListaLivro.getLivros(curso, pergunta);
     $scope.flash = flash;
     
