@@ -1,6 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('DescricaoCtrl', function($scope, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash, URI){
+.controller('DescricaoCtrl', function($scope, $http, $filter, $state, $stateParams, MostraImagem, EnviaDescricao, Auth, flash, URI){
     angular.element("#texto_header").html("Sinestesia - Descrever");
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     $scope.flash = flash;
@@ -15,14 +15,44 @@ angular.module('webAppV2App')
         console.log($scope.imagem);
         $scope.update = response.data;
         console.log(response.data);
-        ocupado();
+		check($scope.imagem, $scope.loggedUser());
     });
     $scope.formData = {};
+	
+	function check(imagem, usuario){
+		if(imagem.estado == "Aberto"){
+			console.log("Estado aberto, pode descrever");
+			var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + usuario.id);
+			promise.then(function(response){
+				if (response.data.length == 0)
+					ocupado();
+				else{
+						flash.setAlert({msg : 'O usuario já se encontra descrevendo outra imagem', type : 'error'});
+						$scope.mantemEstado = true;
+						$state.go("user.home_descrever");
+				}
+			})
+			
+		}
+		else if (imagem.estado == "EmAndamento" && usuario.id == imagem.descritor){
+			console.log("Estado EmAndamento, mas também pode descrever");
+			if ($scope.imagem.histDescricoes !== undefined){
+				var hist = $scope.imagem.histDescricoes;
+				$scope.formData.texto = hist[hist.length - 1].texto;
+			}
+		}			
+		else{
+			$scope.mantemEstado = true;
+			$state.go("user.home_descrever");
+			console.log("Erro: usuário não pode descrever imagem");
+		}
+	}
 
     //atualiza o status do livro para EmAndamento, para reserva-lo ao usuario
     function ocupado() {
         var update = $scope.update;
         update.estado = "EmAndamento";
+		update.descritor = $scope.loggedUser().id;
         var promise = EnviaDescricao.emAndamento(update.id, update);
         promise.then(
             function(response){
@@ -42,6 +72,7 @@ angular.module('webAppV2App')
     $scope.intDescricao = function (){ 
         var update = $scope.update;
         update.estado = "Aberto";
+		update.descritor = "";
         EnviaDescricao.intDescricao($scope.imagem.id, $scope.update)
         .then(
             function(response){
@@ -58,9 +89,10 @@ angular.module('webAppV2App')
     
     //listener do evento de mudança de rota
     $scope.$on('$stateChangeStart', function () {
-        if($scope.enviou) {
+        if($scope.mantemEstado) {
             console.log("Descrição enviada");
-        } else {
+        } 
+		else {
             console.log("a descricao foi interrompida");
             $scope.intDescricao();
         }
@@ -102,7 +134,7 @@ angular.module('webAppV2App')
             function (response) {
                 void(response); //Evitar erro de 'nao utilizado'
                 flash.setAlert({msg: 'A descrição foi feita com sucesso!', type: 'success'});
-                $scope.enviou = true;
+                $scope.mantemEstado = true;
                 $state.go("user.home_descrever");
             },
             function (error) {
@@ -120,8 +152,31 @@ angular.module('webAppV2App')
         var voice = 'Brazilian Portuguese Female';
         setTimeout(responsiveVoice.speak( formData, voice),15000); // jshint ignore:line
     };
-
+	
     $scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
     $scope.uri = URI.api;
+});
+
+angular.module('webAppV2App').
+directive('backupAutomatico', function($rootScope) {
+    void($rootScope); //Evitar erro de 'nao utilizado'
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {   
+            void(element); //Evitar erro de 'nao utilizado'
+            void(attrs); //Evitar erro de 'nao utilizado'
+			var count = 0;
+            scope.$watch("formData.texto", function(newValue, oldValue) {
+                void(newValue); //Evitar erro de 'nao utilizado'
+                void(oldValue); //Evitar erro de 'nao utilizado'
+				count++;
+				if (count >= 10){
+					scope.salva();
+					count = 0;
+					console.log("backup automatico!");
+				}
+            });
+        }
+    };
 });

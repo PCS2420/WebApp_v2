@@ -1,6 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('HomeCtrl', function($scope, $filter, $state, $stateParams, ListaLivro, Auth, flash, preloader, URI){
+.controller('HomeCtrl', function($scope, $http, $filter, $state, $stateParams, EnviaDescricao, ListaLivro, Auth, flash, preloader, URI){
     angular.element("#texto_header").html("Sinestesia - Página Inicial");
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     
@@ -8,8 +8,7 @@ angular.module('webAppV2App')
     if ($state.includes('user.home_descrever')) {pergunta = "precisaDescrever";}
 
     var curso = $scope.loggedUser().curso;
-console.log("lalala");
-console.log(pergunta);
+	
     var myDataPromise = ListaLivro.getLivros(curso, pergunta);
     $scope.flash = flash;
     
@@ -19,7 +18,15 @@ console.log(pergunta);
 	$scope.emptyList = false;
     $scope.percentLoaded = 0;
 
-
+	if (pergunta == "precisaDescrever"){
+		var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + $scope.loggedUser().id);
+		promise.then(function(response){
+			if (response.data.length !== 0){
+				angular.element("#pendente").modal();
+				$scope.id_imagem = response.data[0].id;
+			}
+		})
+	}
     
     myDataPromise.then(function(response){
         //filtra por id do curso.
@@ -28,6 +35,7 @@ console.log(pergunta);
         console.log($scope.livros);
 		if (response.data[0] === undefined) {
 			$scope.isLoading = false;
+			
 			$scope.isSuccessful = false;
 			$scope.emptyList = true;
 		}
@@ -71,6 +79,21 @@ console.log(pergunta);
 
     $scope.prev = function(){
         angular.element('#myCarousel').carousel('prev');
+    };
+	
+	$scope.descreverImagem = function(){
+		angular.element("#pendente").modal("hide");
+		$state.go("user.imagem", {imagem_id: $scope.id_imagem});
+	};
+	
+	$scope.intDescricao = function (){ 
+        var update = {estado:"Aberto", descritor:""};
+        EnviaDescricao.intDescricao($scope.id_imagem, update)
+        .then(
+            function(response){
+                void(response); //Evitar erro de 'nao utilizado'
+            }
+        );
     };
 
     $scope.w = window.innerWidth;
