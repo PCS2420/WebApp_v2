@@ -29,25 +29,7 @@ angular.module('webAppV2App')
 					}
 				}
 			}
-			
-			// capas.sort();
-			// for(var i = 1; i < capas.length; ){
-				// if(capas[i-1].id == capas[i].id){
-					// capas.splice(i, 1);
-				// } else {
-					// i++;
-				// }
-			// }
-			capas.sort();
-			for(i = 1; i < capas.length; ){
-				if(capas[i-1].id === capas[i].id){
-					capas.splice(i, 1);
-				} else {
-					i++;
-				}
-			}
-			
-			capas.sort();
+
 			for(i = 1; i < capas.length; ){
 				if(capas[i-1].livro.id === capas[i].livro.id){
 					capas.splice(i, 1);
@@ -55,9 +37,6 @@ angular.module('webAppV2App')
 					i++;
 				}
 			}
-			console.log(capas);
-			
-			
 			
 			var preloaded_images = [];
 			for(img in capas) {
@@ -67,10 +46,5 @@ angular.module('webAppV2App')
 			$scope.loading = false;
 			$scope.capas = capas;
 		});
-		
 	});
-	
-	
-	
-	
 });
