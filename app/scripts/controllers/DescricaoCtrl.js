@@ -5,6 +5,8 @@ angular.module('webAppV2App')
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     $scope.flash = flash;
 
+	$scope.descId = "-1";
+	
     var imagem_id = $stateParams.imagem_id;
     var myDataPromise = MostraImagem.getDescricao(imagem_id);
 
@@ -68,7 +70,28 @@ angular.module('webAppV2App')
         flash.setAlert({msg: 'A descrição foi cancelada.', type: 'info'});
         $state.go("user.home_descrever");
     };
+	
+	$scope.salva = function() {
+        var formData = $scope.formData;
+		formData.imagem = $stateParams.imagem_id;
+        formData.descritor = $scope.loggedUser().id;
+		
+		$scope.formData.descId = $scope.descId;
 
+        EnviaDescricao.salvar($scope.formData)
+        .then(
+            function (response) {
+                void(response); //Evitar erro de 'nao utilizado'
+                flash.setAlert({msg: 'A descrição foi salva com sucesso!', type: 'success'});
+				$scope.descId = response.data.id;
+            },
+            function (error) {
+                void(error); //Evitar erro de 'nao utilizado'
+                flash.setAlert({msg: 'Ocorreu algum erro ao salvar a descrição', type: 'error'});
+            }
+        );
+    };
+	
     $scope.enviar = function() {
         var formData = $scope.formData;
         formData.imagem = $stateParams.imagem_id;
