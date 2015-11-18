@@ -2,7 +2,7 @@
   <form name="myForm" role="form" id="myForm" ng-submit="search(formData);">
  	  <div class="form-group" ng-class="{ 'has-error': myForm.name.$dirty && myForm.name.$error.required }">
 		  <div>
-			  <input type="radio" checked="checked" name="options" id="option1" value="descrever" ng-model="formData.radio"> Descrever
+			  <input type="radio" click-when-loaded checked="checked" name="options" id="option1" value="descrever" ng-model="formData.radio"> Descrever
 			  <input type="radio" name="options" id="option2" value="revisar" ng-model="formData.radio"> Revisar
 		  </div>
 	  </div>

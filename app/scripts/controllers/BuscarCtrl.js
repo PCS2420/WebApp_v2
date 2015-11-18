@@ -22,3 +22,15 @@ angular.module('webAppV2App')
 	};
 	$scope.URI = URI.api;
 });
+
+angular.module('webAppV2App').
+directive('clickWhenLoaded', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+			void(scope);
+            void(attrs); //Evitar erro de 'nao utilizado'
+			angular.element(element).click();
+        }
+    };
+});
