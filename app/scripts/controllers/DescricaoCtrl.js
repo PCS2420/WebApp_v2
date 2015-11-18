@@ -132,7 +132,6 @@ angular.module('webAppV2App')
         .then(
             function (response) {
                 void(response); //Evitar erro de 'nao utilizado'
-                flash.setAlert({msg: 'A descrição foi salva com sucesso!', type: 'success'});
 				$scope.descId = response.data.id;
             },
             function (error) {
@@ -142,6 +141,7 @@ angular.module('webAppV2App')
     };
 	
     $scope.enviar = function() {
+		$scope.loading = true;
         var formData = $scope.formData; //pegando so o texto
         formData.imagem = $stateParams.imagem_id;
         formData.descritor = $scope.loggedUser().id;
@@ -151,6 +151,7 @@ angular.module('webAppV2App')
         .then(
             function (response) {
                 void(response); //Evitar erro de 'nao utilizado'
+				$scope.loading = false;
                 flash.setAlert({msg: 'A descrição foi feita com sucesso!', type: 'success'});
                 $scope.mantemEstado = true;
                 $state.go("user.home_descrever");
