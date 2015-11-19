@@ -114,3 +114,15 @@ ul.livros-lista li{
 ul.livros-lista li span{
   font-size: 15px;
 }
+
+p {
+  margin-top: 15px;
+}
+
+
+p.subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+}
