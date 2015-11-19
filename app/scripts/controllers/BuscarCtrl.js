@@ -38,7 +38,7 @@ angular.module('webAppV2App')
 		clearList();
 		$http.get(URI.api + 'livro/buscaRevisor?query='+q).then(function(response) {
 			console.log(response.data);
-			$scope.livrosDesc = response.data;
+			$scope.livrosRev = response.data;
 			$scope.loading = false;
 		});
 	}
