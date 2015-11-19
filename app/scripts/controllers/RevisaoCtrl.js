@@ -96,6 +96,7 @@ angular.module('webAppV2App')
     });
 
     $scope.cancela = function() {
+		angular.element("#cancelar").modal('hide');
         flash.setAlert({msg : 'A revisão foi cancelada.', type : 'info'});
         interrompeRevisao();
     };
@@ -103,7 +104,7 @@ angular.module('webAppV2App')
     $scope.aceitar= function() {
         var formData = $scope.formData;
         formData.revisor = $scope.loggedUser().id;
-
+		angular.element("#aceitar").modal('hide');
         if (formData.texto === $scope.descricaoOriginal)
         {
             //Aceita descricao sem editar
@@ -146,7 +147,7 @@ angular.module('webAppV2App')
     $scope.rejeitar = function() {
         var formData = $scope.formData;
         formData.revisor = $scope.loggedUser().id;
-
+		angular.element("#rejeitar").modal('hide');
         //Rejeita descricao
         EnviaDescricao.rejeitada($scope.imagem.descricao.id, formData)
         .then(

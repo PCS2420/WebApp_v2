@@ -20,12 +20,12 @@
 	<div class="row" ng-show="!loading">
 		<div class="list-group" ng-repeat="livro in livrosDesc">
 			<a class="list-group-item" ui-sref="user.desclivro({ livro_id: livro.id })">
-				{{livro.titulo}}
+				{{livro.titulo}} - {{livro.autor}}
 			</a>
 		</div>
 		<div class="list-group" ng-repeat="livro in livrosRev">
 			<a class="list-group-item" ui-sref="revisor.revlivro({ livro_id: livro.id })">
-				{{livro.titulo}}
+				{{livro.titulo}} - {{livro.autor}}
 			</a>
 		</div>
 	</div>

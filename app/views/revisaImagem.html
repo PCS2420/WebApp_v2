@@ -2,7 +2,7 @@
   <img ng-src="{{uri}}/{{imagem.local}}" class="img-responsive img-rounded center" alt="{{imagem.id}}" />
 <!--Text area for description and buttons-->
 <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-  <form ng-submit="aceitar()">
+  <form>
     <div class="form-group">
       <label for="texto">Edite a descrição abaixo e selecione Aceitar para enviá-la ou Rejeitar para exclui-la</label>
       <textarea class="form-control" rows="4" id="texto" ng-model="formData.texto" required>{{formData.texto}}</textarea>
@@ -22,13 +22,13 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><button type="submit" class="btn btn-primary">Aceitar</button></li>
-          <li><button type="button" class="btn btn-primary" ng-click="rejeitar()">Rejeitar</button></li>
+          <li><button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#aceitar">Aceitar</button></li>
+          <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rejeitar">Rejeitar</button></li>
 		  <li><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#denunciar_modal">Denunciar</button></li>
         </ul>
       </div>
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary button-top" ng-click="cancela()">Cancelar</button>
+        <button type="button" class="btn btn-primary button-top" data-toggle="modal" data-target="#cancelar">Cancelar</button>
       </div>
 
     </div>
@@ -67,6 +67,68 @@
 	  <input type="hidden" ng-model="deleteUser" id="delete_user_id" value="" />
       <div class="modal-footer ">
         <button type="button" class="btn btn-success" ng-click="denunciar(denunciaForm);"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+
+<!--CONFIRMA ENVIAR-->
+<div class="modal fade" id="aceitar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Aceitar Descrição</h4>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja aceitar essa descrição?
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ng-click="aceitar();"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+<!--CONFIRMA CANCELAR-->
+<div class="modal fade" id="cancelar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Deletar usuário</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Tem certeza que deseja cancelar essa descrição? Você perderá todas as suas alterações.</div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ng-click="cancela();"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
+
+<!--CONFIRMA REJEITAR-->
+<div class="modal fade" id="rejeitar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Rejeitar descrição</h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Tem certeza que deseja rejeitar essa descrição? O usuário descritor perderá pontos com isso.</div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ng-click="rejeitar();"><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
       </div>
     </div>

@@ -37,9 +37,8 @@ angular.module('webAppV2App')
 			$scope.loading = false;
 		}			
 		else {
-			$scope.mantemEstado = true;
+			flash.setAlert({msg : 'Você não pode descrever essa imagem', type : 'danger'});
 			$state.go("user.home_descrever");
-			console.log("Erro: usuário não pode descrever imagem");
 		}
 	}
 
