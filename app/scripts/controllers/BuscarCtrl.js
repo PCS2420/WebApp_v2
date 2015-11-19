@@ -12,7 +12,7 @@ angular.module('webAppV2App')
 			if (isDescricao) {
 				fetchDescricaoLivrosByQuery(formData.query);
 			} else {
-				fetchRevisaoLivrosByQuery(formData.query)
+				fetchRevisaoLivrosByQuery(formData.query);
 			}
 		} else {
 			fetchDescricaoLivrosByQuery(formData.query);
@@ -33,7 +33,7 @@ angular.module('webAppV2App')
 			$scope.livrosDesc = response.data;
 			$scope.loading = false;
 		});
-	};
+	}
 	
 	function fetchRevisaoLivrosByQuery(q) {
 		clearList();
@@ -42,7 +42,7 @@ angular.module('webAppV2App')
 			$scope.livrosDesc = response.data;
 			$scope.loading = false;
 		});
-	};
+	}
 });
 
 angular.module('webAppV2App').

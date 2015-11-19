@@ -18,14 +18,14 @@ angular.module('webAppV2App')
 	$scope.emptyList = false;
     $scope.percentLoaded = 0;
 
-	if (pergunta == "precisaDescrever"){
+	if (pergunta === "precisaDescrever"){
 		var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + $scope.loggedUser().id);
 		promise.then(function(response){
 			if (response.data.length !== 0){
 				angular.element("#pendente").modal();
 				$scope.id_imagem = response.data[0].id;
 			}
-		})
+		});
 	}
     
     myDataPromise.then(function(response){
