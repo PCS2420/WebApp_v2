@@ -14,7 +14,7 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item" ng-class="{active: $index==0}" ng-repeat="livro in livros">
-						<a ui-sref="user.desclivro({ livro_id: livro.id })">
+						<a class="carousel-image" ui-sref="user.desclivro({ livro_id: livro.id })">
 							<img ng-src="{{preloaded_images[$index]}}" class="img-responsive center-block carousel-image" data-holder-rendered="true" alt="{{livro.titulo}}">
 						</a>
 					</div>
