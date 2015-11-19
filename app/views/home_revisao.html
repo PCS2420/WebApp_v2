@@ -14,7 +14,7 @@
 			<div class="carousel-inner">
 				<div class="item" ng-repeat="livro in livros">
 					<a ui-sref="revisor.revlivro({ livro_id: livro.id })">
-						<img ng-src="{{preloaded_images[$index]}}" style="margin:auto;" alt="{{livro.titulo}}">
+						<img ng-src="{{preloaded_images[$index]}}" style="margin:auto;" class="img-responsive center-block carousel-image" alt="{{livro.titulo}}">
 					</a>
 				</div>
 			</div>
