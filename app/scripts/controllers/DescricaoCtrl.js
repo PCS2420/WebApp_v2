@@ -101,18 +101,7 @@ angular.module('webAppV2App')
                 $state.go("user.home_descrever");
             }
         );
-	}
-    
-    //listener do evento de mudança de rota
-    $scope.$on('$stateChangeStart', function () {
-        if($scope.mantemEstado) {
-            console.log("Descrição enviada");
-        } 
-		else {
-            console.log("a descricao foi interrompida");
-            $scope.intDescricao();
-        }
-    });
+	};
 
     $scope.cancela = function () { //@todo destruir tudo
 		angular.element("#cancelar").modal('hide');
@@ -153,7 +142,6 @@ angular.module('webAppV2App')
                 void(response); //Evitar erro de 'nao utilizado'
 				$scope.loading = false;
                 flash.setAlert({msg: 'A descrição foi feita com sucesso!', type: 'success'});
-                $scope.mantemEstado = true;
                 $state.go("user.home_descrever");
             },
             function (error) {

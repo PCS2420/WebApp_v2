@@ -20,18 +20,18 @@ angular.module('webAppV2App')
 		var pt = parseInt($scope.pontos);
                 void(ln); //Evitar mensagem de 'nao utilizado'		
 		if (pt >= 0 && pt < lp){
-			faltam = pontosDB.limiarPositivo-$scope.pontos;	
+			faltam = parseInt(pontosDB.limiarPositivo)-$scope.pontos;	
 			$scope.aviso = "Faltam "+faltam+" ponto(s) para voce ser um descritor revisor.";
 		}
 		else if (pt<0) {
-			faltam = Math.abs($scope.pontos - pontosDB.limiarNegativo);
+			faltam = Math.abs($scope.pontos - parseInt(pontosDB.limiarNegativo));
 			$scope.aviso = "Cuidado! Voce sera bloqueado se perder mais "+faltam+" ponto(s).";
 		}
 		else if (pt >= lp) {
 			$scope.aviso = "Voce e um descritor revisor =D";			
 		}
-		$scope.limiar = pontosDB.limiarPositivo;
-		$scope.limiarNegativo = pontosDB.limiarNegativo;
+		$scope.limiar = parseInt(pontosDB.limiarPositivo);
+		$scope.limiarNegativo = parseInt(pontosDB.limiarNegativo);
 		if ($scope.pontos>=0){
 				$scope.color = color[0];
 				$scope.barText = "Pontos no level atual:";
@@ -42,10 +42,9 @@ angular.module('webAppV2App')
 				$scope.limiar = -$scope.limiarNegativo;
 				$scope.barText = "Pontos negativos:";
 			}
-		console.log(pontosDB.limiarPositivo);
 		    $scope.isDescritor = ($scope.loggedUser().tipo === "Descritor" || $scope.loggedUser().tipo === "DescritorRevisor");
-			var intervalo = Math.floor(pontosDB.limiarPositivo/4);
-			var resto = pontosDB.limiarPositivo%4;
+			var intervalo = Math.floor(parseInt(pontosDB.limiarPositivo)/4);
+			var resto = parseInt(pontosDB.limiarPositivo)%4;
 			if (!$scope.isDescritor) {
 				avatar = "GoldenRetriever";
 			} else if ($scope.pontos<intervalo +resto){
@@ -60,7 +59,7 @@ angular.module('webAppV2App')
 			else if (3*intervalo +resto<=$scope.pontos && $scope.pontos<4*intervalo +resto){
 				avatar = "GoldenRetriever";
 			}    
-			else if ($scope.pontos>=pontosDB.limiarPositivo){
+			else if ($scope.pontos>=parseInt(pontosDB.limiarPositivo)){
 				avatar = "Labrador";
     }
     $scope.end = URI.api + "images/avatares/"+avatar+".PNG";
