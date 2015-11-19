@@ -8,6 +8,7 @@ angular.module('webAppV2App')
 		salvar: function(formData) {
 			return $http.post(URI.api+"descricao/salva", formData);
 		},
+		
 		//quando uma descrição se inicia, seu estado é atualizado para EmAndamento
 		emAndamento: function(imagem_id, formData) {
 			return $http.put(URI.api+"imagem/" + imagem_id + "/emAndamento", formData);
@@ -16,6 +17,14 @@ angular.module('webAppV2App')
 		intDescricao: function(imagem_id, formData) {
 			return $http.put(URI.api+"imagem/" + imagem_id + "/intDescricao", formData);
 		},
+		
+		emRevisao: function(imagem_id, formData) { //quando uma revisão se inicia, seu estado é atualizado para EmRevisao
+			return $http.put(URI.api+"imagem/" + imagem_id + "/emRevisao", formData);
+		},
+		intRevisao: function(imagem_id, formData) { //quando uma revisão se interrompe, seu estado volta para Pronto
+			return $http.put(URI.api+"imagem/" + imagem_id + "/intRevisao", formData);
+		},
+		
 		aceita: function(descricao_id, formData) {
 			return $http.put(URI.api+"descricao/" + descricao_id + "/aceita", formData);
 		},
