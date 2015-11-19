@@ -5,14 +5,12 @@ angular.module('webAppV2App')
 	console.log("@TODO BuscarCtrl controller");
 	
 	$scope.search = function(formData){
-		$scope.loading = true;
-
 		if ($scope.loggedUser().tipo === 'Revisor' || $scope.loggedUser().tipo === 'DescritorRevisor') {
 			var isDescricao = $scope.formData.radio === "descrever";
 			if (isDescricao) {
 				fetchDescricaoLivrosByQuery(formData.query);
 			} else {
-				fetchRevisaoLivrosByQuery(formData.query);
+				fetchRevisaoLivrosByQuery(formData.query)
 			}
 		} else {
 			fetchDescricaoLivrosByQuery(formData.query);
@@ -27,13 +25,14 @@ angular.module('webAppV2App')
 	}
 	
 	function fetchDescricaoLivrosByQuery(q) {
+		$scope.loading = true;
 		clearList();
 		$http.get(URI.api + 'livro/busca?query='+q).then(function(response) {
 			console.log(response.data);
 			$scope.livrosDesc = response.data;
 			$scope.loading = false;
 		});
-	}
+	};
 	
 	function fetchRevisaoLivrosByQuery(q) {
 		clearList();
@@ -42,7 +41,7 @@ angular.module('webAppV2App')
 			$scope.livrosDesc = response.data;
 			$scope.loading = false;
 		});
-	}
+	};
 });
 
 angular.module('webAppV2App').
