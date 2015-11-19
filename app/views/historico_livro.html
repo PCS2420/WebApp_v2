@@ -1,5 +1,5 @@
 <ul style="list-style-type:none; padding:0">
-<li ng-repeat="imagem in imagens">
+<li ng-repeat="imagem in imagens" style="margin-bottom: 5px;">
 	<img class="imagem" src="{{imagem.src}}" style="width:45%"></img>
 	<span>{{imagem.estado}}</span>
 	<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#descricao" ng-click="populaModal(imagem.descricao)" >Descricao</button>

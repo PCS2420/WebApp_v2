@@ -15,11 +15,11 @@ angular.module('webAppV2App')
     });
 	
 	function check(imagem, usuario) {
-		if(imagem.estado == "Aberto") {
+		if(imagem.estado === "Aberto") {
 			console.log("Estado aberto, pode descrever");
 			var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + usuario.id); // pesquisa por todas imagens em andamento com o usuario bla
 			promise.then(function(response){
-				if (response.data.length == 0) {// se nao tem nenhuma, ocupa imagem
+				if (response.data.length === 0) {// se nao tem nenhuma, ocupa imagem
 					console.log("Ocupando a imagem");
 					ocupado();
 				} else {
@@ -28,7 +28,7 @@ angular.module('webAppV2App')
 				}
 			});
 		}
-		else if (imagem.estado == "EmAndamento" && usuario.id == imagem.descritor) {
+		else if (imagem.estado === "EmAndamento" && usuario.id === imagem.descritor) {
 			console.log("Estado EmAndamento, mas também pode descrever");
 			if ($scope.imagem.histDescricoes !== undefined){
 				var hist = $scope.imagem.histDescricoes;

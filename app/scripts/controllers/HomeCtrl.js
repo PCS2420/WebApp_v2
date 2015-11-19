@@ -1,11 +1,15 @@
 "use strict";
 angular.module('webAppV2App')
 .controller('HomeCtrl', function($scope, $http, $filter, $state, $stateParams, EnviaDescricao, ListaLivro, Auth, flash, preloader, URI){
-    angular.element("#texto_header").html("Sinestesia - Página Inicial");
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     
     var pergunta = "precisaRevisar";
-    if ($state.includes('user.home_descrever')) {pergunta = "precisaDescrever";}
+    if ($state.includes('user.home_descrever')) {
+		angular.element("#texto_header").html("Portal Descrição");
+		pergunta = "precisaDescrever";
+	} else {
+		angular.element("#texto_header").html("Portal Revisão");
+	}
 
     var curso = $scope.loggedUser().curso;
 	
@@ -18,14 +22,14 @@ angular.module('webAppV2App')
 	$scope.emptyList = false;
     $scope.percentLoaded = 0;
 
-	if (pergunta == "precisaDescrever"){
+	if (pergunta === "precisaDescrever"){
 		var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + $scope.loggedUser().id);
 		promise.then(function(response){
 			if (response.data.length !== 0){
 				angular.element("#pendente").modal();
 				$scope.id_imagem = response.data[0].id;
 			}
-		})
+		});
 	}
     
     myDataPromise.then(function(response){

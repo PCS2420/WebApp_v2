@@ -18,7 +18,7 @@ angular.module('webAppV2App')
 		var lp = parseInt(pontosDB.limiarPositivo);
 		var ln = parseInt(pontosDB.limiarNegativo);
 		var pt = parseInt($scope.pontos);
-		
+                void(ln); //Evitar mensagem de 'nao utilizado'		
 		if (pt >= 0 && pt < lp){
 			faltam = pontosDB.limiarPositivo-$scope.pontos;	
 			$scope.aviso = "Faltam "+faltam+" ponto(s) para voce ser um descritor revisor.";

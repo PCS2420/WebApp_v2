@@ -18,12 +18,12 @@ angular.module('webAppV2App')
 
     
 	function check(imagem, usuario){
-		if(imagem.estado == "Pronto") {
+		if(imagem.estado === "Pronto") {
 			console.log("Estado pronto, pode revisar");
 			var promise = $http.get(URI.api + "imagem/Pronto/Pronto?revisor=" + usuario.id); // pesquisa por todas imagens em revisao com o usuario que quer revisar essa
 			promise.then(function(response){
 				console.log(response.data);
-				if (response.data.length == 0) {// se nao tem nenhuma, ocupa imagem
+				if (response.data.length === 0) {// se nao tem nenhuma, ocupa imagem
 					console.log("Ocupando a imagem para revisar");
 					ocupado();
 				} else {
@@ -33,7 +33,7 @@ angular.module('webAppV2App')
 				}
 			});
 		}
-		else if (imagem.estado == "EmRevisao" && usuario.id == imagem.revisor) {
+		else if (imagem.estado === "EmRevisao" && usuario.id === imagem.revisor) {
 			console.log("Estado EmRevisao, mas também pode descrever");
 			$scope.loading = false;
 		}			
@@ -58,7 +58,7 @@ angular.module('webAppV2App')
 			flash.setAlert({msg : 'Ocorreu algum erro ao realizar a revisão', type : 'error', e: error});
 			$state.go("revisor.home_revisar");
 		});
-	};
+	}
 	
 	$scope.intRevisao = function (){ 
 		interrompeRevisao();

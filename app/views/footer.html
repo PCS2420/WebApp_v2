@@ -5,7 +5,7 @@
 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				<span class="glyphicon-class">Home</span>
 			</li>
-			<li ng-if="loggedUser().tipo === 'Revisor' || loggedUser().tipo === 'DescritorRevisor'" ng-click="$state.go('revisor.home_revisar')" ng-class="{active_footer: $state.includes('revisor.home_revisar')}">
+			<li ng-if="loggedUser().tipo === 'Revisor' || loggedUser().tipo === 'DescritorRevisor'" ng-click="$state.go('revisor.home_revisar')" ng-class="{active_footer: $state.includes('revisor.home_revisar') || $state.includes('user.home_descrever')}">
 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 				<span class="glyphicon-class">Home</span>
 			</li>

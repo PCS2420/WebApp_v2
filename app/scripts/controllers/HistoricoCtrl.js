@@ -5,7 +5,6 @@ angular.module('webAppV2App')
 		
 	$scope.uri = URI.api;
 	$scope.loading = true;
-	var myDataPromise;
 	var user = $scope.loggedUser();
 	angular.element("#texto_header").html("Sinestesia - Historico");
 	
