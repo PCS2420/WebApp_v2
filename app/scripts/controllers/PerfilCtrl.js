@@ -8,33 +8,72 @@ angular.module('webAppV2App')
     var IDcurso =  $scope.loggedUser().curso;
     var myPro = ListaLivro.getLivros(IDcurso);
     var avatar;
+	var faltam;
+	var myPromise = $http.get(URI.api + "pontuacao");
+    $scope.pontos = $scope.loggedUser().pontuacao;
+	var color = ["success", "info", "warning", "danger"];
+
+	myPromise.then(function(response){
+		var pontosDB = response.data[0];
+		var lp = parseInt(pontosDB.limiarPositivo);
+		var ln = parseInt(pontosDB.limiarNegativo);
+		var pt = parseInt($scope.pontos);
+		
+		if (pt >= 0 && pt < lp){
+			faltam = pontosDB.limiarPositivo-$scope.pontos;	
+			$scope.aviso = "Faltam "+faltam+" ponto(s) para voce ser um descritor revisor.";
+		}
+		else if (pt<0) {
+			faltam = Math.abs($scope.pontos - pontosDB.limiarNegativo);
+			$scope.aviso = "Cuidado! Voce sera bloqueado se perder mais "+faltam+" ponto(s).";
+		}
+		else if (pt >= lp) {
+			$scope.aviso = "Voce e um descritor revisor =D";			
+		}
+		$scope.limiar = pontosDB.limiarPositivo;
+		$scope.limiarNegativo = pontosDB.limiarNegativo;
+		if ($scope.pontos>=0){
+				$scope.color = color[0];
+				$scope.barText = "Pontos no level atual:";
+			}
+			else{
+				$scope.color = color[3];
+				$scope.pontos = -$scope.pontos;
+				$scope.limiar = -$scope.limiarNegativo;
+				$scope.barText = "Pontos negativos:";
+			}
+		console.log(pontosDB.limiarPositivo);
+		    $scope.isDescritor = ($scope.loggedUser().tipo === "Descritor" || $scope.loggedUser().tipo === "DescritorRevisor");
+			var intervalo = Math.floor(pontosDB.limiarPositivo/4);
+			var resto = pontosDB.limiarPositivo%4;
+			if (!$scope.isDescritor) {
+				avatar = "GoldenRetriever";
+			} else if ($scope.pontos<intervalo +resto){
+				avatar = "boxer";
+			}
+			else if (intervalo +resto<=$scope.pontos && $scope.pontos<2*intervalo +resto){
+				avatar = "BorderCollie";
+			}
+			else if (2*intervalo +resto<=$scope.pontos && $scope.pontos<3*intervalo +resto){
+				avatar = "PastorAlemao";
+			}    
+			else if (3*intervalo +resto<=$scope.pontos && $scope.pontos<4*intervalo +resto){
+				avatar = "GoldenRetriever";
+			}    
+			else if ($scope.pontos>=pontosDB.limiarPositivo){
+				avatar = "Labrador";
+    }
+    $scope.end = URI.api + "images/avatares/"+avatar+".PNG";
+	});
+	
     //var avatar = $scope.loggedUser().nomePersonagem; //puxar do banco
-    $scope.pontos =  $scope.loggedUser().pontuacao;
-    $scope.isDescritor = ($scope.loggedUser().tipo === "Descritor" || $scope.loggedUser().tipo === "DescritorRevisor");
-    if (!$scope.isDescritor) {
-        avatar = "GoldenRetriever";
-    } else if ($scope.pontos<20){
-        avatar = "boxer";
-    }
-    else if (20<=$scope.pontos<40){
-        avatar = "BorderCollie";
-    }
-    else if (40<=$scope.pontos<60){
-        avatar = "PastorAlemao";
-    }    
-    else if (60<=$scope.pontos<80){
-        avatar = "GoldenRetriever";
-    }    
-    else if ($scope.pontos>=80){
-        avatar = "Labrador";
-    }
-    $scope.end = "http://localhost:1337/images/avatares/"+avatar+".PNG";
-    
+
+
     myPro.then(function(response){
         $scope.curso = response.data.nome;
         
     });
-    
+  
     $scope.nome =  $scope.loggedUser().nome;
     $scope.nusp =  $scope.loggedUser().cpf;
     console.log($scope.pontos);
@@ -69,5 +108,5 @@ angular.module('webAppV2App')
 
     };
 
-    console.log("@TODO PerfilCtrl controller");
+    
 });

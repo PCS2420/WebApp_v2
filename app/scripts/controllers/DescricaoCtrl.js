@@ -14,7 +14,7 @@ angular.module('webAppV2App')
 		check($scope.imagem, $scope.loggedUser()); //verifica se o usuario pode mesmo entrar aqui
     });
 	
-	function check(imagem, usuario){
+	function check(imagem, usuario) {
 		if(imagem.estado == "Aberto") {
 			console.log("Estado aberto, pode descrever");
 			var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + usuario.id); // pesquisa por todas imagens em andamento com o usuario bla
@@ -23,8 +23,7 @@ angular.module('webAppV2App')
 					console.log("Ocupando a imagem");
 					ocupado();
 				} else {
-					console.log({msg : 'O usuario já se encontra descrevendo outra imagem', type : 'error'});
-					$scope.mantemEstado = true;
+					flash.setAlert({msg : 'O usuario já se encontra descrevendo outra imagem', type : 'danger'});
 					$state.go("user.home_descrever");
 				}
 			});
@@ -69,12 +68,12 @@ angular.module('webAppV2App')
 				$scope.descId = response.data.id;
 				$scope.loading = false;
 			}, function (error) {
-				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error', e: error});
+				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
 				$state.go("user.home_descrever");
 			});
 			
 		}, function(error){
-			flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error', e: error});
+			flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
 			$state.go("user.home_descrever");
 		});
     }
@@ -99,7 +98,7 @@ angular.module('webAppV2App')
             },
             function(error){
 				$scope.loading = false;
-                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error', e: error});
+                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
                 $state.go("user.home_descrever");
             }
         );
@@ -117,6 +116,7 @@ angular.module('webAppV2App')
     });
 
     $scope.cancela = function () { //@todo destruir tudo
+		angular.element("#cancelar").modal('hide');
         flash.setAlert({msg: 'A descrição foi cancelada.', type: 'info'});
 		interrompeDescricao();
     };
@@ -135,13 +135,14 @@ angular.module('webAppV2App')
 				$scope.descId = response.data.id;
             },
             function (error) {
-                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error', e: error});
+                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
             }
         );
     };
 	
     $scope.enviar = function() {
 		$scope.loading = true;
+		angular.element("#enviar").modal('hide');
         var formData = $scope.formData; //pegando so o texto
         formData.imagem = $stateParams.imagem_id;
         formData.descritor = $scope.loggedUser().id;
@@ -157,7 +158,7 @@ angular.module('webAppV2App')
                 $state.go("user.home_descrever");
             },
             function (error) {
-				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'error', e: error});
+				flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
                 $state.go("user.home_descrever");
             }
         );
@@ -176,8 +177,8 @@ angular.module('webAppV2App')
     $scope.uri = URI.api;
 });
 
-angular.module('webAppV2App').
-directive('backupAutomatico', function($rootScope) {
+angular.module('webAppV2App')
+.directive('backupAutomatico', function($rootScope) {
     void($rootScope); //Evitar erro de 'nao utilizado'
     return {
         restrict: 'A',

@@ -23,15 +23,17 @@
 					<td>{{curso}}</td>
 				  </tr>
 				  <tr ng-if="isDescritor">
-					<td>Pontos no level atual:</td>
+					<td>{{barText}}</td>
 					<td>
-						<uib-progressbar animate="false" value="pontos">
-							<b style = "color:#000000">{{pontos}}/100</b>
+						<uib-progressbar animate="false" max="limiar" value="pontos" type ={{color}}>
+							<b style = "color:#000000">{{pontos}}/{{limiar}}</b>
 						</uib-progressbar>
-				    <td>				  
+					</td>					  
 				  </tr> 
 				</tbody>
 			  </table>
+			  <div ng-if="isDescritor"> {{aviso}}</div>
+			  <br>
 			  <div align="center"><a ng-click="showForm = true" class="btn btn-primary">Mudar Senha</a></div>
 			</div>
 		  </div>

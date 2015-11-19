@@ -27,7 +27,7 @@ angular.module('webAppV2App')
         myDataPromise2.then(function(response){
             console.log(response.data);
             angular.element("#texto_header").html(/*"Sinestesia - " + */response.data.titulo);
-            
+			angular.element("#texto_header").css('font-size', '9px');
         });
     
         

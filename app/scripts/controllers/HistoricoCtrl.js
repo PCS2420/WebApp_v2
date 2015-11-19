@@ -1,8 +1,6 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('HistoricoCtrl', function($scope, $http, URI, ListaLivro, CurrentUser){
-        void(ListaLivro); //Evitar erro de 'nao utilizado'
-        void(CurrentUser); //Evitar erro de 'nao utilizado'
+.controller('HistoricoCtrl', function($scope, $http, URI){
 	angular.element("#texto_header").html("Sinestesia - Historico");
 		
 	$scope.uri = URI.api;
@@ -10,22 +8,16 @@ angular.module('webAppV2App')
 	var myDataPromise;
 	var user = $scope.loggedUser();
 	angular.element("#texto_header").html("Sinestesia - Historico");
-	myDataPromise = $http.get(URI.api + "descricao?descritor=" + user.id);
 	
-	myDataPromise.then(function(response){
-		// console.log(response.data);
+	$http.get(URI.api + "descricao?descritor=" + user.id).then(function(response){
 		var imagens = response.data;
-		var myDataPromise2 = $http.get(URI.api + "imagem/");
-		myDataPromise2.then(function(response){
+		$http.get(URI.api + "imagem/").then(function(response){
 		        var img, descImg, i;	
 			var capas = [];
 			for(img in response.data){
 				for(descImg in imagens){
 					if(response.data[img].id === imagens[descImg].imagem.id){
-						// console.log(response.data[img]);
-						// console.log(imagens[descImg]);
 						capas.push(response.data[img]);
-						// capas.push(imagens[descImg]);
 					}
 				}
 			}
@@ -37,7 +29,7 @@ angular.module('webAppV2App')
 					i++;
 				}
 			}
-			
+
 			var preloaded_images = [];
 			for(img in capas) {
 				preloaded_images.push($scope.uri+"/"+ capas[img].livro.capa);
@@ -46,5 +38,7 @@ angular.module('webAppV2App')
 			$scope.loading = false;
 			$scope.capas = capas;
 		});
+		
 	});
+
 });

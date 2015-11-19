@@ -6,21 +6,43 @@ angular.module('webAppV2App')
 	
 	$scope.search = function(formData){
 		$scope.loading = true;
-		console.log(formData.radio);
-		var myDataPromise = $http.get(URI.api + "livro");
-		myDataPromise.then(function(response){
-			$scope.resultados = [];
-			console.log(response.data);
-			for (var i in response.data){
-				if (response.data[i].titulo.indexOf(formData.query) !== -1){
-					$scope.resultados.push(response.data[i]);
-				}
+
+		if ($scope.loggedUser().tipo === 'Revisor' || $scope.loggedUser().tipo === 'DescritorRevisor') {
+			var isDescricao = $scope.formData.radio === "descrever";
+			if (isDescricao) {
+				fetchDescricaoLivrosByQuery(formData.query);
+			} else {
+				fetchRevisaoLivrosByQuery(formData.query)
 			}
-			$scope.isDescricao = formData.radio === 'descrever';
+		} else {
+			fetchDescricaoLivrosByQuery(formData.query);
+		}
+
+
+	};
+	
+	function clearList() {
+		$scope.livrosDesc = [];
+		$scope.livrosRev = [];
+	}
+	
+	function fetchDescricaoLivrosByQuery(q) {
+		clearList();
+		$http.get(URI.api + 'livro/busca?query='+q).then(function(response) {
+			console.log(response.data);
+			$scope.livrosDesc = response.data;
 			$scope.loading = false;
 		});
 	};
-	$scope.URI = URI.api;
+	
+	function fetchRevisaoLivrosByQuery(q) {
+		clearList();
+		$http.get(URI.api + 'livro/buscaRevisor?query='+q).then(function(response) {
+			console.log(response.data);
+			$scope.livrosDesc = response.data;
+			$scope.loading = false;
+		});
+	};
 });
 
 angular.module('webAppV2App').
@@ -31,6 +53,27 @@ directive('clickWhenLoaded', function() {
 			void(scope);
             void(attrs); //Evitar erro de 'nao utilizado'
 			angular.element(element).click();
+        }
+    };
+});
+
+
+angular.module('webAppV2App').
+directive('carouselPreloader', function($rootScope) {
+    void($rootScope); //Evitar erro de 'nao utilizado'
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {   
+            void(element); //Evitar erro de 'nao utilizado'
+            void(attrs); //Evitar erro de 'nao utilizado'
+            scope.$watch("isSuccessful", function(newValue, oldValue) {
+                void(newValue); //Evitar erro de 'nao utilizado'
+                void(oldValue); //Evitar erro de 'nao utilizado'
+                if (scope.isSuccessful) {
+                    console.log("Images successfully loaded. Starting carousel!");
+                    angular.element(document).find("#myCarousel").carousel({interval: false, toughness: 0.5});
+                }
+            });
         }
     };
 });
