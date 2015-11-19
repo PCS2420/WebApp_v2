@@ -20,6 +20,7 @@ angular.module('webAppV2App')
     $scope.isLoading = true;
     $scope.isSuccessful = false;
 	$scope.emptyList = false;
+	$scope.pendenciaDescartada = false;
     $scope.percentLoaded = 0;
 
 	if (pergunta === "precisaDescrever"){
@@ -91,11 +92,15 @@ angular.module('webAppV2App')
 	};
 	
 	$scope.intDescricao = function (){ 
+		$scope.isLoading = true;
+		angular.element("#pendente").modal("hide");
         var update = {estado:"Aberto", descritor:""};
         EnviaDescricao.intDescricao($scope.id_imagem, update)
         .then(
             function(response){
                 void(response); //Evitar erro de 'nao utilizado'
+				$scope.pendenciaDescartada = true;
+				$scope.isLoading = false;
             }
         );
     };

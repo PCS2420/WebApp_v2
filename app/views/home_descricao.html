@@ -2,6 +2,10 @@
 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	{{flash.getMessage()}}
 </div>
+<div ng-show="pendenciaDescartada" class="alert alert-success}}">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	Sua descrição foi descartada com sucesso.
+</div>
 <div ng-switch="isLoading">
 	<p ng-switch-when="true">
 		<img src="styles/ajax-loader.gif" style="position: absolute; top: 40%;right: 45.5%;"/>

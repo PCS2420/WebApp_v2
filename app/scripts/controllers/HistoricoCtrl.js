@@ -20,7 +20,8 @@ angular.module('webAppV2App')
 					}
 				}
 			}
-
+			
+			
 			for(i = 1; i < capas.length; ){
 				if(capas[i-1].livro.id === capas[i].livro.id){
 					capas.splice(i, 1);
