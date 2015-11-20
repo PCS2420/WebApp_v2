@@ -5,8 +5,6 @@ angular.module('webAppV2App')
     $scope.$state = $state; // http://stackoverflow.com/questions/21696104/how-to-ng-hide-and-ng-show-views-using-angular-ui-router
     $scope.flash = flash;
     
-    var IDcurso =  $scope.loggedUser().curso;
-    var myPro = ListaLivro.getLivros(IDcurso);
     var avatar;
 	var faltam;
 	var myPromise = $http.get(URI.api + "pontuacao");
@@ -64,13 +62,10 @@ angular.module('webAppV2App')
     }
     $scope.end = URI.api + "images/avatares/"+avatar+".PNG";
 	});
-	
-    //var avatar = $scope.loggedUser().nomePersonagem; //puxar do banco
 
-
+    var myPro = $http.get(URI.api + "curso/" + $scope.loggedUser().curso);
     myPro.then(function(response){
-        $scope.curso = response.data.nome;
-        
+        $scope.curso = response.data.nome;        
     });
   
     $scope.nome =  $scope.loggedUser().nome;
