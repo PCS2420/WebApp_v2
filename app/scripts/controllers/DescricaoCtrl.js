@@ -111,6 +111,31 @@ angular.module('webAppV2App')
     };
 	
 	$scope.salva = function() {
+		$scope.loading = true;
+        var formData = $scope.formData;
+		formData.imagem = $stateParams.imagem_id;
+        formData.descritor = $scope.loggedUser().id;
+		formData.descId = $scope.descId; // deve estar preenchido
+		formData.estado = "Salvo";
+		
+        EnviaDescricao.salvar(formData)
+        .then(
+            function (response) {
+                void(response); //Evitar erro de 'nao utilizado'
+				$scope.loading = false;
+				angular.element("#salvar").modal();
+				console.log(response);
+				$scope.descId = response.data.id;
+            },
+            function (error) {
+				$scope.loading = false;
+                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
+				$state.go("user.home_descrever");
+            }
+        );
+    };
+	
+	$scope.backup = function() {
         var formData = $scope.formData;
 		formData.imagem = $stateParams.imagem_id;
         formData.descritor = $scope.loggedUser().id;
@@ -122,9 +147,10 @@ angular.module('webAppV2App')
             function (response) {
                 void(response); //Evitar erro de 'nao utilizado'
 				$scope.descId = response.data.id;
+				console.log("backup automatico!");
             },
             function (error) {
-                flash.setAlert({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
+                console.log({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
             }
         );
     };
@@ -179,9 +205,8 @@ angular.module('webAppV2App')
                 void(oldValue); //Evitar erro de 'nao utilizado'
 				count++;
 				if (count >= 10){
-					scope.salva();
+					scope.backup();
 					count = 0;
-					console.log("backup automatico!");
 				}
             });
         }

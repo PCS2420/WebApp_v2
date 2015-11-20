@@ -27,8 +27,10 @@ angular.module('webAppV2App')
 		var promise = $http.get(URI.api + "imagem/estado/EmAndamento?descritor=" + $scope.loggedUser().id);
 		promise.then(function(response){
 			if (response.data.length !== 0){
+				console.log("Pendente: ", response.data);
 				angular.element("#pendente").modal();
 				$scope.id_imagem = response.data[0].id;
+				$scope.descId = response.data[0].descricao;
 			}
 		});
 	}
@@ -91,19 +93,24 @@ angular.module('webAppV2App')
 		$state.go("user.imagem", {imagem_id: $scope.id_imagem});
 	};
 	
-	$scope.intDescricao = function (){ 
+	$scope.interrompeDescricao = function() {
+		console.log("esperando para interromper descricao");
 		$scope.isLoading = true;
 		angular.element("#pendente").modal("hide");
-        var update = {estado:"Aberto", descritor:""};
-        EnviaDescricao.intDescricao($scope.id_imagem, update)
+
+        EnviaDescricao.intDescricao($scope.id_imagem, {descId: $scope.descId})
         .then(
             function(response){
                 void(response); //Evitar erro de 'nao utilizado'
-				$scope.pendenciaDescartada = true;
 				$scope.isLoading = false;
+				$scope.pendenciaDescartada = true;
+            },
+            function(error){
+				$scope.isLoading = false;
+                console.log({msg : 'Ocorreu algum erro ao realizar a descrição', type : 'danger', e: error});
             }
         );
-    };
+	};
 
     $scope.w = window.innerWidth;
     $scope.h = window.innerHeight;
