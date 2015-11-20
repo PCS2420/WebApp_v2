@@ -33,6 +33,7 @@ angular.module('webAppV2App')
 			if ($scope.imagem.histDescricoes !== undefined){
 				var hist = $scope.imagem.histDescricoes;
 				$scope.formData.texto = hist[hist.length - 1].texto;
+				$scope.descId = hist[hist.length - 1].descId;
 			}
 			$scope.loading = false;
 		}			

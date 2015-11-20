@@ -20,7 +20,7 @@ angular.module('webAppV2App')
 	function check(imagem, usuario){
 		if(imagem.estado === "Pronto") {
 			console.log("Estado pronto, pode revisar");
-			var promise = $http.get(URI.api + "imagem/Pronto/Pronto?revisor=" + usuario.id); // pesquisa por todas imagens em revisao com o usuario que quer revisar essa
+			var promise = $http.get(URI.api + "imagem/emRevisao/EmRevisao?revisor=" + usuario.id); // pesquisa por todas imagens em revisao com o usuario que quer revisar essa
 			promise.then(function(response){
 				console.log(response.data);
 				if (response.data.length === 0) {// se nao tem nenhuma, ocupa imagem
