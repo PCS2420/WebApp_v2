@@ -2,6 +2,20 @@
 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	{{flash.getMessage()}}
 </div>
+
+<div ng-show="showNotificacaoDescricaoAceita" class="alert alert-success">Parabéns!! Sua descrição estava perfeita!!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="showNotificacaoDescricaoEditada" class="alert alert-success">Sua descrição foi aceita com pequenas alterações!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="showNotificacaoDescricaoRejeitada" class="alert alert-danger">Sua descrição não estava boa! Se esforçe mais da próxima vez!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="showNotificacaoPromovido" class="alert alert-success">Parabéns!! Você agora é um descritor promovido!!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="showNotificacaoRebaixado" class="alert alert-danger">Devido a queda da sua pontuação voce foi rebaixado para Descritor!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+<div ng-show="showNotificacaoBloqueio" class="alert alert-danger">Devido a suas ações, notificamos que você está bloqueado do sistema!
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>
+
 <div ng-show="pendenciaDescartada" class="alert alert-success">
 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 	Sua descrição foi descartada com sucesso.

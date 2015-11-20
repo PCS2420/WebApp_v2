@@ -12,10 +12,83 @@ angular.module('webAppV2App')
 	}
 
     var curso = $scope.loggedUser().curso;
-	
+	var notificacaoRebaixado =  $scope.loggedUser().notificacaoRebaixado;
+	var notificacaoPromovido =  $scope.loggedUser().notificacaoPromovido;
+	var notificacaoBloqueio =  $scope.loggedUser().notificacaoBloqueio;
+	var notificacaoDescricaoAceita =  $scope.loggedUser().notificacaoDescricaoAceita;
+	var notificacaoDescricaoEditada =  $scope.loggedUser().notificacaoDescricaoEditada;
+	var notificacaoDescricaoRejeitada =  $scope.loggedUser().notificacaoDescricaoRejeitada;
     var myDataPromise = ListaLivro.getLivros(curso, pergunta);
     $scope.flash = flash;
     
+	console.log('notificacaoRebaixado: '+notificacaoRebaixado);
+	console.log('notificacaoPromovido: '+notificacaoPromovido);
+	console.log('notificacaoBloqueio: '+notificacaoBloqueio);
+	console.log('notificacaoDescricaoAceita: '+notificacaoDescricaoAceita);
+	console.log('notificacaoDescricaoEditada: '+notificacaoDescricaoEditada);
+	console.log('notificacaoDescricaoRejeitada: '+notificacaoDescricaoRejeitada);
+
+	if (notificacaoRebaixado){
+		$scope.showNotificacaoRebaixado = true;
+		notificacaoRebaixado = false;
+	} else {
+		$scope.showNotificacaoRebaixado = false;	
+	}
+	
+	if (notificacaoPromovido){
+		$scope.showNotificacaoPromovido = true;
+		notificacaoPromovido = false;
+	} else {
+		$scope.showNotificacaoPromovido = false;	
+	}
+	
+	if (notificacaoBloqueio){
+		$scope.showNotificacaoBloqueio = true;	
+		notificacaoBloqueio = false;
+	} else {
+		$scope.showNotificacaoBloqueio = false;	
+	}
+	
+	if (notificacaoDescricaoAceita){
+		$scope.showNotificacaoDescricaoAceita = true;	
+		notificacaoDescricaoAceita = false;
+	} else {
+		$scope.showNotificacaoDescricaoAceita = false;	
+	}
+	
+	if (notificacaoDescricaoEditada){
+		$scope.showNotificacaoDescricaoEditada = true;
+		notificacaoDescricaoEditada = false;
+	} else {
+		$scope.showNotificacaoDescricaoEditada = false;
+	}
+	
+	if (notificacaoDescricaoRejeitada){
+		$scope.showNotificacaoDescricaoRejeitada = true;
+		notificacaoDescricaoRejeitada = false;
+	} else {	
+		$scope.showNotificacaoDescricaoRejeitada = false;
+	}
+		
+	var notificacaoDadosNovos = {
+		login: $scope.loggedUser().login,
+		newNotificacaoRebaixado: notificacaoRebaixado,
+		newNotificacaoPromovido: notificacaoPromovido,
+		newNotificacaoBloqueio: notificacaoBloqueio,
+		newNotificacaoDescricaoAceita: notificacaoDescricaoAceita,
+		newNotificacaoDescricaoEditada: notificacaoDescricaoEditada,
+		newNotificacaoDescricaoRejeitada: notificacaoDescricaoRejeitada
+	};
+	
+	console.log('notificacaoRebaixado1: '+notificacaoRebaixado);
+	console.log('notificacaoPromovido1: '+notificacaoPromovido);
+	console.log('notificacaoBloqueio1: '+notificacaoBloqueio);
+	console.log('notificacaoDescricaoAceita1: '+notificacaoDescricaoAceita);
+	console.log('notificacaoDescricaoEditada1: '+notificacaoDescricaoEditada);
+	console.log('notificacaoDescricaoRejeitada1: '+notificacaoDescricaoRejeitada);
+
+	$http.post(URI.api + 'usuario/updateNotificacao', notificacaoDadosNovos);
+	
     // I keep track of the state of the loading images.
     $scope.isLoading = true;
     $scope.isSuccessful = false;
