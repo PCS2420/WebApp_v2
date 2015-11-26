@@ -70,7 +70,7 @@ angular.module('webAppV2App')
     };
 
     $scope.openModal = function (imagem) {
-        $uibModal.open({
+        var modal = $uibModal.open({
             animation: true,
             templateUrl: 'views/admin_image_form.html',
             controller: 'AdminImageCtrl',
@@ -83,6 +83,11 @@ angular.module('webAppV2App')
                 }
             }
         });
+		
+		modal.result.then(function(imagem){
+			console.log('adiciona imagem');
+			$scope.livro.imagens.push(imagem);
+		});
     };
 
     function success () {

@@ -41,7 +41,8 @@
         <h4 class="modal-title" id="myModalLabel">Contexto da imagem</h4>
       </div>
       <div class="modal-body">
-        {{imagem.contexto}}
+        <span ng-if="imagem.tipoDeContexto === 'texto'">{{imagem.contexto}}</span>
+		<img ng-if="imagem.tipoDeContexto === 'imagem'" src='{{uri}}/{{imagem.contexto}}'>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

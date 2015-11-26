@@ -1,6 +1,7 @@
 "use strict";
 angular.module('webAppV2App')
-.controller('AdminImageCtrl', function($scope, $timeout, $modalInstance, imagem, livro_id, Imagem, JQuery){
+.controller('AdminImageCtrl', function($scope, $timeout, $modalInstance, imagem, livro_id, Imagem, $window){
+	
     window.scope = $scope;
     $scope.isSuccess = false;
     $scope.isError = false;
@@ -9,7 +10,7 @@ angular.module('webAppV2App')
     if (imagem) {
         $scope.imagem = imagem;
         $scope.imagem_id = imagem.id;
-        imagemCopy = JQuery.extend(true, {}, imagem);
+        imagemCopy = $window.jQuery.extend(true, {}, imagem);
     }
     else {
         $scope.imagem = {};
@@ -30,9 +31,10 @@ angular.module('webAppV2App')
                     return res;
                 }
             }).then(function () {
+				
                 success();
                 $scope.isSaving = false;
-                $scope.close();
+                $scope.respond(imagem);
             }, function (err) {
                 void(err); //Evitar erro de 'nao utilizado'
                 error();
@@ -56,7 +58,7 @@ angular.module('webAppV2App')
             }).then(function () {
                 success();
                 $scope.isSaving = false;
-                $scope.close();
+                $scope.respond(imagem);
             }, function (err) {
                 void(err); //Evitar erro de 'nao utilizado'
                 error();
@@ -66,8 +68,13 @@ angular.module('webAppV2App')
     };
 
     $scope.rollback = function () {
-        $scope.imagem = JQuery.extend(true, {}, imagemCopy);
-        $scope.close();
+        $scope.imagem = $window.jQuery.extend(true, {}, imagemCopy);
+        $modalInstance.dismiss('cancel');
+    };
+	
+	$scope.respond = function (imagem) {
+		console.log('respond');
+        $modalInstance.close(imagem);
     };
 
     $scope.close = function () {
